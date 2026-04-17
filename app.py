@@ -8,36 +8,36 @@ from datetime import datetime
 
 st.set_page_config(page_title="Foresight – AI & Robotics Insights", layout="wide")
 
-# ---------- Language data (only English for now, easy to extend) ----------
+# ---------- Language data (only English for now) ----------
 LANGUAGES = {
     "English": {
         "code": "en",
         "voice": "en-US-GuyNeural",
         "login_title": "🔐 Access Required",
-        "login_sub": "20 essential insights – AI, LLMs, robotics & the future",
+        "login_sub": "28 daily insights – AI, LLMs, robotics & the future",
         "login_password": "Enter password to access",
         "login_btn": "Login",
         "login_error": "Incorrect password. Access denied.",
         "sidebar_progress": "Your progress",
-        "sidebar_completed": "of 20",
+        "sidebar_completed": "of 28",
         "sidebar_founder": "Founder & Developer:",
         "sidebar_price": "**$49 USD** (complete insights, source code included)",
         "sidebar_logout": "Logout",
-        "module_prefix": "Module",
+        "module_prefix": "Day",
         "duration_label": "Reading time",
-        "next_module": "Next Module",
-        "prev_module": "Previous Module",
+        "next_module": "Next Day",
+        "prev_module": "Previous Day",
         "download_btn": "📥 Download Notes (TXT)",
-        "footer_caption": "🤖 Foresight – 20 insights to stay ahead of the curve."
+        "footer_caption": "🔭 Foresight – 28 days to see the future of AI & robotics."
     }
 }
 
-# ---------- 20 modules with title, content, image URL ----------
+# ---------- 28 modules with day number, title, content, image URL ----------
 modules_data = {
     1: {
         "title": "How Large Language Models (LLMs) Actually Work",
         "content": """
-        **The Transformer Architecture**  
+        **Day 1: The Transformer Architecture**  
         Large Language Models like GPT-4, Gemini, and Claude are built on a deep learning architecture called the Transformer. Unlike older recurrent networks, Transformers process all words in a sentence simultaneously using a mechanism called "self-attention". This allows the model to understand context and relationships between words, regardless of their distance in the text.  
         
         **Training Process**  
@@ -50,12 +50,12 @@ modules_data = {
         LLMs can "hallucinate" (make up confident-sounding but false information), have limited context windows (typically 8k-128k tokens), and reflect the biases in their training data. Understanding these limits is crucial for responsible use.
         """,
         "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Transformer_architecture.png/800px-Transformer_architecture.png",
-        "audio_text": "How Large Language Models work. Transformers use self-attention to process words simultaneously. Training involves pre-training and fine-tuning. Larger models perform better but have limitations like hallucinations and context windows."
+        "audio_text": "Day 1: How Large Language Models work. Transformers use self-attention to process words simultaneously. Training involves pre-training and fine-tuning. Larger models perform better but have limitations like hallucinations and context windows."
     },
     2: {
         "title": "The Rise of Dexterous Robotics – BrainCo's Hand",
         "content": """
-        **What Makes BrainCo's Hand Different**  
+        **Day 2: What Makes BrainCo's Hand Different**  
         Most industrial robots use simple grippers that can only pick and place objects. BrainCo's new dexterous hand has five independently articulated fingers, each with multiple joints. It can perform fine motor tasks: holding a pen, turning a key, even playing musical instruments.  
         
         **How It Works**  
@@ -68,12 +68,12 @@ modules_data = {
         Cost (currently high), durability, and the need for advanced AI control systems remain barriers. However, rapid progress suggests that dexterous robots will become commercially viable sooner than many expect.
         """,
         "image": "https://www.brainco.tech/hubfs/BrainCo_Robotic_Hand.jpg",
-        "audio_text": "BrainCo's dexterous robotic hand mimics human fine motor skills. It uses articulated fingers, force sensors, and AI. Applications in healthcare, assembly, and logistics. Challenges remain but progress is rapid."
+        "audio_text": "Day 2: BrainCo's dexterous robotic hand mimics human fine motor skills. It uses articulated fingers, force sensors, and AI. Applications in healthcare, assembly, and logistics. Challenges remain but progress is rapid."
     },
     3: {
         "title": "The Future of AI Agents – From Chatbots to Action",
         "content": """
-        **What Are AI Agents?**  
+        **Day 3: What Are AI Agents?**  
         Unlike chatbots that only respond to prompts, AI agents are designed to take actions: book flights, send emails, control smart home devices, even write and execute code. They combine LLMs with tools and APIs.  
         
         **How They Work**  
@@ -86,12 +86,12 @@ modules_data = {
         Agents could automate entire workflows, but they also pose risks: executing harmful actions if not properly constrained, making costly mistakes, and being difficult to debug. Safe deployment requires careful guardrails.
         """,
         "image": "https://via.placeholder.com/800x400?text=AI+Agents+Illustration",
-        "audio_text": "AI agents go beyond chatbots – they take actions. They use reasoning loops and tools. Examples include AutoGPT. Potential to automate workflows but risks need careful management."
+        "audio_text": "Day 3: AI agents go beyond chatbots – they take actions. They use reasoning loops and tools. Examples include AutoGPT. Potential to automate workflows but risks need careful management."
     },
     4: {
         "title": "Multimodal AI – Seeing, Hearing, and Understanding",
         "content": """
-        **Beyond Text**  
+        **Day 4: Beyond Text**  
         Multimodal AI models can process and generate not just text, but also images, audio, and video. GPT-4 with vision, Google Gemini, and Meta's ImageBind are leading examples.  
         
         **How It Works**  
@@ -106,12 +106,12 @@ modules_data = {
         Training is computationally expensive. Aligning different modalities without losing information is difficult. Bias can propagate across all modalities.
         """,
         "image": "https://via.placeholder.com/800x400?text=Multimodal+AI",
-        "audio_text": "Multimodal AI processes text, images, audio, and video. Models like GPT-4 Vision and Gemini are examples. Applications in medicine, accessibility, and content creation. Challenges include cost and bias."
+        "audio_text": "Day 4: Multimodal AI processes text, images, audio, and video. Models like GPT-4 Vision and Gemini are examples. Applications in medicine, accessibility, and content creation. Challenges include cost and bias."
     },
     5: {
         "title": "Edge AI – Running Models on Your Phone",
         "content": """
-        **Why Edge AI Matters**  
+        **Day 5: Why Edge AI Matters**  
         Most AI runs in the cloud, which requires internet and causes latency. Edge AI runs models directly on devices: smartphones, cameras, cars, even microcontrollers. This enables real‑time processing, privacy, and offline operation.  
         
         **Techniques**  
@@ -128,12 +128,12 @@ modules_data = {
         As chips become more powerful, more complex models will run at the edge, reducing reliance on cloud servers and enabling new applications like autonomous drones and smart sensors.
         """,
         "image": "https://via.placeholder.com/800x400?text=Edge+AI",
-        "audio_text": "Edge AI runs models on local devices, not the cloud. It enables real-time processing, privacy, and offline use. Techniques include compression and specialized hardware. Examples: face unlock, offline translation."
+        "audio_text": "Day 5: Edge AI runs models on local devices, not the cloud. It enables real-time processing, privacy, and offline use. Techniques include compression and specialized hardware. Examples: face unlock, offline translation."
     },
     6: {
         "title": "AI Hallucinations – Why Models Make Things Up",
         "content": """
-        **What Are Hallucinations?**  
+        **Day 6: What Are Hallucinations?**  
         When an LLM generates plausible-sounding but factually incorrect or nonsensical information, it's called a hallucination. For example, inventing a scientific paper that doesn't exist or citing wrong dates.  
         
         **Why Do They Happen?**  
@@ -149,12 +149,12 @@ modules_data = {
         Eliminating hallucinations entirely would require a model that understands truth – a very hard problem. Current best practice is to design applications that can tolerate or detect hallucinations.
         """,
         "image": "https://via.placeholder.com/800x400?text=AI+Hallucinations",
-        "audio_text": "Hallucinations are when AI makes up false information. They happen because models predict likely words, not facts. Mitigation includes RAG and fine-tuning. Complete elimination is still unsolved."
+        "audio_text": "Day 6: Hallucinations are when AI makes up false information. They happen because models predict likely words, not facts. Mitigation includes RAG and fine-tuning. Complete elimination is still unsolved."
     },
     7: {
         "title": "Reinforcement Learning from Human Feedback (RLHF)",
         "content": """
-        **What Is RLHF?**  
+        **Day 7: What Is RLHF?**  
         RLHF is a technique used to align LLMs with human preferences. After pre-training, the model is fine-tuned using feedback from human evaluators who rank different model outputs. This helps the model learn what responses are helpful, honest, and harmless.  
         
         **How It Works**  
@@ -169,12 +169,12 @@ modules_data = {
         RLHF is expensive and time‑consuming. It can also introduce new biases based on the preferences of the human evaluators. Scaling it to all possible scenarios is impossible.
         """,
         "image": "https://via.placeholder.com/800x400?text=RLHF",
-        "audio_text": "RLHF aligns AI with human preferences. Humans rank outputs, a reward model learns, and the LLM is fine-tuned. It reduces harm and improves helpfulness but is expensive and can introduce bias."
+        "audio_text": "Day 7: RLHF aligns AI with human preferences. Humans rank outputs, a reward model learns, and the LLM is fine-tuned. It reduces harm and improves helpfulness but is expensive and can introduce bias."
     },
     8: {
         "title": "The Economics of AI – Cost, Compute, and Carbon",
         "content": """
-        **The True Cost of AI**  
+        **Day 8: The True Cost of AI**  
         Training a large LLM like GPT-4 costs tens of millions of dollars in compute (GPU hours) and electricity. Inference (using the model) also adds up: serving millions of users requires vast server farms.  
         
         **Compute Trends**  
@@ -187,12 +187,12 @@ modules_data = {
         Techniques like distillation (training smaller models to mimic larger ones), quantization, and efficient architectures (Mixture of Experts) help reduce costs. Open‑source models also democratize access.
         """,
         "image": "https://via.placeholder.com/800x400?text=AI+Economics",
-        "audio_text": "Training large AI models costs millions of dollars and significant carbon. Compute demand grows faster than Moore's Law. Techniques like distillation and efficient architectures help reduce costs."
+        "audio_text": "Day 8: Training large AI models costs millions of dollars and significant carbon. Compute demand grows faster than Moore's Law. Techniques like distillation and efficient architectures help reduce costs."
     },
     9: {
         "title": "Retrieval-Augmented Generation (RAG)",
         "content": """
-        **What Is RAG?**  
+        **Day 9: What Is RAG?**  
         RAG combines an LLM with an external knowledge base (e.g., a database, vector store, or search engine). When asked a question, the system first retrieves relevant documents, then feeds them as context to the LLM to generate an answer grounded in those sources.  
         
         **Why Use RAG?**  
@@ -209,12 +209,12 @@ modules_data = {
         Customer support (company documentation), research assistants (academic papers), legal analysis (case law), and any domain requiring up‑to‑date, verifiable information.
         """,
         "image": "https://via.placeholder.com/800x400?text=RAG+Diagram",
-        "audio_text": "RAG combines LLMs with external knowledge bases. It retrieves relevant documents then generates answers grounded in them. Reduces hallucinations and keeps knowledge current. Used in support, research, legal."
+        "audio_text": "Day 9: RAG combines LLMs with external knowledge bases. It retrieves relevant documents then generates answers grounded in them. Reduces hallucinations and keeps knowledge current. Used in support, research, legal."
     },
     10: {
         "title": "Open‑Source vs. Proprietary AI Models",
         "content": """
-        **The Landscape**  
+        **Day 10: The Landscape**  
         Proprietary models (GPT-4, Claude, Gemini) are developed by companies, kept secret, and accessed via APIs. Open‑source models (Llama, Mistral, Falcon) have weights publicly available and can be run locally.  
         
         **Pros and Cons**  
@@ -233,12 +233,12 @@ modules_data = {
         The trend suggests open‑source models will become increasingly competitive, forcing proprietary providers to offer more value (e.g., better tooling, safety guarantees, or integration).
         """,
         "image": "https://via.placeholder.com/800x400?text=Open+Source+vs+Proprietary",
-        "audio_text": "Open-source models like Llama are free and customizable but slightly behind proprietary models like GPT-4. Proprietary models are state-of-the-art but cost money and lack transparency. The gap is closing."
+        "audio_text": "Day 10: Open-source models like Llama are free and customizable but slightly behind proprietary models like GPT-4. Proprietary models are state-of-the-art but cost money and lack transparency. The gap is closing."
     },
     11: {
         "title": "AI in Healthcare – Diagnosis, Drug Discovery, and Beyond",
         "content": """
-        **Diagnosis**  
+        **Day 11: Diagnosis**  
         AI models can now detect diseases from medical images (X‑rays, MRIs, retinal scans) with accuracy rivaling or exceeding human experts. For example, Google's LYNA detects breast cancer metastases, and IDx‑DR diagnoses diabetic retinopathy.  
         
         **Drug Discovery**  
@@ -251,12 +251,12 @@ modules_data = {
         Regulatory approval, data privacy (HIPAA), and avoiding bias are major hurdles. AI systems must be rigorously validated before clinical deployment.
         """,
         "image": "https://via.placeholder.com/800x400?text=AI+in+Healthcare",
-        "audio_text": "AI helps diagnose diseases from medical images, discovers new drugs via AlphaFold, and enables personalized medicine. Challenges include regulation, privacy, and bias."
+        "audio_text": "Day 11: AI helps diagnose diseases from medical images, discovers new drugs via AlphaFold, and enables personalized medicine. Challenges include regulation, privacy, and bias."
     },
     12: {
         "title": "Generative AI for Video – Runway, Sora, and the Future",
         "content": """
-        **From Text to Video**  
+        **Day 12: From Text to Video**  
         Generative video models like Runway's Gen‑2, OpenAI's Sora, and Pika Labs can create short video clips from text prompts. They learn the dynamics of real‑world motion, lighting, and objects.  
         
         **How They Work**  
@@ -274,12 +274,12 @@ modules_data = {
         Film production, advertising, and social media will be transformed. Soon, anyone will be able to create short films from a script.
         """,
         "image": "https://via.placeholder.com/800x400?text=Generative+Video",
-        "audio_text": "Generative video models like Runway and Sora create clips from text. They use diffusion extended to time. Current limits: short clips, occasional physics glitches. Future impact on film and ads."
+        "audio_text": "Day 12: Generative video models like Runway and Sora create clips from text. They use diffusion extended to time. Current limits: short clips, occasional physics glitches. Future impact on film and ads."
     },
     13: {
         "title": "AI Safety – Alignment, Robustness, and Control",
         "content": """
-        **Alignment Problem**  
+        **Day 13: Alignment Problem**  
         How do we ensure AI systems pursue goals that are beneficial to humans? Misaligned AI could optimize for the wrong objective (e.g., a paperclip maximizer). Current alignment techniques include RLHF, constitutional AI, and scalable oversight.  
         
         **Robustness**  
@@ -292,12 +292,12 @@ modules_data = {
         Even today's LLMs can be jailbroken to produce harmful content. As AI becomes more capable and autonomous, safety research becomes urgent. Leading labs have dedicated safety teams, but the field is still young.
         """,
         "image": "https://via.placeholder.com/800x400?text=AI+Safety",
-        "audio_text": "AI safety covers alignment (ensuring AI pursues human goals), robustness (resistance to adversarial attacks), and control. Even current models can be jailbroken. Research is urgent as AI advances."
+        "audio_text": "Day 13: AI safety covers alignment (ensuring AI pursues human goals), robustness (resistance to adversarial attacks), and control. Even current models can be jailbroken. Research is urgent as AI advances."
     },
     14: {
         "title": "The Turing Test and Beyond – Measuring Intelligence",
         "content": """
-        **The Turing Test**  
+        **Day 14: The Turing Test**  
         Proposed by Alan Turing in 1950, a machine passes if a human cannot distinguish its responses from a human's. Today, many LLMs can easily pass the original test, but the test is now considered insufficient for true intelligence.  
         
         **Modern Benchmarks**  
@@ -313,12 +313,12 @@ modules_data = {
         Researchers are developing more holistic evaluations, including interactive environments (like Minecraft) where agents must achieve goals over extended periods.
         """,
         "image": "https://via.placeholder.com/800x400?text=Turing+Test",
-        "audio_text": "The Turing Test is outdated. Modern benchmarks include MMLU, GSM8K, and HumanEval. They measure knowledge, math, and code. Future evaluations will include long-term planning and embodiment."
+        "audio_text": "Day 14: The Turing Test is outdated. Modern benchmarks include MMLU, GSM8K, and HumanEval. They measure knowledge, math, and code. Future evaluations will include long-term planning and embodiment."
     },
     15: {
         "title": "Low‑Code and No‑Code AI for Everyone",
         "content": """
-        **Democratizing AI**  
+        **Day 15: Democratizing AI**  
         Platforms like Microsoft Power Automate, Zapier, and Make allow users to build AI‑powered workflows without writing code. Drag‑and‑drop interfaces connect apps, trigger actions, and integrate AI models.  
         
         **What You Can Build**  
@@ -334,12 +334,12 @@ modules_data = {
         These tools are limited to pre‑built connectors and templates. Custom logic or complex models still require coding. However, the trend is toward more flexibility and power.
         """,
         "image": "https://via.placeholder.com/800x400?text=Low+Code+AI",
-        "audio_text": "Low-code AI platforms like Zapier and Make let non-technical users build automations. Benefits include speed and accessibility. Limitations: custom logic still requires coding."
+        "audio_text": "Day 15: Low-code AI platforms like Zapier and Make let non-technical users build automations. Benefits include speed and accessibility. Limitations: custom logic still requires coding."
     },
     16: {
         "title": "Ethical AI – Bias, Fairness, and Transparency",
         "content": """
-        **Sources of Bias**  
+        **Day 16: Sources of Bias**  
         AI models inherit biases from their training data (e.g., stereotypes in text, underrepresentation in images). They can also amplify those biases, leading to unfair outcomes in hiring, lending, policing, etc.  
         
         **Measuring Fairness**  
@@ -357,12 +357,12 @@ modules_data = {
         The EU's AI Act and similar regulations require risk assessments and transparency for high‑risk AI systems. Companies must audit models for bias.
         """,
         "image": "https://via.placeholder.com/800x400?text=Ethical+AI",
-        "audio_text": "AI bias comes from training data. Fairness can be measured in different ways. Mitigation includes debiasing and constraints. Transparency tools like LIME help explain decisions. Regulations are emerging."
+        "audio_text": "Day 16: AI bias comes from training data. Fairness can be measured in different ways. Mitigation includes debiasing and constraints. Transparency tools like LIME help explain decisions. Regulations are emerging."
     },
     17: {
         "title": "The Future of Work with AI – Augmentation, Not Replacement",
         "content": """
-        **Historical Patterns**  
+        **Day 17: Historical Patterns**  
         Automation has always displaced some jobs while creating new ones. The printing press, steam engine, and computer each caused upheaval, but employment eventually grew.  
         
         **AI's Unique Impact**  
@@ -380,12 +380,12 @@ modules_data = {
         Companies should invest in reskilling, redesign workflows, and involve workers in AI adoption decisions.
         """,
         "image": "https://via.placeholder.com/800x400?text=Future+of+Work",
-        "audio_text": "AI will augment, not replace, most jobs. It automates routine cognitive tasks. Workers should learn AI tools and soft skills. Organizations must reskill and redesign workflows."
+        "audio_text": "Day 17: AI will augment, not replace, most jobs. It automates routine cognitive tasks. Workers should learn AI tools and soft skills. Organizations must reskill and redesign workflows."
     },
     18: {
         "title": "Quantum Machine Learning – Hype or Reality?",
         "content": """
-        **What Is Quantum Machine Learning?**  
+        **Day 18: What Is Quantum Machine Learning?**  
         QML uses quantum computers to speed up machine learning algorithms. Potential applications include solving linear systems exponentially faster, improving optimization, and discovering new materials.  
         
         **Current State**  
@@ -400,12 +400,12 @@ modules_data = {
         Most experts believe practical QML is at least a decade away, and it may only benefit specific niches (e.g., chemistry, optimization). Classical AI will remain dominant for the foreseeable future.
         """,
         "image": "https://via.placeholder.com/800x400?text=Quantum+Machine+Learning",
-        "audio_text": "Quantum machine learning promises speedups for some algorithms, but current quantum computers are too small. Practical QML is likely a decade away. Classical AI remains dominant."
+        "audio_text": "Day 18: Quantum machine learning promises speedups for some algorithms, but current quantum computers are too small. Practical QML is likely a decade away. Classical AI remains dominant."
     },
     19: {
         "title": "Embodied AI – Robots That Learn in the Real World",
         "content": """
-        **Beyond Pure Software**  
+        **Day 19: Beyond Pure Software**  
         Embodied AI gives an AI a body – a robot, drone, or even a simulated avatar. It learns by interacting with the physical world through sensors and actuators.  
         
         **Challenges**  
@@ -422,12 +422,12 @@ modules_data = {
         Warehouse automation, domestic service robots, search and rescue, and space exploration. Embodied AI could eventually lead to general‑purpose household robots.
         """,
         "image": "https://via.placeholder.com/800x400?text=Embodied+AI",
-        "audio_text": "Embodied AI gives intelligence a physical body. It learns by interacting with the real world. Challenges include slow learning and sim-to-real transfer. Recent advances include Google's RT-2."
+        "audio_text": "Day 19: Embodied AI gives intelligence a physical body. It learns by interacting with the real world. Challenges include slow learning and sim-to-real transfer. Recent advances include Google's RT-2."
     },
     20: {
         "title": "How to Stay Ahead – Lifelong Learning in the AI Era",
         "content": """
-        **The Pace of Change**  
+        **Day 20: The Pace of Change**  
         AI capabilities are doubling every few months. What was cutting‑edge a year ago is now standard. To stay relevant, you need a strategy for continuous learning.  
         
         **Practical Tips**  
@@ -446,7 +446,180 @@ modules_data = {
         Don't try to master everything. Focus on learning how to learn – adapt quickly to new tools as they emerge. The most valuable skill is not knowing a specific technology but being able to pick it up when needed.
         """,
         "image": "https://via.placeholder.com/800x400?text=Lifelong+Learning",
-        "audio_text": "Stay ahead by continuous learning. Follow researchers, build small projects, join communities. Learn prompt engineering, basic Python, and ethical considerations. The key skill is learning how to learn."
+        "audio_text": "Day 20: Stay ahead by continuous learning. Follow researchers, build small projects, join communities. Learn prompt engineering, basic Python, and ethical considerations. The key skill is learning how to learn."
+    },
+    21: {
+        "title": "AI Regulation – The EU AI Act and Global Trends",
+        "content": """
+        **Day 21: The EU AI Act**  
+        The European Union's AI Act is the world's first comprehensive AI law. It classifies AI systems into risk categories: unacceptable, high, limited, and minimal. Unacceptable risk systems (e.g., social scoring) are banned. High‑risk systems (e.g., medical devices, hiring tools) require conformity assessments, transparency, and human oversight.  
+        
+        **Global Landscape**  
+        - China has implemented rules for generative AI (must respect socialist values, watermark content).  
+        - The US has executive orders and voluntary commitments from leading AI companies.  
+        - Many countries are drafting their own regulations.  
+        
+        **Implications for Businesses**  
+        Companies building or using AI must conduct risk assessments, document data sources, and ensure compliance. Non‑compliance can lead to fines up to €30 million or 6% of global turnover.  
+        
+        **Challenges**  
+        Rapidly evolving technology makes regulation difficult. Over‑regulation could stifle innovation, while under‑regulation could cause harm. The EU AI Act is likely to become a global benchmark, similar to GDPR.
+        """,
+        "image": "https://via.placeholder.com/800x400?text=AI+Regulation",
+        "audio_text": "Day 21: The EU AI Act is the first comprehensive AI law. It classifies AI by risk, bans unacceptable systems, and requires compliance for high-risk ones. Global regulations are emerging. Businesses must prepare."
+    },
+    22: {
+        "title": "AI in Education – Personalized Tutors and Automated Grading",
+        "content": """
+        **Day 22: Personalized Learning**  
+        AI can provide one‑on‑one tutoring at scale. Systems like Khan Academy's Khanmigo use LLMs to guide students through problems without giving away answers. They adapt to each student's pace and learning style.  
+        
+        **Automated Grading**  
+        AI can grade essays, short answers, and even code, providing instant feedback. This frees teachers to focus on instruction. However, ensuring fairness and avoiding bias remains a challenge.  
+        
+        **Content Generation**  
+        Teachers can use AI to create lesson plans, quizzes, and explanatory texts. Students can generate study guides or practice problems.  
+        
+        **Risks**  
+        Over‑reliance on AI could reduce critical thinking. Privacy concerns arise when student data is processed. Also, AI may perpetuate existing biases in educational materials.  
+        
+        **The Future**  
+        AI will not replace teachers but will augment them, handling routine tasks and enabling more personalized, engaging learning experiences.
+        """,
+        "image": "https://via.placeholder.com/800x400?text=AI+in+Education",
+        "audio_text": "Day 22: AI offers personalized tutoring, automated grading, and content generation. It frees teachers but risks over-reliance and bias. The future is augmentation, not replacement."
+    },
+    23: {
+        "title": "AI for Climate Change – Prediction, Optimization, and Mitigation",
+        "content": """
+        **Day 23: Climate Prediction**  
+        AI improves weather forecasting and climate modeling, helping predict extreme events (hurricanes, floods) with greater accuracy. It also analyzes satellite imagery to track deforestation, glacier melt, and pollution.  
+        
+        **Energy Optimization**  
+        AI optimizes power grids, reducing waste and integrating renewable sources. Smart buildings adjust heating and cooling based on occupancy and weather forecasts.  
+        
+        **Carbon Capture and Material Science**  
+        AI accelerates the discovery of new materials for carbon capture, batteries, and solar cells. It simulates chemical reactions at scale, reducing lab experimentation time.  
+        
+        **Challenges**  
+        Training large AI models has a significant carbon footprint. However, the net benefit (optimizing other sectors) likely outweighs the cost.  
+        
+        **Call to Action**  
+        Use AI tools to measure and reduce your own carbon footprint. Support policies that encourage green AI research.
+        """,
+        "image": "https://via.placeholder.com/800x400?text=AI+for+Climate",
+        "audio_text": "Day 23: AI helps predict climate events, optimize energy, and discover green materials. Training AI has a carbon cost, but the net benefit is positive. Use AI to reduce your footprint."
+    },
+    24: {
+        "title": "AI in Finance – Fraud Detection, Algorithmic Trading, and Robo‑Advisors",
+        "content": """
+        **Day 24: Fraud Detection**  
+        AI models analyze transaction patterns in real time to flag suspicious activity. They learn from past fraud and adapt to new schemes, reducing false positives compared to rule‑based systems.  
+        
+        **Algorithmic Trading**  
+        High‑frequency trading firms use AI to execute trades in milliseconds, exploiting market inefficiencies. More advanced models incorporate news sentiment and macroeconomic indicators.  
+        
+        **Robo‑Advisors**  
+        Automated investment platforms (Betterment, Wealthfront) use AI to build and rebalance portfolios based on risk tolerance and goals. They lower costs and democratize access to financial advice.  
+        
+        **Credit Scoring**  
+        AI can assess creditworthiness using alternative data (rent payments, utility bills), expanding access to underserved populations. However, this raises fairness and privacy concerns.  
+        
+        **Risks**  
+        AI can amplify market volatility (flash crashes). Black‑box models may produce unexplainable decisions, complicating regulatory compliance. Bias in training data can lead to discriminatory lending.
+        """,
+        "image": "https://via.placeholder.com/800x400?text=AI+in+Finance",
+        "audio_text": "Day 24: AI detects fraud, powers algorithmic trading, and enables robo-advisors. It expands credit access but risks market volatility and bias. Transparency is key."
+    },
+    25: {
+        "title": "AI in Creative Arts – Music, Painting, and Storytelling",
+        "content": """
+        **Day 25: Generative Art**  
+        Tools like DALL‑E, MidJourney, and Stable Diffusion allow anyone to create stunning images from text prompts. Artists use them for inspiration, prototyping, or final pieces.  
+        
+        **AI Music**  
+        Models like Suno and Udio generate full songs with lyrics, melody, and instrumentation. Musicians use AI for backing tracks, idea generation, or even complete releases.  
+        
+        **Storytelling**  
+        LLMs can write short stories, poems, and even screenplays. They assist writers by overcoming writer's block or generating variations.  
+        
+        **Copyright and Ownership**  
+        Who owns AI‑generated art? Current laws are unclear. Some argue it's the user who provided the prompt; others say the model's creators or the public domain. This is an active legal debate.  
+        
+        **The Human Touch**  
+        AI is a tool, not a replacement. The most compelling art still requires human emotion, intent, and curation. AI expands what's possible, but the artist remains essential.
+        """,
+        "image": "https://via.placeholder.com/800x400?text=AI+in+Creative+Arts",
+        "audio_text": "Day 25: AI generates images, music, and stories. It's a tool for artists, not a replacement. Copyright and ownership remain unsettled. Human creativity still drives value."
+    },
+    26: {
+        "title": "AI for Accessibility – Empowering People with Disabilities",
+        "content": """
+        **Day 26: Visual Impairment**  
+        AI apps like Seeing AI (Microsoft) describe scenes, read text, and identify objects for blind users. Real‑time navigation and obstacle detection are also possible.  
+        
+        **Hearing Impairment**  
+        Live captioning and sign language translation (via computer vision) help deaf users communicate. AI can also transcribe meetings and lectures in real time.  
+        
+        **Motor Impairment**  
+        Voice‑controlled assistants (Alexa, Google Home) enable independent living. Brain‑computer interfaces (like Neuralink) promise direct thought‑controlled devices.  
+        
+        **Cognitive Disabilities**  
+        AI simplifies complex tasks, provides reminders, and offers step‑by‑step guidance. Personalized learning tools adapt to individual needs.  
+        
+        **The Challenge**  
+        Accessibility features must be affordable and integrated by default, not as expensive add‑ons. Privacy concerns (e.g., cameras in the home) must be addressed.  
+        
+        **Call to Action**  
+        Developers should prioritize accessibility from the start. Inclusive design benefits everyone.
+        """,
+        "image": "https://via.placeholder.com/800x400?text=AI+for+Accessibility",
+        "audio_text": "Day 26: AI empowers people with visual, hearing, motor, and cognitive disabilities through scene description, live captioning, voice control, and personalized assistance. Accessibility must be default, not an afterthought."
+    },
+    27: {
+        "title": "AI in Cybersecurity – Threat Detection and Response",
+        "content": """
+        **Day 27: Threat Detection**  
+        AI analyzes network traffic, user behavior, and system logs to identify anomalies that may indicate a breach. It can detect zero‑day attacks that signature‑based systems miss.  
+        
+        **Automated Response**  
+        When a threat is detected, AI can automatically isolate affected systems, block malicious IPs, and initiate incident response workflows, reducing reaction time from hours to seconds.  
+        
+        **Phishing and Social Engineering**  
+        AI filters emails and messages for phishing attempts, and can also be used by attackers to craft convincing scams. This is an arms race.  
+        
+        **Challenges**  
+        Adversarial AI can evade detection. Attackers also use AI to automate attacks. Defenders must constantly update models. Data privacy (monitoring user behavior) is a concern.  
+        
+        **Best Practices**  
+        Combine AI with human oversight. Regularly test and update models. Use explainable AI to understand why a decision was made.
+        """,
+        "image": "https://via.placeholder.com/800x400?text=AI+Cybersecurity",
+        "audio_text": "Day 27: AI detects threats and automates response. It fights phishing and zero-day attacks but faces adversarial evasion. Combine AI with human oversight and regular updates."
+    },
+    28: {
+        "title": "The Next Frontier – AGI, Superintelligence, and the Long‑Term Future",
+        "content": """
+        **Day 28: What Is AGI?**  
+        Artificial General Intelligence (AGI) refers to a machine that can perform any intellectual task that a human can. Current AI is narrow (excels at specific tasks). AGI would be flexible and adaptable.  
+        
+        **When Might It Arrive?**  
+        Estimates vary wildly: some say 5‑10 years, others a century. Recent rapid progress has moved many predictions closer.  
+        
+        **Superintelligence**  
+        Once AGI is achieved, it could quickly improve itself, leading to superintelligence – an intellect vastly surpassing the best human minds. This could solve major problems (disease, poverty) but also poses existential risks.  
+        
+        **Alignment Again**  
+        Ensuring a superintelligent AI shares human values is the most critical challenge. Misaligned superintelligence could be catastrophic.  
+        
+        **What You Can Do**  
+        Stay informed. Support research into AI safety and governance. Engage in public discourse. The decisions we make in the next decade will shape the long‑term future of intelligence.  
+        
+        **Final Thought**  
+        The future is not predetermined. By understanding AI today, you become part of the conversation that will determine tomorrow.
+        """,
+        "image": "https://via.placeholder.com/800x400?text=AGI+and+Superintelligence",
+        "audio_text": "Day 28: AGI is a machine that can do any intellectual task. Superintelligence could solve huge problems but poses existential risks. Alignment is critical. Stay informed and engage in shaping the future."
     }
 }
 
@@ -548,11 +721,11 @@ with st.sidebar:
     st.markdown("---")
     show_logo()
     st.markdown(f"## 🎯 {ui['module_prefix']}")
-    module_number = st.selectbox("", list(range(1, 21)), index=st.session_state.module_index, format_func=lambda x: f"{ui['module_prefix']} {x}: {modules_data[x]['title'][:40]}...", label_visibility="collapsed")
+    module_number = st.selectbox("", list(range(1, 29)), index=st.session_state.module_index, format_func=lambda x: f"{ui['module_prefix']} {x}: {modules_data[x]['title'][:40]}...", label_visibility="collapsed")
     st.session_state.module_index = module_number - 1
     st.markdown("---")
     st.markdown(f"### 📚 {ui['sidebar_progress']}")
-    st.progress(module_number / 20)
+    st.progress(module_number / 28)
     st.markdown(f"✅ {ui['module_prefix']} {module_number} {ui['sidebar_completed']}")
     st.markdown("---")
     st.markdown(f"**{ui['sidebar_founder']}**")
@@ -590,9 +763,8 @@ with col1:
     play_audio(module['audio_text'], f"audio_{module_number}", voice)
 with col2:
     if st.button(ui['download_btn'], use_container_width=True):
-        # Create notes file
-        notes = f"Module {module_number}: {module['title']}\n\n{module['content']}\n\n---\nGenerated by Foresight – GlobalInternet.py"
-        st.download_button("⬇️ Download", notes, file_name=f"foresight_module_{module_number}.txt", mime="text/plain")
+        notes = f"Day {module_number}: {module['title']}\n\n{module['content']}\n\n---\nGenerated by Foresight – GlobalInternet.py"
+        st.download_button("⬇️ Download", notes, file_name=f"foresight_day_{module_number}.txt", mime="text/plain")
 
 # Navigation buttons
 col_prev, col_next = st.columns(2)
@@ -602,14 +774,14 @@ with col_prev:
             st.session_state.module_index = module_number - 2
             st.rerun()
 with col_next:
-    if module_number < 20:
+    if module_number < 28:
         if st.button(f"{ui['next_module']} ➡️", use_container_width=True):
             st.session_state.module_index = module_number
             st.rerun()
 
-if module_number == 20:
+if module_number == 28:
     st.markdown("---")
-    st.markdown("## 🎓 You have completed all 20 insights.")
+    st.markdown("## 🎓 You have completed all 28 insights.")
     st.markdown("""
     ### 📞 To get more advanced content or support:
     - **Gesner Deslandes** – Founder
