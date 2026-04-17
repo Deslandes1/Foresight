@@ -6,9 +6,9 @@ import os
 import subprocess
 from datetime import datetime
 
-st.set_page_config(page_title="AI & Robotics Insights", layout="wide")
+st.set_page_config(page_title="Foresight – AI & Robotics Insights", layout="wide")
 
-# ---------- Language data ----------
+# ---------- Language data with clean single‑line audio texts ----------
 LANGUAGES = {
     "English": {
         "code": "en",
@@ -27,7 +27,7 @@ LANGUAGES = {
         "duration_label": "Reading time",
         "next_module": "Next Module",
         "prev_module": "Previous Module",
-        "footer_caption": "🤖 AI & Robotics Insights – stay ahead of the curve.",
+        "footer_caption": "🤖 Foresight – stay ahead of the curve.",
         "modules": {
             1: {
                 "title": "Introduction to LLMs (Stanford Lecture)",
@@ -91,7 +91,7 @@ LANGUAGES = {
         "duration_label": "Temps de lecture",
         "next_module": "Module suivant",
         "prev_module": "Module précédent",
-        "footer_caption": "🤖 IA et robotique – restez en avance.",
+        "footer_caption": "🤖 Foresight – restez en avance.",
         "modules": {
             1: {
                 "title": "Introduction aux LLM (cours de Stanford)",
@@ -114,7 +114,7 @@ LANGUAGES = {
                 
                 🔗 Lien vers la vidéo dans les commentaires (ou contactez‑nous pour l'URL directe).
                 """,
-                "audio_text": "Introduction aux grands modèles de langage. Ce cours de Stanford explique comment GPT, Gemini et Claude sont construits. Sujets clés : entraînement, transformeurs, attention et limites pratiques."
+                "audio_text": "Introduction aux grands modèles de langage. Ce cours de Stanford explique comment GPT, Gemini et Claude sont construits. Sujets clés : entraînement, transformeurs, attention et limites pratiques. Réservez deux heures ce week-end pour le regarder."
             },
             2: {
                 "title": "Robotique dextre – la percée de BrainCo",
@@ -134,7 +134,7 @@ LANGUAGES = {
                 **Quel secteur sera perturbé en premier ?**  
                 Les soins de santé (assistance chirurgicale), l'assemblage électronique et la logistique du dernier kilomètre sont des candidats de choix.
                 """,
-                "audio_text": "BrainCo a dévoilé une main robotique dextre imitant la précision humaine. Elle effectue des tâches fines, pas seulement la préhension. Cela signale que l'automatisation du travail manuel qualifié arrive plus tôt que prévu."
+                "audio_text": "BrainCo a dévoilé une main robotique dextre imitant la précision humaine. Elle effectue des tâches fines, pas seulement la préhension. Cela signale que l'automatisation du travail manuel qualifié arrive plus tôt que prévu. Les secteurs comme la santé, l'assemblage et la logistique devraient se préparer."
             }
         }
     },
@@ -155,19 +155,50 @@ LANGUAGES = {
         "duration_label": "Tiempo de lectura",
         "next_module": "Siguiente módulo",
         "prev_module": "Módulo anterior",
-        "footer_caption": "🤖 IA y robótica – mantente a la vanguardia.",
+        "footer_caption": "🤖 Foresight – mantente a la vanguardia.",
         "modules": {
             1: {
                 "title": "Introducción a los LLM (conferencia de Stanford)",
                 "duration": "2 horas (a su ritmo)",
-                "content": "...",
-                "audio_text": "..."
+                "content": """
+                **Lo que aprenderás:**  
+                Esta conferencia de Stanford de 2 horas explica cómo se construyen realmente modelos como GPT, Gemini y Claude – más claro de lo que muchos en puestos de IA de alto nivel han visto.  
+                
+                **Conclusiones clave:**  
+                - Cómo se entrenan los grandes modelos de lenguaje (preentrenamiento, ajuste fino, RLHF).  
+                - La arquitectura detrás de los transformadores y mecanismos de atención.  
+                - Por qué la escala y la calidad de los datos importan más que el número de parámetros.  
+                - Limitaciones prácticas: alucinaciones, ventanas de contexto y costos de inferencia.  
+                
+                **Por qué es importante:**  
+                Entender los fundamentos de los LLM te da una gran ventaja para aprovechar la IA en tu trabajo, sin importar tu formación técnica.  
+                
+                **Paso a seguir:**  
+                Reserva dos horas este fin de semana para ver la conferencia completa. Podría ser lo más valioso que aprendas en la semana.  
+                
+                🔗 Enlace al vídeo en los comentarios (o contáctanos para la URL directa).
+                """,
+                "audio_text": "Introducción a los grandes modelos de lenguaje. Esta conferencia de Stanford explica cómo se construyen GPT, Gemini y Claude. Temas clave: entrenamiento, transformadores, atención y limitaciones prácticas. Reserva dos horas este fin de semana para verlo."
             },
             2: {
                 "title": "Robótica diestra – el avance de BrainCo",
                 "duration": "15 min de lectura",
-                "content": "...",
-                "audio_text": "..."
+                "content": """
+                **Lo que sucedió:**  
+                BrainCo, una empresa china, presentó una mano robótica diestra de nueva generación que se mueve con la precisión y agilidad que antes solo se creía posible con manos humanas. Realiza tareas finas y delicadas – no solo agarrar y soltar.  
+                
+                **Lo que significa:**  
+                La brecha entre "robot que hace tareas repetitivas" y "robot que hace trabajo cualificado" se está cerrando rápidamente. Las industrias que dependían de la destreza humana como barrera para la automatización ya no pueden hacerlo. El hardware alcanza el momento del software de IA.  
+                
+                **Por qué deberías importarte:**  
+                - Si tus operaciones implican trabajo manual y detallado (ensamblaje, atención médica, logística, trabajo de laboratorio), el plazo para la automatización se ha acortado.  
+                - Esto no es un prototipo de laboratorio – es una señal de que la robótica diestra está entrando en rango de despliegue.  
+                - Los líderes que entiendan este cambio ahora tomarán mejores decisiones de inversión y fuerza laboral.  
+                
+                **¿Qué industria se verá afectada primero?**  
+                La atención médica (asistencia quirúrgica), el ensamblaje electrónico y la logística de última milla son los principales candidatos.
+                """,
+                "audio_text": "BrainCo presentó una mano robótica diestra que imita la precisión humana. Realiza tareas finas, no solo agarrar. Esto indica que la automatización del trabajo manual cualificado está llegando antes de lo esperado. Industrias como la salud, el ensamblaje y la logística deben prepararse."
             }
         }
     },
@@ -188,19 +219,50 @@ LANGUAGES = {
         "duration_label": "Tempo de leitura",
         "next_module": "Próximo módulo",
         "prev_module": "Módulo anterior",
-        "footer_caption": "🤖 IA e robótica – fique à frente.",
+        "footer_caption": "🤖 Foresight – fique à frente.",
         "modules": {
             1: {
                 "title": "Introdução aos LLMs (aula de Stanford)",
                 "duration": "2 horas (auto‑ritmo)",
-                "content": "...",
-                "audio_text": "..."
+                "content": """
+                **O que você aprenderá:**  
+                Esta aula de Stanford de 2 horas explica como modelos como GPT, Gemini e Claude são realmente construídos – mais claro do que muitos em cargos de IA de alto nível já viram.  
+                
+                **Principais lições:**  
+                - Como os grandes modelos de linguagem são treinados (pré‑treinamento, ajuste fino, RLHF).  
+                - A arquitetura por trás dos transformadores e mecanismos de atenção.  
+                - Por que a escala e a qualidade dos dados importam mais do que a contagem bruta de parâmetros.  
+                - Limitações práticas: alucinações, janelas de contexto e custos de inferência.  
+                
+                **Por que isso é importante:**  
+                Compreender os fundamentos dos LLMs lhe dá uma enorme vantagem para aproveitar a IA em seu trabalho, independentemente de sua formação técnica.  
+                
+                **Próximo passo:**  
+                Separe duas horas neste fim de semana para assistir à aula completa. Pode ser a coisa mais valiosa que você aprenderá na semana.  
+                
+                🔗 Link para o vídeo nos comentários (ou contate‑nos para a URL direta).
+                """,
+                "audio_text": "Introdução aos grandes modelos de linguagem. Esta aula de Stanford explica como GPT, Gemini e Claude são construídos. Tópicos principais: treinamento, transformadores, atenção e limitações práticas. Separe duas horas neste fim de semana para assistir."
             },
             2: {
                 "title": "Robótica hábil – o avanço da BrainCo",
                 "duration": "15 min de leitura",
-                "content": "...",
-                "audio_text": "..."
+                "content": """
+                **O que aconteceu:**  
+                A BrainCo, uma empresa chinesa, lançou uma mão robótica hábil de nova geração que se move com a precisão e agilidade que antes se pensava serem possíveis apenas com mãos humanas. Ela realiza tarefas finas e delicadas – não apenas agarrar e soltar.  
+                
+                **O que significa:**  
+                A lacuna entre "robô que faz tarefas repetitivas" e "robô que faz trabalho qualificado" está se fechando rapidamente. Indústrias que dependiam da destreza humana como barreira para automação não podem mais fazer isso. O hardware está alcançando o momento do software de IA.  
+                
+                **Por que você deveria se importar:**  
+                - Se suas operações envolvem trabalho manual e detalhado (montagem, saúde, logística, trabalho de laboratório), o cronograma para automação acabou de ficar mais curto.  
+                - Isso não é um protótipo de laboratório – é um sinal de que a robótica hábil está entrando em fase de implantação.  
+                - Líderes que entendem essa mudança agora tomarão melhores decisões de força de trabalho e investimento.  
+                
+                **Qual setor será perturbado primeiro?**  
+                Saúde (assistência cirúrgica), montagem eletrônica e logística de última milha são os principais candidatos.
+                """,
+                "audio_text": "A BrainCo lançou uma mão robótica hábil que imita a precisão humana. Ela realiza tarefas finas, não apenas agarrar. Isso sinaliza que a automação do trabalho manual qualificado está chegando mais cedo do que o esperado. Setores como saúde, montagem e logística devem se preparar."
             }
         }
     }
@@ -244,20 +306,28 @@ def show_logo():
     """, unsafe_allow_html=True)
 
 def generate_audio(text, output_path, voice):
-    cmd = ["edge-tts", "--voice", voice, "--text", text, "--write-media", output_path]
+    # Remove any line breaks and extra spaces
+    clean_text = ' '.join(text.split())
+    cmd = ["edge-tts", "--voice", voice, "--text", clean_text, "--write-media", output_path]
     try:
-        subprocess.run(cmd, check=True, capture_output=True, text=True, timeout=30)
+        result = subprocess.run(cmd, check=True, capture_output=True, text=True, timeout=30)
+    except subprocess.CalledProcessError as e:
+        st.error(f"Audio error: {e.stderr}")
+        return False
     except Exception as e:
         st.error(f"Audio error: {e}")
+        return False
+    return True
 
 def play_audio(text, key, voice):
     if st.button(f"🔊 Listen / Écouter / Escuchar / Ouvir", key=key):
         with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as tmp:
-            generate_audio(text, tmp.name, voice)
-            with open(tmp.name, "rb") as f:
-                audio_bytes = f.read()
-                b64 = base64.b64encode(audio_bytes).decode()
-                st.markdown(f'<audio controls src="data:audio/mp3;base64,{b64}" autoplay style="width: 100%;"></audio>', unsafe_allow_html=True)
+            success = generate_audio(text, tmp.name, voice)
+            if success:
+                with open(tmp.name, "rb") as f:
+                    audio_bytes = f.read()
+                    b64 = base64.b64encode(audio_bytes).decode()
+                    st.markdown(f'<audio controls src="data:audio/mp3;base64,{b64}" autoplay style="width: 100%;"></audio>', unsafe_allow_html=True)
             os.unlink(tmp.name)
 
 # ---------- Authentication ----------
@@ -275,7 +345,7 @@ if not st.session_state.authenticated:
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
         show_logo()
-        st.markdown("<h2 style='text-align: center;'>AI & Robotics Insights</h2>", unsafe_allow_html=True)
+        st.markdown("<h2 style='text-align: center;'>Foresight</h2>", unsafe_allow_html=True)
         st.markdown(f"<p style='text-align: center; color: #00d4ff;'>{LANGUAGES[lang]['login_sub']}</p>", unsafe_allow_html=True)
         password_input = st.text_input(LANGUAGES[lang]["login_password"], type="password")
         if st.button(LANGUAGES[lang]["login_btn"]):
