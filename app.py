@@ -304,14 +304,523 @@ The trend suggests open‑source models will become increasingly competitive, fo
         "explanation_image": "https://via.placeholder.com/800x400?text=Comparison+Table",
         "audio_text": "Day 10: Open-source models like Llama are free and customizable but slightly behind proprietary models like GPT-4. Proprietary models are state-of-the-art but cost money and lack transparency. The gap is closing."
     },
-    # For brevity, I will continue with the remaining 18 modules in the same pattern.
-    # In the final answer, I will include all 28 modules fully.
-    # Due to length, I'll output the complete file as a single code block.
-}
+    11: {
+        "title": "AI in Healthcare – Diagnosis, Drug Discovery, and Beyond",
+        "content": """
+**Key Notes / Takeaways**  
+- AI matches or exceeds human experts in medical image diagnosis.  
+- AlphaFold solves protein folding, accelerating drug discovery.  
+- LLMs power personalized medicine and patient chatbots.  
+- Challenges: regulation, data privacy, bias.  
 
-# Note: The full dictionary includes all 28 modules (1 to 28). 
-# I am truncating here for display, but the final code will have all.
-# In the actual deployment, you must include all 28 entries.
+**Diagnosis**  
+AI models can now detect diseases from medical images (X‑rays, MRIs, retinal scans) with accuracy rivaling or exceeding human experts. For example, Google's LYNA detects breast cancer metastases, and IDx‑DR diagnoses diabetic retinopathy.  
+
+**Drug Discovery**  
+AlphaFold solved the protein folding problem, predicting 3D structures from amino acid sequences. This accelerates drug design. Generative models can also propose novel molecules for specific targets, reducing discovery time from years to months.  
+
+**Personalized Medicine**  
+LLMs can analyze patient records, genetic data, and clinical studies to recommend tailored treatments. They also power chatbots that triage symptoms and answer patient questions, reducing clinician workload.  
+
+**Challenges**  
+Regulatory approval, data privacy (HIPAA), and avoiding bias are major hurdles. AI systems must be rigorously validated before clinical deployment.
+""",
+        "main_image": "https://via.placeholder.com/800x400?text=AI+in+Healthcare",
+        "explanation_image": "https://via.placeholder.com/800x400?text=Medical+AI+Examples",
+        "audio_text": "Day 11: AI helps diagnose diseases from medical images, discovers new drugs via AlphaFold, and enables personalized medicine. Challenges include regulation, privacy, and bias."
+    },
+    12: {
+        "title": "Generative AI for Video – Runway, Sora, and the Future",
+        "content": """
+**Key Notes / Takeaways**  
+- Generative video models (Runway, Sora) create clips from text prompts.  
+- Diffusion models extended to time dimension.  
+- Current limits: short clips (<1 min), occasional physics glitches.  
+- Future impact on film, ads, social media.  
+
+**From Text to Video**  
+Generative video models like Runway's Gen‑2, OpenAI's Sora, and Pika Labs can create short video clips from text prompts. They learn the dynamics of real‑world motion, lighting, and objects.  
+
+**How They Work**  
+These models are typically diffusion‑based (like image generators) but extended to the temporal dimension. They are trained on vast datasets of video clips with captions, learning to predict subsequent frames.  
+
+**Current Capabilities**  
+- Generate up to 10‑60 seconds of consistent video.  
+- Animate static images.  
+- Extend or edit existing videos.  
+
+**Limitations**  
+Physics can still be inconsistent (objects passing through each other). Long‑range coherence (story over minutes) is not yet possible. Compute cost is high.  
+
+**Implications**  
+Film production, advertising, and social media will be transformed. Soon, anyone will be able to create short films from a script.
+""",
+        "main_image": "https://via.placeholder.com/800x400?text=Generative+Video",
+        "explanation_image": "https://via.placeholder.com/800x400?text=Diffusion+Model+Video",
+        "audio_text": "Day 12: Generative video models like Runway and Sora create clips from text. They use diffusion extended to time. Current limits: short clips, occasional physics glitches. Future impact on film and ads."
+    },
+    13: {
+        "title": "AI Safety – Alignment, Robustness, and Control",
+        "content": """
+**Key Notes / Takeaways**  
+- Alignment: ensure AI pursues human‑beneficial goals.  
+- Robustness: resistance to adversarial attacks.  
+- Control: ability to monitor, shut down, or correct AI.  
+- Even current LLMs can be jailbroken; safety research is urgent.  
+
+**Alignment Problem**  
+How do we ensure AI systems pursue goals that are beneficial to humans? Misaligned AI could optimize for the wrong objective (e.g., a paperclip maximizer). Current alignment techniques include RLHF, constitutional AI, and scalable oversight.  
+
+**Robustness**  
+AI systems can be fooled by adversarial examples – small, imperceptible changes to input that cause wrong outputs. Robustness research aims to make models resistant to such attacks.  
+
+**Control and Monitoring**  
+For advanced AI, we may need methods to verify behavior, shut down unsafe systems, and prevent deception. This includes interpretability (understanding why a model made a decision) and anomaly detection.  
+
+**Why It Matters Now**  
+Even today's LLMs can be jailbroken to produce harmful content. As AI becomes more capable and autonomous, safety research becomes urgent. Leading labs have dedicated safety teams, but the field is still young.
+""",
+        "main_image": "https://via.placeholder.com/800x400?text=AI+Safety",
+        "explanation_image": "https://via.placeholder.com/800x400?text=Alignment+Diagram",
+        "audio_text": "Day 13: AI safety covers alignment (ensuring AI pursues human goals), robustness (resistance to adversarial attacks), and control. Even current models can be jailbroken. Research is urgent as AI advances."
+    },
+    14: {
+        "title": "The Turing Test and Beyond – Measuring Intelligence",
+        "content": """
+**Key Notes / Takeaways**  
+- Turing Test: human cannot distinguish AI from human. Modern LLMs pass it easily.  
+- Modern benchmarks: MMLU (knowledge), GSM8K (math), HumanEval (code).  
+- Missing: long‑term planning, embodiment, social intelligence.  
+- Future: interactive environments (e.g., Minecraft) for holistic evaluation.  
+
+**The Turing Test**  
+Proposed by Alan Turing in 1950, a machine passes if a human cannot distinguish its responses from a human's. Today, many LLMs can easily pass the original test, but the test is now considered insufficient for true intelligence.  
+
+**Modern Benchmarks**  
+- MMLU (Massive Multitask Language Understanding) – tests knowledge across 57 subjects.  
+- GSM8K – grade school math problems.  
+- HumanEval – code generation.  
+- BIG‑bench – diverse reasoning tasks.  
+
+**What's Missing**  
+Current benchmarks don't measure long‑term planning, memory, embodiment, or social intelligence. Some argue that intelligence is not a single dimension but a collection of capabilities.  
+
+**Future Directions**  
+Researchers are developing more holistic evaluations, including interactive environments (like Minecraft) where agents must achieve goals over extended periods.
+""",
+        "main_image": "https://via.placeholder.com/800x400?text=Turing+Test",
+        "explanation_image": "https://via.placeholder.com/800x400?text=Benchmark+Comparison",
+        "audio_text": "Day 14: The Turing Test is outdated. Modern benchmarks include MMLU, GSM8K, and HumanEval. They measure knowledge, math, and code. Future evaluations will include long-term planning and embodiment."
+    },
+    15: {
+        "title": "Low‑Code and No‑Code AI for Everyone",
+        "content": """
+**Key Notes / Takeaways**  
+- Platforms: Zapier, Make, Power Automate – drag‑and‑drop AI workflows.  
+- Build automations: email summarization, ticket classification, data extraction.  
+- Benefits: non‑technical users can automate tasks; rapid prototyping.  
+- Limitations: pre‑built connectors only; custom logic still needs code.  
+
+**Democratizing AI**  
+Platforms like Microsoft Power Automate, Zapier, and Make allow users to build AI‑powered workflows without writing code. Drag‑and‑drop interfaces connect apps, trigger actions, and integrate AI models.  
+
+**What You Can Build**  
+- Automatically summarize emails.  
+- Classify customer support tickets.  
+- Extract data from invoices.  
+- Generate social media posts.  
+
+**Benefits**  
+Non‑technical employees can automate tasks, reducing workload and errors. Businesses can quickly prototype AI solutions without hiring developers.  
+
+**Limitations**  
+These tools are limited to pre‑built connectors and templates. Custom logic or complex models still require coding. However, the trend is toward more flexibility and power.
+""",
+        "main_image": "https://via.placeholder.com/800x400?text=Low+Code+AI",
+        "explanation_image": "https://via.placeholder.com/800x400?text=Zapier+Example",
+        "audio_text": "Day 15: Low-code AI platforms like Zapier and Make let non-technical users build automations. Benefits include speed and accessibility. Limitations: custom logic still requires coding."
+    },
+    16: {
+        "title": "Ethical AI – Bias, Fairness, and Transparency",
+        "content": """
+**Key Notes / Takeaways**  
+- Bias originates from training data and can be amplified.  
+- Fairness metrics: demographic parity, equal opportunity, individual fairness.  
+- Mitigation: pre‑processing, in‑processing, post‑processing.  
+- Transparency: LIME, SHAP explain decisions; full interpretability remains hard.  
+- Regulation: EU AI Act requires risk assessments.  
+
+**Sources of Bias**  
+AI models inherit biases from their training data (e.g., stereotypes in text, underrepresentation in images). They can also amplify those biases, leading to unfair outcomes in hiring, lending, policing, etc.  
+
+**Measuring Fairness**  
+There are multiple definitions: demographic parity (equal outcomes across groups), equal opportunity (equal true positive rates), and individual fairness (similar individuals get similar predictions). No single metric is universally correct.  
+
+**Mitigation Strategies**  
+- Pre‑processing: debias training data.  
+- In‑processing: add fairness constraints during training.  
+- Post‑processing: adjust model outputs.  
+
+**Transparency**  
+Explainable AI (XAI) methods like LIME and SHAP help users understand why a model made a decision. However, for large neural networks, full interpretability remains an open problem.  
+
+**Regulation**  
+The EU's AI Act and similar regulations require risk assessments and transparency for high‑risk AI systems. Companies must audit models for bias.
+""",
+        "main_image": "https://via.placeholder.com/800x400?text=Ethical+AI",
+        "explanation_image": "https://via.placeholder.com/800x400?text=Bias+Mitigation+Steps",
+        "audio_text": "Day 16: AI bias comes from training data. Fairness can be measured in different ways. Mitigation includes debiasing and constraints. Transparency tools like LIME help explain decisions. Regulations are emerging."
+    },
+    17: {
+        "title": "The Future of Work with AI – Augmentation, Not Replacement",
+        "content": """
+**Key Notes / Takeaways**  
+- Automation historically displaces some jobs but creates new ones.  
+- AI affects cognitive work: writing, coding, analysis.  
+- AI augments workers by handling routine subtasks.  
+- Workers should learn AI tools and soft skills.  
+
+**Historical Patterns**  
+Automation has always displaced some jobs while creating new ones. The printing press, steam engine, and computer each caused upheaval, but employment eventually grew.  
+
+**AI's Unique Impact**  
+AI affects cognitive work – writing, coding, design, analysis. It can augment workers by handling routine subtasks, allowing humans to focus on higher‑value activities (creativity, strategy, relationships).  
+
+**Which Jobs Are Most Exposed?**  
+Research suggests that jobs involving data processing, pattern recognition, and routine communication are most affected. Physical jobs are less exposed (for now). However, dexterous robotics is closing that gap.  
+
+**What Workers Can Do**  
+- Learn to use AI tools as co‑pilots.  
+- Develop soft skills (empathy, communication, leadership).  
+- Embrace lifelong learning.  
+
+**Organizational Response**  
+Companies should invest in reskilling, redesign workflows, and involve workers in AI adoption decisions.
+""",
+        "main_image": "https://via.placeholder.com/800x400?text=Future+of+Work",
+        "explanation_image": "https://via.placeholder.com/800x400?text=Job+Impact+Chart",
+        "audio_text": "Day 17: AI will augment, not replace, most jobs. It automates routine cognitive tasks. Workers should learn AI tools and soft skills. Organizations must reskill and redesign workflows."
+    },
+    18: {
+        "title": "Quantum Machine Learning – Hype or Reality?",
+        "content": """
+**Key Notes / Takeaways**  
+- QML uses quantum computers to speed up ML algorithms.  
+- Current quantum computers are too small (noisy, limited qubits).  
+- No practical advantage demonstrated yet.  
+- Practical QML likely a decade away; classical AI remains dominant.  
+
+**What Is Quantum Machine Learning?**  
+QML uses quantum computers to speed up machine learning algorithms. Potential applications include solving linear systems exponentially faster, improving optimization, and discovering new materials.  
+
+**Current State**  
+Quantum computers are still small (noisy, limited qubits). Only a few toy demonstrations exist, such as quantum kernel methods or small Boltzmann machines. No practical advantage has been proven yet.  
+
+**Challenges**  
+- Hardware instability (decoherence).  
+- Lack of quantum RAM to load classical data.  
+- Algorithm design is extremely difficult.  
+
+**When Will It Arrive?**  
+Most experts believe practical QML is at least a decade away, and it may only benefit specific niches (e.g., chemistry, optimization). Classical AI will remain dominant for the foreseeable future.
+""",
+        "main_image": "https://via.placeholder.com/800x400?text=Quantum+Machine+Learning",
+        "explanation_image": "https://via.placeholder.com/800x400?text=Quantum+Circuit",
+        "audio_text": "Day 18: Quantum machine learning promises speedups for some algorithms, but current quantum computers are too small. Practical QML is likely a decade away. Classical AI remains dominant."
+    },
+    19: {
+        "title": "Embodied AI – Robots That Learn in the Real World",
+        "content": """
+**Key Notes / Takeaways**  
+- Embodied AI gives intelligence a physical body (robot, drone).  
+- Learns through interaction with the environment.  
+- Challenges: slow learning, sim‑to‑real transfer, safety.  
+- Advances: Google's RT‑2, Meta's Habitat.  
+
+**Beyond Pure Software**  
+Embodied AI gives an AI a body – a robot, drone, or even a simulated avatar. It learns by interacting with the physical world through sensors and actuators.  
+
+**Challenges**  
+- Real‑world interaction is slow and expensive compared to simulation.  
+- Sim‑to‑real transfer is hard because of physical differences.  
+- Safety constraints prevent random exploration.  
+
+**Recent Advances**  
+- Google's RT-2: a vision‑language‑action model that can follow commands in novel situations.  
+- Meta's Habitat: simulated environments for training navigation agents.  
+- Reinforcement learning from human feedback (RLHF) in robotics.  
+
+**Applications**  
+Warehouse automation, domestic service robots, search and rescue, and space exploration. Embodied AI could eventually lead to general‑purpose household robots.
+""",
+        "main_image": "https://via.placeholder.com/800x400?text=Embodied+AI",
+        "explanation_image": "https://via.placeholder.com/800x400?text=RT2+Architecture",
+        "audio_text": "Day 19: Embodied AI gives intelligence a physical body. It learns by interacting with the real world. Challenges include slow learning and sim-to-real transfer. Recent advances include Google's RT-2."
+    },
+    20: {
+        "title": "How to Stay Ahead – Lifelong Learning in the AI Era",
+        "content": """
+**Key Notes / Takeaways**  
+- AI capabilities double every few months → continuous learning required.  
+- Follow researchers, build small projects, join communities.  
+- Learn: prompt engineering, basic Python, API integration, ethics.  
+- Most valuable skill: learning how to learn.  
+
+**The Pace of Change**  
+AI capabilities are doubling every few months. What was cutting‑edge a year ago is now standard. To stay relevant, you need a strategy for continuous learning.  
+
+**Practical Tips**  
+- Follow key researchers and labs (OpenAI, DeepMind, Stanford).  
+- Build small projects using new APIs (OpenAI, Hugging Face).  
+- Join communities (Reddit, Discord, local meetups).  
+- Set aside 2‑4 hours weekly for reading and experimentation.  
+
+**What to Learn**  
+- Prompt engineering and AI tool usage.  
+- Basic Python and API integration.  
+- Understanding model limitations and evaluation.  
+- Ethical and legal aspects of AI deployment.  
+
+**The Mindset**  
+Don't try to master everything. Focus on learning how to learn – adapt quickly to new tools as they emerge. The most valuable skill is not knowing a specific technology but being able to pick it up when needed.
+""",
+        "main_image": "https://via.placeholder.com/800x400?text=Lifelong+Learning",
+        "explanation_image": "https://via.placeholder.com/800x400?text=Learning+Strategy",
+        "audio_text": "Day 20: Stay ahead by continuous learning. Follow researchers, build small projects, join communities. Learn prompt engineering, basic Python, and ethical considerations. The key skill is learning how to learn."
+    },
+    21: {
+        "title": "AI Regulation – The EU AI Act and Global Trends",
+        "content": """
+**Key Notes / Takeaways**  
+- EU AI Act: first comprehensive AI law. Risk categories: unacceptable, high, limited, minimal.  
+- Bans social scoring, real‑time biometric surveillance (exceptions).  
+- High‑risk systems require conformity assessments and human oversight.  
+- Fines up to €30M or 6% of global turnover.  
+
+**The EU AI Act**  
+The European Union's AI Act is the world's first comprehensive AI law. It classifies AI systems into risk categories: unacceptable, high, limited, and minimal. Unacceptable risk systems (e.g., social scoring) are banned. High‑risk systems (e.g., medical devices, hiring tools) require conformity assessments, transparency, and human oversight.  
+
+**Global Landscape**  
+- China has implemented rules for generative AI (must respect socialist values, watermark content).  
+- The US has executive orders and voluntary commitments from leading AI companies.  
+- Many countries are drafting their own regulations.  
+
+**Implications for Businesses**  
+Companies building or using AI must conduct risk assessments, document data sources, and ensure compliance. Non‑compliance can lead to fines up to €30 million or 6% of global turnover.  
+
+**Challenges**  
+Rapidly evolving technology makes regulation difficult. Over‑regulation could stifle innovation, while under‑regulation could cause harm. The EU AI Act is likely to become a global benchmark, similar to GDPR.
+""",
+        "main_image": "https://via.placeholder.com/800x400?text=AI+Regulation",
+        "explanation_image": "https://via.placeholder.com/800x400?text=EU+AI+Act+Risk+Pyramid",
+        "audio_text": "Day 21: The EU AI Act is the first comprehensive AI law. It classifies AI by risk, bans unacceptable systems, and requires compliance for high-risk ones. Global regulations are emerging. Businesses must prepare."
+    },
+    22: {
+        "title": "AI in Education – Personalized Tutors and Automated Grading",
+        "content": """
+**Key Notes / Takeaways**  
+- AI tutors provide one‑on‑one guidance at scale (e.g., Khanmigo).  
+- Automated grading saves teacher time but must be fair.  
+- AI generates lesson plans, quizzes, study guides.  
+- Risks: over‑reliance, privacy, bias.  
+
+**Personalized Learning**  
+AI can provide one‑on‑one tutoring at scale. Systems like Khan Academy's Khanmigo use LLMs to guide students through problems without giving away answers. They adapt to each student's pace and learning style.  
+
+**Automated Grading**  
+AI can grade essays, short answers, and even code, providing instant feedback. This frees teachers to focus on instruction. However, ensuring fairness and avoiding bias remains a challenge.  
+
+**Content Generation**  
+Teachers can use AI to create lesson plans, quizzes, and explanatory texts. Students can generate study guides or practice problems.  
+
+**Risks**  
+Over‑reliance on AI could reduce critical thinking. Privacy concerns arise when student data is processed. Also, AI may perpetuate existing biases in educational materials.  
+
+**The Future**  
+AI will not replace teachers but will augment them, handling routine tasks and enabling more personalized, engaging learning experiences.
+""",
+        "main_image": "https://via.placeholder.com/800x400?text=AI+in+Education",
+        "explanation_image": "https://via.placeholder.com/800x400?text=AI+Tutor+Example",
+        "audio_text": "Day 22: AI offers personalized tutoring, automated grading, and content generation. It frees teachers but risks over-reliance and bias. The future is augmentation, not replacement."
+    },
+    23: {
+        "title": "AI for Climate Change – Prediction, Optimization, and Mitigation",
+        "content": """
+**Key Notes / Takeaways**  
+- AI improves weather and climate prediction, tracks deforestation.  
+- Optimizes energy grids and building efficiency.  
+- Accelerates material discovery for carbon capture, batteries.  
+- Training AI has carbon footprint, but net benefit is positive.  
+
+**Climate Prediction**  
+AI improves weather forecasting and climate modeling, helping predict extreme events (hurricanes, floods) with greater accuracy. It also analyzes satellite imagery to track deforestation, glacier melt, and pollution.  
+
+**Energy Optimization**  
+AI optimizes power grids, reducing waste and integrating renewable sources. Smart buildings adjust heating and cooling based on occupancy and weather forecasts.  
+
+**Carbon Capture and Material Science**  
+AI accelerates the discovery of new materials for carbon capture, batteries, and solar cells. It simulates chemical reactions at scale, reducing lab experimentation time.  
+
+**Challenges**  
+Training large AI models has a significant carbon footprint. However, the net benefit (optimizing other sectors) likely outweighs the cost.  
+
+**Call to Action**  
+Use AI tools to measure and reduce your own carbon footprint. Support policies that encourage green AI research.
+""",
+        "main_image": "https://via.placeholder.com/800x400?text=AI+for+Climate",
+        "explanation_image": "https://via.placeholder.com/800x400?text=Climate+Modeling+Diagram",
+        "audio_text": "Day 23: AI helps predict climate events, optimize energy, and discover green materials. Training AI has a carbon cost, but the net benefit is positive. Use AI to reduce your footprint."
+    },
+    24: {
+        "title": "AI in Finance – Fraud Detection, Algorithmic Trading, and Robo‑Advisors",
+        "content": """
+**Key Notes / Takeaways**  
+- AI detects fraud in real time, adapts to new schemes.  
+- Algorithmic trading exploits millisecond inefficiencies.  
+- Robo‑advisors automate portfolio management, lowering costs.  
+- Risks: market volatility, opaque decisions, bias.  
+
+**Fraud Detection**  
+AI models analyze transaction patterns in real time to flag suspicious activity. They learn from past fraud and adapt to new schemes, reducing false positives compared to rule‑based systems.  
+
+**Algorithmic Trading**  
+High‑frequency trading firms use AI to execute trades in milliseconds, exploiting market inefficiencies. More advanced models incorporate news sentiment and macroeconomic indicators.  
+
+**Robo‑Advisors**  
+Automated investment platforms (Betterment, Wealthfront) use AI to build and rebalance portfolios based on risk tolerance and goals. They lower costs and democratize access to financial advice.  
+
+**Credit Scoring**  
+AI can assess creditworthiness using alternative data (rent payments, utility bills), expanding access to underserved populations. However, this raises fairness and privacy concerns.  
+
+**Risks**  
+AI can amplify market volatility (flash crashes). Black‑box models may produce unexplainable decisions, complicating regulatory compliance. Bias in training data can lead to discriminatory lending.
+""",
+        "main_image": "https://via.placeholder.com/800x400?text=AI+in+Finance",
+        "explanation_image": "https://via.placeholder.com/800x400?text=Fraud+Detection+Flow",
+        "audio_text": "Day 24: AI detects fraud, powers algorithmic trading, and enables robo-advisors. It expands credit access but risks market volatility and bias. Transparency is key."
+    },
+    25: {
+        "title": "AI in Creative Arts – Music, Painting, and Storytelling",
+        "content": """
+**Key Notes / Takeaways**  
+- Generative AI (DALL‑E, MidJourney) creates stunning images.  
+- AI music models (Suno, Udio) generate full songs.  
+- LLMs write stories, poems, screenplays.  
+- Copyright and ownership are unsettled.  
+- AI is a tool; human creativity remains essential.  
+
+**Generative Art**  
+Tools like DALL‑E, MidJourney, and Stable Diffusion allow anyone to create stunning images from text prompts. Artists use them for inspiration, prototyping, or final pieces.  
+
+**AI Music**  
+Models like Suno and Udio generate full songs with lyrics, melody, and instrumentation. Musicians use AI for backing tracks, idea generation, or even complete releases.  
+
+**Storytelling**  
+LLMs can write short stories, poems, and even screenplays. They assist writers by overcoming writer's block or generating variations.  
+
+**Copyright and Ownership**  
+Who owns AI‑generated art? Current laws are unclear. Some argue it's the user who provided the prompt; others say the model's creators or the public domain. This is an active legal debate.  
+
+**The Human Touch**  
+AI is a tool, not a replacement. The most compelling art still requires human emotion, intent, and curation. AI expands what's possible, but the artist remains essential.
+""",
+        "main_image": "https://via.placeholder.com/800x400?text=AI+in+Creative+Arts",
+        "explanation_image": "https://via.placeholder.com/800x400?text=AI+Art+Examples",
+        "audio_text": "Day 25: AI generates images, music, and stories. It's a tool for artists, not a replacement. Copyright and ownership remain unsettled. Human creativity still drives value."
+    },
+    26: {
+        "title": "AI for Accessibility – Empowering People with Disabilities",
+        "content": """
+**Key Notes / Takeaways**  
+- AI describes scenes, reads text for blind users (Seeing AI).  
+- Live captioning and sign language translation for deaf users.  
+- Voice control and brain‑computer interfaces for motor impairments.  
+- Personalized assistance for cognitive disabilities.  
+- Accessibility should be default, not an add‑on.  
+
+**Visual Impairment**  
+AI apps like Seeing AI (Microsoft) describe scenes, read text, and identify objects for blind users. Real‑time navigation and obstacle detection are also possible.  
+
+**Hearing Impairment**  
+Live captioning and sign language translation (via computer vision) help deaf users communicate. AI can also transcribe meetings and lectures in real time.  
+
+**Motor Impairment**  
+Voice‑controlled assistants (Alexa, Google Home) enable independent living. Brain‑computer interfaces (like Neuralink) promise direct thought‑controlled devices.  
+
+**Cognitive Disabilities**  
+AI simplifies complex tasks, provides reminders, and offers step‑by‑step guidance. Personalized learning tools adapt to individual needs.  
+
+**The Challenge**  
+Accessibility features must be affordable and integrated by default, not as expensive add‑ons. Privacy concerns (e.g., cameras in the home) must be addressed.  
+
+**Call to Action**  
+Developers should prioritize accessibility from the start. Inclusive design benefits everyone.
+""",
+        "main_image": "https://via.placeholder.com/800x400?text=AI+for+Accessibility",
+        "explanation_image": "https://via.placeholder.com/800x400?text=Accessibility+Tools",
+        "audio_text": "Day 26: AI empowers people with visual, hearing, motor, and cognitive disabilities through scene description, live captioning, voice control, and personalized assistance. Accessibility must be default, not an afterthought."
+    },
+    27: {
+        "title": "AI in Cybersecurity – Threat Detection and Response",
+        "content": """
+**Key Notes / Takeaways**  
+- AI detects zero‑day attacks and anomalies.  
+- Automated response isolates threats in seconds.  
+- AI also used by attackers (phishing, adversarial AI).  
+- Combine AI with human oversight; regularly update models.  
+
+**Threat Detection**  
+AI analyzes network traffic, user behavior, and system logs to identify anomalies that may indicate a breach. It can detect zero‑day attacks that signature‑based systems miss.  
+
+**Automated Response**  
+When a threat is detected, AI can automatically isolate affected systems, block malicious IPs, and initiate incident response workflows, reducing reaction time from hours to seconds.  
+
+**Phishing and Social Engineering**  
+AI filters emails and messages for phishing attempts, and can also be used by attackers to craft convincing scams. This is an arms race.  
+
+**Challenges**  
+Adversarial AI can evade detection. Attackers also use AI to automate attacks. Defenders must constantly update models. Data privacy (monitoring user behavior) is a concern.  
+
+**Best Practices**  
+Combine AI with human oversight. Regularly test and update models. Use explainable AI to understand why a decision was made.
+""",
+        "main_image": "https://via.placeholder.com/800x400?text=AI+Cybersecurity",
+        "explanation_image": "https://via.placeholder.com/800x400?text=Threat+Detection+Flow",
+        "audio_text": "Day 27: AI detects threats and automates response. It fights phishing and zero-day attacks but faces adversarial evasion. Combine AI with human oversight and regular updates."
+    },
+    28: {
+        "title": "The Next Frontier – AGI, Superintelligence, and the Long‑Term Future",
+        "content": """
+**Key Notes / Takeaways**  
+- AGI = Artificial General Intelligence (human‑level across all tasks).  
+- Estimates vary: 5‑10 years to a century.  
+- Superintelligence could solve major problems or pose existential risks.  
+- Alignment is the most critical challenge.  
+- Stay informed and engage in shaping the future.  
+
+**What Is AGI?**  
+Artificial General Intelligence (AGI) refers to a machine that can perform any intellectual task that a human can. Current AI is narrow (excels at specific tasks). AGI would be flexible and adaptable.  
+
+**When Might It Arrive?**  
+Estimates vary wildly: some say 5‑10 years, others a century. Recent rapid progress has moved many predictions closer.  
+
+**Superintelligence**  
+Once AGI is achieved, it could quickly improve itself, leading to superintelligence – an intellect vastly surpassing the best human minds. This could solve major problems (disease, poverty) but also poses existential risks.  
+
+**Alignment Again**  
+Ensuring a superintelligent AI shares human values is the most critical challenge. Misaligned superintelligence could be catastrophic.  
+
+**What You Can Do**  
+Stay informed. Support research into AI safety and governance. Engage in public discourse. The decisions we make in the next decade will shape the long‑term future of intelligence.  
+
+**Final Thought**  
+The future is not predetermined. By understanding AI today, you become part of the conversation that will determine tomorrow.
+""",
+        "main_image": "https://via.placeholder.com/800x400?text=AGI+and+Superintelligence",
+        "explanation_image": "https://via.placeholder.com/800x400?text=AGI+Timeline",
+        "audio_text": "Day 28: AGI is a machine that can do any intellectual task. Superintelligence could solve huge problems but poses existential risks. Alignment is critical. Stay informed and engage in shaping the future."
+    }
+}
 
 # ---------- Helper functions ----------
 def set_style():
