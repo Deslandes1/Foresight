@@ -8,18 +8,18 @@ from datetime import datetime
 
 st.set_page_config(page_title="Foresight – AI & Robotics Insights", layout="wide")
 
-# ---------- Language data with clean single‑line audio texts ----------
+# ---------- Language data (only English for now, easy to extend) ----------
 LANGUAGES = {
     "English": {
         "code": "en",
         "voice": "en-US-GuyNeural",
         "login_title": "🔐 Access Required",
-        "login_sub": "2 essential insights – LLMs & dexterous robotics",
+        "login_sub": "20 essential insights – AI, LLMs, robotics & the future",
         "login_password": "Enter password to access",
         "login_btn": "Login",
         "login_error": "Incorrect password. Access denied.",
         "sidebar_progress": "Your progress",
-        "sidebar_completed": "of 2",
+        "sidebar_completed": "of 20",
         "sidebar_founder": "Founder & Developer:",
         "sidebar_price": "**$49 USD** (complete insights, source code included)",
         "sidebar_logout": "Logout",
@@ -27,244 +27,426 @@ LANGUAGES = {
         "duration_label": "Reading time",
         "next_module": "Next Module",
         "prev_module": "Previous Module",
-        "footer_caption": "🤖 Foresight – stay ahead of the curve.",
-        "modules": {
-            1: {
-                "title": "Introduction to LLMs (Stanford Lecture)",
-                "duration": "2 hours (self‑paced)",
-                "content": """
-                **What you'll learn:**  
-                This 2‑hour Stanford lecture breaks down how models like GPT, Gemini, and Claude are actually built – clearer than what many people in top AI roles ever get exposed to.  
-                
-                **Key takeaways:**  
-                - How large language models are trained (pre‑training, fine‑tuning, RLHF).  
-                - The architecture behind transformers and attention mechanisms.  
-                - Why scale and data quality matter more than raw parameter count.  
-                - Practical limitations: hallucinations, context windows, and inference costs.  
-                
-                **Why this matters:**  
-                Understanding the fundamentals of LLMs gives you a massive advantage in leveraging AI for your work, regardless of your technical background.  
-                
-                **Action step:**  
-                Set aside two hours this weekend to watch the full lecture. It might be the most valuable thing you learn all week.  
-                
-                🔗 Link to the video in the comments (or contact us for the direct URL).
-                """,
-                "audio_text": "Introduction to Large Language Models. This Stanford lecture explains how GPT, Gemini and Claude are built. Key topics: training, transformers, attention, and practical limitations. Save two hours this weekend to watch it."
-            },
-            2: {
-                "title": "Dexterous Robotics – BrainCo's Breakthrough",
-                "duration": "15 min read",
-                "content": """
-                **What happened:**  
-                China's BrainCo unveiled a next‑generation dexterous robotic hand that moves with precision and agility previously thought only human hands could achieve. It performs fine, delicate tasks – not just grab and release.  
-                
-                **What it means:**  
-                The gap between "robot doing repetitive tasks" and "robot doing skilled human work" is closing fast. Industries that relied on human dexterity as a barrier to automation no longer can. Hardware is catching up to the AI software moment.  
-                
-                **Why you should care:**  
-                - If your operations involve manual, detail‑oriented work (assembly, healthcare, logistics, lab work), the timeline for automation just got shorter.  
-                - This is not a lab prototype – it's a signal that dexterous robotics is entering deployment range.  
-                - Leaders who understand this shift now will make better workforce and investment decisions.  
-                
-                **Which industry gets disrupted first?**  
-                Healthcare (surgery assistance), electronics assembly, and last‑mile logistics are prime candidates.
-                """,
-                "audio_text": "China's BrainCo unveiled a dexterous robotic hand that mimics human precision. It performs fine tasks, not just gripping. This signals that skilled manual work automation is arriving sooner than expected. Industries like healthcare, assembly, and logistics should prepare."
-            }
-        }
+        "download_btn": "📥 Download Notes (TXT)",
+        "footer_caption": "🤖 Foresight – 20 insights to stay ahead of the curve."
+    }
+}
+
+# ---------- 20 modules with title, content, image URL ----------
+modules_data = {
+    1: {
+        "title": "How Large Language Models (LLMs) Actually Work",
+        "content": """
+        **The Transformer Architecture**  
+        Large Language Models like GPT-4, Gemini, and Claude are built on a deep learning architecture called the Transformer. Unlike older recurrent networks, Transformers process all words in a sentence simultaneously using a mechanism called "self-attention". This allows the model to understand context and relationships between words, regardless of their distance in the text.  
+        
+        **Training Process**  
+        LLMs are trained in two main stages: pre-training and fine-tuning. During pre-training, the model learns to predict the next word in a huge corpus of internet text (billions of pages). It develops grammar, facts, reasoning patterns, and even biases. Fine-tuning then adjusts the model for specific tasks like conversation or coding, often using human feedback (RLHF).  
+        
+        **Why Scale Matters**  
+        Larger models with more parameters (hundreds of billions) tend to perform better, but they also require massive computational resources. Recent research shows that data quality and training efficiency can be as important as raw size.  
+        
+        **Limitations**  
+        LLMs can "hallucinate" (make up confident-sounding but false information), have limited context windows (typically 8k-128k tokens), and reflect the biases in their training data. Understanding these limits is crucial for responsible use.
+        """,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Transformer_architecture.png/800px-Transformer_architecture.png",
+        "audio_text": "How Large Language Models work. Transformers use self-attention to process words simultaneously. Training involves pre-training and fine-tuning. Larger models perform better but have limitations like hallucinations and context windows."
     },
-    "French": {
-        "code": "fr",
-        "voice": "fr-FR-HenriNeural",
-        "login_title": "🔐 Accès requis",
-        "login_sub": "2 informations essentielles – LLM et robotique dextre",
-        "login_password": "Entrez le mot de passe pour accéder",
-        "login_btn": "Se connecter",
-        "login_error": "Mot de passe incorrect. Accès refusé.",
-        "sidebar_progress": "Votre progression",
-        "sidebar_completed": "sur 2",
-        "sidebar_founder": "Fondateur et développeur :",
-        "sidebar_price": "**49 $ USD** (informations complètes, code source inclus)",
-        "sidebar_logout": "Déconnexion",
-        "module_prefix": "Module",
-        "duration_label": "Temps de lecture",
-        "next_module": "Module suivant",
-        "prev_module": "Module précédent",
-        "footer_caption": "🤖 Foresight – restez en avance.",
-        "modules": {
-            1: {
-                "title": "Introduction aux LLM (cours de Stanford)",
-                "duration": "2 heures (à votre rythme)",
-                "content": """
-                **Ce que vous apprendrez :**  
-                Ce cours de Stanford de 2 heures explique comment les modèles comme GPT, Gemini et Claude sont réellement construits – plus clairement que ce que beaucoup de personnes dans des postes IA de haut niveau n'ont jamais vu.  
-                
-                **Points clés :**  
-                - Comment les grands modèles de langage sont entraînés (pré‑entraînement, ajustement fin, RLHF).  
-                - L'architecture des transformateurs et des mécanismes d'attention.  
-                - Pourquoi l'échelle et la qualité des données comptent plus que le nombre de paramètres.  
-                - Limites pratiques : hallucinations, fenêtres de contexte, coûts d'inférence.  
-                
-                **Pourquoi c'est important :**  
-                Comprendre les fondamentaux des LLM vous donne un avantage considérable pour utiliser l'IA dans votre travail, quel que soit votre niveau technique.  
-                
-                **Action :**  
-                Réservez deux heures ce week‑end pour regarder la conférence complète. Cela pourrait être la chose la plus utile que vous apprendrez de la semaine.  
-                
-                🔗 Lien vers la vidéo dans les commentaires (ou contactez‑nous pour l'URL directe).
-                """,
-                "audio_text": "Introduction aux grands modèles de langage. Ce cours de Stanford explique comment GPT, Gemini et Claude sont construits. Sujets clés : entraînement, transformeurs, attention et limites pratiques. Réservez deux heures ce week-end pour le regarder."
-            },
-            2: {
-                "title": "Robotique dextre – la percée de BrainCo",
-                "duration": "15 min de lecture",
-                "content": """
-                **Ce qui s'est passé :**  
-                BrainCo, une entreprise chinoise, a dévoilé une main robotique dextre de nouvelle génération qui imite la précision et l'agilité d'une main humaine. Elle peut effectuer des tâches fines et délicates – pas seulement saisir et relâcher.  
-                
-                **Ce que cela signifie :**  
-                L'écart entre « robot effectuant des tâches répétitives » et « robot effectuant un travail qualifié » se réduit rapidement. Les industries qui comptaient sur la dextérité humaine comme barrière à l'automatisation ne le peuvent plus. Le matériel rattrape le moment de l'IA logicielle.  
-                
-                **Pourquoi vous devriez vous y intéresser :**  
-                - Si vos opérations impliquent un travail manuel et méticuleux (assemblage, soins de santé, logistique, travail de laboratoire), le calendrier d'automatisation vient de se raccourcir.  
-                - Ce n'est pas un prototype de laboratoire – c'est un signal que la robotique dextre entre dans la phase de déploiement.  
-                - Les leaders qui comprennent ce changement maintenant prendront de meilleures décisions en matière de main‑d'œuvre et d'investissement.  
-                
-                **Quel secteur sera perturbé en premier ?**  
-                Les soins de santé (assistance chirurgicale), l'assemblage électronique et la logistique du dernier kilomètre sont des candidats de choix.
-                """,
-                "audio_text": "BrainCo a dévoilé une main robotique dextre imitant la précision humaine. Elle effectue des tâches fines, pas seulement la préhension. Cela signale que l'automatisation du travail manuel qualifié arrive plus tôt que prévu. Les secteurs comme la santé, l'assemblage et la logistique devraient se préparer."
-            }
-        }
+    2: {
+        "title": "The Rise of Dexterous Robotics – BrainCo's Hand",
+        "content": """
+        **What Makes BrainCo's Hand Different**  
+        Most industrial robots use simple grippers that can only pick and place objects. BrainCo's new dexterous hand has five independently articulated fingers, each with multiple joints. It can perform fine motor tasks: holding a pen, turning a key, even playing musical instruments.  
+        
+        **How It Works**  
+        The hand uses a combination of electric motors, tendon-like cables, and force sensors. Machine learning algorithms translate human movements (captured by a sensor glove) into precise finger motions. The system can also operate autonomously using computer vision to identify and grasp objects of various shapes.  
+        
+        **Implications for Automation**  
+        Tasks that once required human dexterity – assembling electronics, handling delicate medical instruments, sorting irregular packages – are now within reach of automation. Industries like healthcare, logistics, and manufacturing will see major shifts in the next 3-5 years.  
+        
+        **Challenges**  
+        Cost (currently high), durability, and the need for advanced AI control systems remain barriers. However, rapid progress suggests that dexterous robots will become commercially viable sooner than many expect.
+        """,
+        "image": "https://www.brainco.tech/hubfs/BrainCo_Robotic_Hand.jpg",
+        "audio_text": "BrainCo's dexterous robotic hand mimics human fine motor skills. It uses articulated fingers, force sensors, and AI. Applications in healthcare, assembly, and logistics. Challenges remain but progress is rapid."
     },
-    "Spanish": {
-        "code": "es",
-        "voice": "es-ES-AlvaroNeural",
-        "login_title": "🔐 Acceso requerido",
-        "login_sub": "2 ideas esenciales – LLM y robótica diestra",
-        "login_password": "Ingrese la contraseña para acceder",
-        "login_btn": "Iniciar sesión",
-        "login_error": "Contraseña incorrecta. Acceso denegado.",
-        "sidebar_progress": "Tu progreso",
-        "sidebar_completed": "de 2",
-        "sidebar_founder": "Fundador y desarrollador:",
-        "sidebar_price": "**$49 USD** (información completa, código fuente incluido)",
-        "sidebar_logout": "Cerrar sesión",
-        "module_prefix": "Módulo",
-        "duration_label": "Tiempo de lectura",
-        "next_module": "Siguiente módulo",
-        "prev_module": "Módulo anterior",
-        "footer_caption": "🤖 Foresight – mantente a la vanguardia.",
-        "modules": {
-            1: {
-                "title": "Introducción a los LLM (conferencia de Stanford)",
-                "duration": "2 horas (a su ritmo)",
-                "content": """
-                **Lo que aprenderás:**  
-                Esta conferencia de Stanford de 2 horas explica cómo se construyen realmente modelos como GPT, Gemini y Claude – más claro de lo que muchos en puestos de IA de alto nivel han visto.  
-                
-                **Conclusiones clave:**  
-                - Cómo se entrenan los grandes modelos de lenguaje (preentrenamiento, ajuste fino, RLHF).  
-                - La arquitectura detrás de los transformadores y mecanismos de atención.  
-                - Por qué la escala y la calidad de los datos importan más que el número de parámetros.  
-                - Limitaciones prácticas: alucinaciones, ventanas de contexto y costos de inferencia.  
-                
-                **Por qué es importante:**  
-                Entender los fundamentos de los LLM te da una gran ventaja para aprovechar la IA en tu trabajo, sin importar tu formación técnica.  
-                
-                **Paso a seguir:**  
-                Reserva dos horas este fin de semana para ver la conferencia completa. Podría ser lo más valioso que aprendas en la semana.  
-                
-                🔗 Enlace al vídeo en los comentarios (o contáctanos para la URL directa).
-                """,
-                "audio_text": "Introducción a los grandes modelos de lenguaje. Esta conferencia de Stanford explica cómo se construyen GPT, Gemini y Claude. Temas clave: entrenamiento, transformadores, atención y limitaciones prácticas. Reserva dos horas este fin de semana para verlo."
-            },
-            2: {
-                "title": "Robótica diestra – el avance de BrainCo",
-                "duration": "15 min de lectura",
-                "content": """
-                **Lo que sucedió:**  
-                BrainCo, una empresa china, presentó una mano robótica diestra de nueva generación que se mueve con la precisión y agilidad que antes solo se creía posible con manos humanas. Realiza tareas finas y delicadas – no solo agarrar y soltar.  
-                
-                **Lo que significa:**  
-                La brecha entre "robot que hace tareas repetitivas" y "robot que hace trabajo cualificado" se está cerrando rápidamente. Las industrias que dependían de la destreza humana como barrera para la automatización ya no pueden hacerlo. El hardware alcanza el momento del software de IA.  
-                
-                **Por qué deberías importarte:**  
-                - Si tus operaciones implican trabajo manual y detallado (ensamblaje, atención médica, logística, trabajo de laboratorio), el plazo para la automatización se ha acortado.  
-                - Esto no es un prototipo de laboratorio – es una señal de que la robótica diestra está entrando en rango de despliegue.  
-                - Los líderes que entiendan este cambio ahora tomarán mejores decisiones de inversión y fuerza laboral.  
-                
-                **¿Qué industria se verá afectada primero?**  
-                La atención médica (asistencia quirúrgica), el ensamblaje electrónico y la logística de última milla son los principales candidatos.
-                """,
-                "audio_text": "BrainCo presentó una mano robótica diestra que imita la precisión humana. Realiza tareas finas, no solo agarrar. Esto indica que la automatización del trabajo manual cualificado está llegando antes de lo esperado. Industrias como la salud, el ensamblaje y la logística deben prepararse."
-            }
-        }
+    3: {
+        "title": "The Future of AI Agents – From Chatbots to Action",
+        "content": """
+        **What Are AI Agents?**  
+        Unlike chatbots that only respond to prompts, AI agents are designed to take actions: book flights, send emails, control smart home devices, even write and execute code. They combine LLMs with tools and APIs.  
+        
+        **How They Work**  
+        An agent receives a goal (e.g., "plan a trip to Paris"). It breaks the task into steps, decides which tools to use (search, calendar, booking API), executes actions, and learns from results. This loop of reasoning, acting, and observing is called "ReAct" (Reasoning + Acting).  
+        
+        **Current Examples**  
+        AutoGPT, BabyAGI, and LangChain agents are early prototypes. Companies like Adept and Google are building more robust versions for enterprise automation.  
+        
+        **Potential and Risks**  
+        Agents could automate entire workflows, but they also pose risks: executing harmful actions if not properly constrained, making costly mistakes, and being difficult to debug. Safe deployment requires careful guardrails.
+        """,
+        "image": "https://via.placeholder.com/800x400?text=AI+Agents+Illustration",
+        "audio_text": "AI agents go beyond chatbots – they take actions. They use reasoning loops and tools. Examples include AutoGPT. Potential to automate workflows but risks need careful management."
     },
-    "Portuguese": {
-        "code": "pt",
-        "voice": "pt-BR-FranciscaNeural",
-        "login_title": "🔐 Acesso necessário",
-        "login_sub": "2 insights essenciais – LLM e robótica hábil",
-        "login_password": "Digite a senha para acessar",
-        "login_btn": "Entrar",
-        "login_error": "Senha incorreta. Acesso negado.",
-        "sidebar_progress": "Seu progresso",
-        "sidebar_completed": "de 2",
-        "sidebar_founder": "Fundador e desenvolvedor:",
-        "sidebar_price": "**$49 USD** (insights completos, código fonte incluído)",
-        "sidebar_logout": "Sair",
-        "module_prefix": "Módulo",
-        "duration_label": "Tempo de leitura",
-        "next_module": "Próximo módulo",
-        "prev_module": "Módulo anterior",
-        "footer_caption": "🤖 Foresight – fique à frente.",
-        "modules": {
-            1: {
-                "title": "Introdução aos LLMs (aula de Stanford)",
-                "duration": "2 horas (auto‑ritmo)",
-                "content": """
-                **O que você aprenderá:**  
-                Esta aula de Stanford de 2 horas explica como modelos como GPT, Gemini e Claude são realmente construídos – mais claro do que muitos em cargos de IA de alto nível já viram.  
-                
-                **Principais lições:**  
-                - Como os grandes modelos de linguagem são treinados (pré‑treinamento, ajuste fino, RLHF).  
-                - A arquitetura por trás dos transformadores e mecanismos de atenção.  
-                - Por que a escala e a qualidade dos dados importam mais do que a contagem bruta de parâmetros.  
-                - Limitações práticas: alucinações, janelas de contexto e custos de inferência.  
-                
-                **Por que isso é importante:**  
-                Compreender os fundamentos dos LLMs lhe dá uma enorme vantagem para aproveitar a IA em seu trabalho, independentemente de sua formação técnica.  
-                
-                **Próximo passo:**  
-                Separe duas horas neste fim de semana para assistir à aula completa. Pode ser a coisa mais valiosa que você aprenderá na semana.  
-                
-                🔗 Link para o vídeo nos comentários (ou contate‑nos para a URL direta).
-                """,
-                "audio_text": "Introdução aos grandes modelos de linguagem. Esta aula de Stanford explica como GPT, Gemini e Claude são construídos. Tópicos principais: treinamento, transformadores, atenção e limitações práticas. Separe duas horas neste fim de semana para assistir."
-            },
-            2: {
-                "title": "Robótica hábil – o avanço da BrainCo",
-                "duration": "15 min de leitura",
-                "content": """
-                **O que aconteceu:**  
-                A BrainCo, uma empresa chinesa, lançou uma mão robótica hábil de nova geração que se move com a precisão e agilidade que antes se pensava serem possíveis apenas com mãos humanas. Ela realiza tarefas finas e delicadas – não apenas agarrar e soltar.  
-                
-                **O que significa:**  
-                A lacuna entre "robô que faz tarefas repetitivas" e "robô que faz trabalho qualificado" está se fechando rapidamente. Indústrias que dependiam da destreza humana como barreira para automação não podem mais fazer isso. O hardware está alcançando o momento do software de IA.  
-                
-                **Por que você deveria se importar:**  
-                - Se suas operações envolvem trabalho manual e detalhado (montagem, saúde, logística, trabalho de laboratório), o cronograma para automação acabou de ficar mais curto.  
-                - Isso não é um protótipo de laboratório – é um sinal de que a robótica hábil está entrando em fase de implantação.  
-                - Líderes que entendem essa mudança agora tomarão melhores decisões de força de trabalho e investimento.  
-                
-                **Qual setor será perturbado primeiro?**  
-                Saúde (assistência cirúrgica), montagem eletrônica e logística de última milha são os principais candidatos.
-                """,
-                "audio_text": "A BrainCo lançou uma mão robótica hábil que imita a precisão humana. Ela realiza tarefas finas, não apenas agarrar. Isso sinaliza que a automação do trabalho manual qualificado está chegando mais cedo do que o esperado. Setores como saúde, montagem e logística devem se preparar."
-            }
-        }
+    4: {
+        "title": "Multimodal AI – Seeing, Hearing, and Understanding",
+        "content": """
+        **Beyond Text**  
+        Multimodal AI models can process and generate not just text, but also images, audio, and video. GPT-4 with vision, Google Gemini, and Meta's ImageBind are leading examples.  
+        
+        **How It Works**  
+        These models are trained on vast datasets containing paired modalities: images with captions, video with audio, etc. They learn to map different types of data into a shared semantic space. For instance, they can understand that a picture of a cat and the word "cat" are related.  
+        
+        **Applications**  
+        - Medical diagnosis: analyzing X‑rays and patient notes together.  
+        - Accessibility: describing scenes for blind users.  
+        - Content creation: generating videos from text descriptions.  
+        
+        **Challenges**  
+        Training is computationally expensive. Aligning different modalities without losing information is difficult. Bias can propagate across all modalities.
+        """,
+        "image": "https://via.placeholder.com/800x400?text=Multimodal+AI",
+        "audio_text": "Multimodal AI processes text, images, audio, and video. Models like GPT-4 Vision and Gemini are examples. Applications in medicine, accessibility, and content creation. Challenges include cost and bias."
+    },
+    5: {
+        "title": "Edge AI – Running Models on Your Phone",
+        "content": """
+        **Why Edge AI Matters**  
+        Most AI runs in the cloud, which requires internet and causes latency. Edge AI runs models directly on devices: smartphones, cameras, cars, even microcontrollers. This enables real‑time processing, privacy, and offline operation.  
+        
+        **Techniques**  
+        - Model compression (pruning, quantization) to reduce size.  
+        - Specialized hardware like Google's TPU, Apple's Neural Engine, and NVIDIA Jetson.  
+        - On‑device training (federated learning) for personalization without sending data to the cloud.  
+        
+        **Examples**  
+        - Face unlock on phones.  
+        - Real‑time translation without internet.  
+        - Anomaly detection in industrial equipment.  
+        
+        **Future**  
+        As chips become more powerful, more complex models will run at the edge, reducing reliance on cloud servers and enabling new applications like autonomous drones and smart sensors.
+        """,
+        "image": "https://via.placeholder.com/800x400?text=Edge+AI",
+        "audio_text": "Edge AI runs models on local devices, not the cloud. It enables real-time processing, privacy, and offline use. Techniques include compression and specialized hardware. Examples: face unlock, offline translation."
+    },
+    6: {
+        "title": "AI Hallucinations – Why Models Make Things Up",
+        "content": """
+        **What Are Hallucinations?**  
+        When an LLM generates plausible-sounding but factually incorrect or nonsensical information, it's called a hallucination. For example, inventing a scientific paper that doesn't exist or citing wrong dates.  
+        
+        **Why Do They Happen?**  
+        LLMs are trained to predict the next most likely word, not to assert truth. They have no internal knowledge base to verify facts. Hallucinations are more common when the prompt is ambiguous, asks for obscure information, or pushes the model beyond its training data.  
+        
+        **Mitigation Strategies**  
+        - Retrieval-Augmented Generation (RAG): provide relevant documents as context.  
+        - Chain-of-thought prompting: force step‑by‑step reasoning.  
+        - Fine-tuning with high‑quality, verified data.  
+        - Using external fact-checking tools.  
+        
+        **Why It's Still Unsolved**  
+        Eliminating hallucinations entirely would require a model that understands truth – a very hard problem. Current best practice is to design applications that can tolerate or detect hallucinations.
+        """,
+        "image": "https://via.placeholder.com/800x400?text=AI+Hallucinations",
+        "audio_text": "Hallucinations are when AI makes up false information. They happen because models predict likely words, not facts. Mitigation includes RAG and fine-tuning. Complete elimination is still unsolved."
+    },
+    7: {
+        "title": "Reinforcement Learning from Human Feedback (RLHF)",
+        "content": """
+        **What Is RLHF?**  
+        RLHF is a technique used to align LLMs with human preferences. After pre-training, the model is fine-tuned using feedback from human evaluators who rank different model outputs. This helps the model learn what responses are helpful, honest, and harmless.  
+        
+        **How It Works**  
+        1. A human ranks two or more model outputs.  
+        2. A reward model is trained to predict human preferences.  
+        3. The LLM is fine‑tuned using reinforcement learning (often PPO) to maximize the reward model's score.  
+        
+        **Why It's Important**  
+        RLHF reduces harmful outputs, improves helpfulness, and makes models more engaging. It's why ChatGPT feels more "aligned" than base GPT-3.  
+        
+        **Limitations**  
+        RLHF is expensive and time‑consuming. It can also introduce new biases based on the preferences of the human evaluators. Scaling it to all possible scenarios is impossible.
+        """,
+        "image": "https://via.placeholder.com/800x400?text=RLHF",
+        "audio_text": "RLHF aligns AI with human preferences. Humans rank outputs, a reward model learns, and the LLM is fine-tuned. It reduces harm and improves helpfulness but is expensive and can introduce bias."
+    },
+    8: {
+        "title": "The Economics of AI – Cost, Compute, and Carbon",
+        "content": """
+        **The True Cost of AI**  
+        Training a large LLM like GPT-4 costs tens of millions of dollars in compute (GPU hours) and electricity. Inference (using the model) also adds up: serving millions of users requires vast server farms.  
+        
+        **Compute Trends**  
+        Compute demand for AI has doubled every ~3.4 months since 2012, far outpacing Moore's Law. This drives investment in specialized hardware like GPUs, TPUs, and neuromorphic chips.  
+        
+        **Carbon Footprint**  
+        Training a single large model can emit as much carbon as five cars over their lifetimes. However, inference (usage) over the model's life may account for far more. Companies are increasingly using carbon‑aware scheduling and renewable energy.  
+        
+        **Making AI More Affordable**  
+        Techniques like distillation (training smaller models to mimic larger ones), quantization, and efficient architectures (Mixture of Experts) help reduce costs. Open‑source models also democratize access.
+        """,
+        "image": "https://via.placeholder.com/800x400?text=AI+Economics",
+        "audio_text": "Training large AI models costs millions of dollars and significant carbon. Compute demand grows faster than Moore's Law. Techniques like distillation and efficient architectures help reduce costs."
+    },
+    9: {
+        "title": "Retrieval-Augmented Generation (RAG)",
+        "content": """
+        **What Is RAG?**  
+        RAG combines an LLM with an external knowledge base (e.g., a database, vector store, or search engine). When asked a question, the system first retrieves relevant documents, then feeds them as context to the LLM to generate an answer grounded in those sources.  
+        
+        **Why Use RAG?**  
+        - Reduces hallucinations by providing factual references.  
+        - Keeps knowledge up‑to‑date without retraining the model.  
+        - Allows the model to access private or proprietary data.  
+        
+        **How It Works**  
+        1. User asks a question.  
+        2. A retriever (e.g., dense vector search) finds relevant chunks from a knowledge base.  
+        3. The LLM receives the question + retrieved chunks and generates an answer citing the sources.  
+        
+        **Applications**  
+        Customer support (company documentation), research assistants (academic papers), legal analysis (case law), and any domain requiring up‑to‑date, verifiable information.
+        """,
+        "image": "https://via.placeholder.com/800x400?text=RAG+Diagram",
+        "audio_text": "RAG combines LLMs with external knowledge bases. It retrieves relevant documents then generates answers grounded in them. Reduces hallucinations and keeps knowledge current. Used in support, research, legal."
+    },
+    10: {
+        "title": "Open‑Source vs. Proprietary AI Models",
+        "content": """
+        **The Landscape**  
+        Proprietary models (GPT-4, Claude, Gemini) are developed by companies, kept secret, and accessed via APIs. Open‑source models (Llama, Mistral, Falcon) have weights publicly available and can be run locally.  
+        
+        **Pros and Cons**  
+        | Aspect | Proprietary | Open‑Source |  
+        |--------|-------------|-------------|  
+        | Performance | Usually state‑of‑the‑art | Often slightly behind |  
+        | Cost | Pay per token | Free (except compute) |  
+        | Privacy | Data may be logged | Full control |  
+        | Customization | Limited | Full fine‑tuning |  
+        | Transparency | Black box | Inspectable |  
+        
+        **The Open‑Source Advantage**  
+        Open‑source models allow researchers to study biases, developers to build on‑premise solutions, and startups to avoid API costs. The gap in capability is closing rapidly, with Llama 3 and Mixtral approaching GPT-4 performance on many benchmarks.  
+        
+        **Future**  
+        The trend suggests open‑source models will become increasingly competitive, forcing proprietary providers to offer more value (e.g., better tooling, safety guarantees, or integration).
+        """,
+        "image": "https://via.placeholder.com/800x400?text=Open+Source+vs+Proprietary",
+        "audio_text": "Open-source models like Llama are free and customizable but slightly behind proprietary models like GPT-4. Proprietary models are state-of-the-art but cost money and lack transparency. The gap is closing."
+    },
+    11: {
+        "title": "AI in Healthcare – Diagnosis, Drug Discovery, and Beyond",
+        "content": """
+        **Diagnosis**  
+        AI models can now detect diseases from medical images (X‑rays, MRIs, retinal scans) with accuracy rivaling or exceeding human experts. For example, Google's LYNA detects breast cancer metastases, and IDx‑DR diagnoses diabetic retinopathy.  
+        
+        **Drug Discovery**  
+        AlphaFold solved the protein folding problem, predicting 3D structures from amino acid sequences. This accelerates drug design. Generative models can also propose novel molecules for specific targets, reducing discovery time from years to months.  
+        
+        **Personalized Medicine**  
+        LLMs can analyze patient records, genetic data, and clinical studies to recommend tailored treatments. They also power chatbots that triage symptoms and answer patient questions, reducing clinician workload.  
+        
+        **Challenges**  
+        Regulatory approval, data privacy (HIPAA), and avoiding bias are major hurdles. AI systems must be rigorously validated before clinical deployment.
+        """,
+        "image": "https://via.placeholder.com/800x400?text=AI+in+Healthcare",
+        "audio_text": "AI helps diagnose diseases from medical images, discovers new drugs via AlphaFold, and enables personalized medicine. Challenges include regulation, privacy, and bias."
+    },
+    12: {
+        "title": "Generative AI for Video – Runway, Sora, and the Future",
+        "content": """
+        **From Text to Video**  
+        Generative video models like Runway's Gen‑2, OpenAI's Sora, and Pika Labs can create short video clips from text prompts. They learn the dynamics of real‑world motion, lighting, and objects.  
+        
+        **How They Work**  
+        These models are typically diffusion‑based (like image generators) but extended to the temporal dimension. They are trained on vast datasets of video clips with captions, learning to predict subsequent frames.  
+        
+        **Current Capabilities**  
+        - Generate up to 10‑60 seconds of consistent video.  
+        - Animate static images.  
+        - Extend or edit existing videos.  
+        
+        **Limitations**  
+        Physics can still be inconsistent (objects passing through each other). Long‑range coherence (story over minutes) is not yet possible. Compute cost is high.  
+        
+        **Implications**  
+        Film production, advertising, and social media will be transformed. Soon, anyone will be able to create short films from a script.
+        """,
+        "image": "https://via.placeholder.com/800x400?text=Generative+Video",
+        "audio_text": "Generative video models like Runway and Sora create clips from text. They use diffusion extended to time. Current limits: short clips, occasional physics glitches. Future impact on film and ads."
+    },
+    13: {
+        "title": "AI Safety – Alignment, Robustness, and Control",
+        "content": """
+        **Alignment Problem**  
+        How do we ensure AI systems pursue goals that are beneficial to humans? Misaligned AI could optimize for the wrong objective (e.g., a paperclip maximizer). Current alignment techniques include RLHF, constitutional AI, and scalable oversight.  
+        
+        **Robustness**  
+        AI systems can be fooled by adversarial examples – small, imperceptible changes to input that cause wrong outputs. Robustness research aims to make models resistant to such attacks.  
+        
+        **Control and Monitoring**  
+        For advanced AI, we may need methods to verify behavior, shut down unsafe systems, and prevent deception. This includes interpretability (understanding why a model made a decision) and anomaly detection.  
+        
+        **Why It Matters Now**  
+        Even today's LLMs can be jailbroken to produce harmful content. As AI becomes more capable and autonomous, safety research becomes urgent. Leading labs have dedicated safety teams, but the field is still young.
+        """,
+        "image": "https://via.placeholder.com/800x400?text=AI+Safety",
+        "audio_text": "AI safety covers alignment (ensuring AI pursues human goals), robustness (resistance to adversarial attacks), and control. Even current models can be jailbroken. Research is urgent as AI advances."
+    },
+    14: {
+        "title": "The Turing Test and Beyond – Measuring Intelligence",
+        "content": """
+        **The Turing Test**  
+        Proposed by Alan Turing in 1950, a machine passes if a human cannot distinguish its responses from a human's. Today, many LLMs can easily pass the original test, but the test is now considered insufficient for true intelligence.  
+        
+        **Modern Benchmarks**  
+        - MMLU (Massive Multitask Language Understanding) – tests knowledge across 57 subjects.  
+        - GSM8K – grade school math problems.  
+        - HumanEval – code generation.  
+        - BIG‑bench – diverse reasoning tasks.  
+        
+        **What's Missing**  
+        Current benchmarks don't measure long‑term planning, memory, embodiment, or social intelligence. Some argue that intelligence is not a single dimension but a collection of capabilities.  
+        
+        **Future Directions**  
+        Researchers are developing more holistic evaluations, including interactive environments (like Minecraft) where agents must achieve goals over extended periods.
+        """,
+        "image": "https://via.placeholder.com/800x400?text=Turing+Test",
+        "audio_text": "The Turing Test is outdated. Modern benchmarks include MMLU, GSM8K, and HumanEval. They measure knowledge, math, and code. Future evaluations will include long-term planning and embodiment."
+    },
+    15: {
+        "title": "Low‑Code and No‑Code AI for Everyone",
+        "content": """
+        **Democratizing AI**  
+        Platforms like Microsoft Power Automate, Zapier, and Make allow users to build AI‑powered workflows without writing code. Drag‑and‑drop interfaces connect apps, trigger actions, and integrate AI models.  
+        
+        **What You Can Build**  
+        - Automatically summarize emails.  
+        - Classify customer support tickets.  
+        - Extract data from invoices.  
+        - Generate social media posts.  
+        
+        **Benefits**  
+        Non‑technical employees can automate tasks, reducing workload and errors. Businesses can quickly prototype AI solutions without hiring developers.  
+        
+        **Limitations**  
+        These tools are limited to pre‑built connectors and templates. Custom logic or complex models still require coding. However, the trend is toward more flexibility and power.
+        """,
+        "image": "https://via.placeholder.com/800x400?text=Low+Code+AI",
+        "audio_text": "Low-code AI platforms like Zapier and Make let non-technical users build automations. Benefits include speed and accessibility. Limitations: custom logic still requires coding."
+    },
+    16: {
+        "title": "Ethical AI – Bias, Fairness, and Transparency",
+        "content": """
+        **Sources of Bias**  
+        AI models inherit biases from their training data (e.g., stereotypes in text, underrepresentation in images). They can also amplify those biases, leading to unfair outcomes in hiring, lending, policing, etc.  
+        
+        **Measuring Fairness**  
+        There are multiple definitions: demographic parity (equal outcomes across groups), equal opportunity (equal true positive rates), and individual fairness (similar individuals get similar predictions). No single metric is universally correct.  
+        
+        **Mitigation Strategies**  
+        - Pre‑processing: debias training data.  
+        - In‑processing: add fairness constraints during training.  
+        - Post‑processing: adjust model outputs.  
+        
+        **Transparency**  
+        Explainable AI (XAI) methods like LIME and SHAP help users understand why a model made a decision. However, for large neural networks, full interpretability remains an open problem.  
+        
+        **Regulation**  
+        The EU's AI Act and similar regulations require risk assessments and transparency for high‑risk AI systems. Companies must audit models for bias.
+        """,
+        "image": "https://via.placeholder.com/800x400?text=Ethical+AI",
+        "audio_text": "AI bias comes from training data. Fairness can be measured in different ways. Mitigation includes debiasing and constraints. Transparency tools like LIME help explain decisions. Regulations are emerging."
+    },
+    17: {
+        "title": "The Future of Work with AI – Augmentation, Not Replacement",
+        "content": """
+        **Historical Patterns**  
+        Automation has always displaced some jobs while creating new ones. The printing press, steam engine, and computer each caused upheaval, but employment eventually grew.  
+        
+        **AI's Unique Impact**  
+        AI affects cognitive work – writing, coding, design, analysis. It can augment workers by handling routine subtasks, allowing humans to focus on higher‑value activities (creativity, strategy, relationships).  
+        
+        **Which Jobs Are Most Exposed?**  
+        Research suggests that jobs involving data processing, pattern recognition, and routine communication are most affected. Physical jobs are less exposed (for now). However, dexterous robotics is closing that gap.  
+        
+        **What Workers Can Do**  
+        - Learn to use AI tools as co‑pilots.  
+        - Develop soft skills (empathy, communication, leadership).  
+        - Embrace lifelong learning.  
+        
+        **Organizational Response**  
+        Companies should invest in reskilling, redesign workflows, and involve workers in AI adoption decisions.
+        """,
+        "image": "https://via.placeholder.com/800x400?text=Future+of+Work",
+        "audio_text": "AI will augment, not replace, most jobs. It automates routine cognitive tasks. Workers should learn AI tools and soft skills. Organizations must reskill and redesign workflows."
+    },
+    18: {
+        "title": "Quantum Machine Learning – Hype or Reality?",
+        "content": """
+        **What Is Quantum Machine Learning?**  
+        QML uses quantum computers to speed up machine learning algorithms. Potential applications include solving linear systems exponentially faster, improving optimization, and discovering new materials.  
+        
+        **Current State**  
+        Quantum computers are still small (noisy, limited qubits). Only a few toy demonstrations exist, such as quantum kernel methods or small Boltzmann machines. No practical advantage has been proven yet.  
+        
+        **Challenges**  
+        - Hardware instability (decoherence).  
+        - Lack of quantum RAM to load classical data.  
+        - Algorithm design is extremely difficult.  
+        
+        **When Will It Arrive?**  
+        Most experts believe practical QML is at least a decade away, and it may only benefit specific niches (e.g., chemistry, optimization). Classical AI will remain dominant for the foreseeable future.
+        """,
+        "image": "https://via.placeholder.com/800x400?text=Quantum+Machine+Learning",
+        "audio_text": "Quantum machine learning promises speedups for some algorithms, but current quantum computers are too small. Practical QML is likely a decade away. Classical AI remains dominant."
+    },
+    19: {
+        "title": "Embodied AI – Robots That Learn in the Real World",
+        "content": """
+        **Beyond Pure Software**  
+        Embodied AI gives an AI a body – a robot, drone, or even a simulated avatar. It learns by interacting with the physical world through sensors and actuators.  
+        
+        **Challenges**  
+        - Real‑world interaction is slow and expensive compared to simulation.  
+        - Sim‑to‑real transfer is hard because of physical differences.  
+        - Safety constraints prevent random exploration.  
+        
+        **Recent Advances**  
+        - Google's RT-2: a vision‑language‑action model that can follow commands in novel situations.  
+        - Meta's Habitat: simulated environments for training navigation agents.  
+        - Reinforcement learning from human feedback (RLHF) in robotics.  
+        
+        **Applications**  
+        Warehouse automation, domestic service robots, search and rescue, and space exploration. Embodied AI could eventually lead to general‑purpose household robots.
+        """,
+        "image": "https://via.placeholder.com/800x400?text=Embodied+AI",
+        "audio_text": "Embodied AI gives intelligence a physical body. It learns by interacting with the real world. Challenges include slow learning and sim-to-real transfer. Recent advances include Google's RT-2."
+    },
+    20: {
+        "title": "How to Stay Ahead – Lifelong Learning in the AI Era",
+        "content": """
+        **The Pace of Change**  
+        AI capabilities are doubling every few months. What was cutting‑edge a year ago is now standard. To stay relevant, you need a strategy for continuous learning.  
+        
+        **Practical Tips**  
+        - Follow key researchers and labs (OpenAI, DeepMind, Stanford).  
+        - Build small projects using new APIs (OpenAI, Hugging Face).  
+        - Join communities (Reddit, Discord, local meetups).  
+        - Set aside 2‑4 hours weekly for reading and experimentation.  
+        
+        **What to Learn**  
+        - Prompt engineering and AI tool usage.  
+        - Basic Python and API integration.  
+        - Understanding model limitations and evaluation.  
+        - Ethical and legal aspects of AI deployment.  
+        
+        **The Mindset**  
+        Don't try to master everything. Focus on learning how to learn – adapt quickly to new tools as they emerge. The most valuable skill is not knowing a specific technology but being able to pick it up when needed.
+        """,
+        "image": "https://via.placeholder.com/800x400?text=Lifelong+Learning",
+        "audio_text": "Stay ahead by continuous learning. Follow researchers, build small projects, join communities. Learn prompt engineering, basic Python, and ethical considerations. The key skill is learning how to learn."
     }
 }
 
@@ -287,6 +469,7 @@ def set_style():
         div[data-baseweb="popover"] ul { background-color: #1e2a3a; border: 1px solid #0077ff; }
         div[data-baseweb="popover"] li { color: white !important; background-color: #1e2a3a; }
         div[data-baseweb="popover"] li:hover { background-color: #0077ff; }
+        .module-image { border-radius: 15px; margin: 1rem 0; width: 100%; }
         </style>
     """, unsafe_allow_html=True)
 
@@ -300,27 +483,22 @@ def show_logo():
                     <stop offset="50%" stop-color="#0077ff"/>
                     <stop offset="100%" stop-color="#0033aa"/>
                 </linearGradient></defs>
-                <text x="50" y="65" font-size="40" text-anchor="middle" fill="white" font-weight="bold">🧠</text>
+                <text x="50" y="65" font-size="40" text-anchor="middle" fill="white" font-weight="bold">🔭</text>
             </svg>
         </div>
     """, unsafe_allow_html=True)
 
 def generate_audio(text, output_path, voice):
-    # Remove any line breaks and extra spaces
     clean_text = ' '.join(text.split())
     cmd = ["edge-tts", "--voice", voice, "--text", clean_text, "--write-media", output_path]
     try:
-        result = subprocess.run(cmd, check=True, capture_output=True, text=True, timeout=30)
-    except subprocess.CalledProcessError as e:
-        st.error(f"Audio error: {e.stderr}")
+        subprocess.run(cmd, check=True, capture_output=True, text=True, timeout=30)
+        return True
+    except:
         return False
-    except Exception as e:
-        st.error(f"Audio error: {e}")
-        return False
-    return True
 
 def play_audio(text, key, voice):
-    if st.button(f"🔊 Listen / Écouter / Escuchar / Ouvir", key=key):
+    if st.button(f"🔊 Listen", key=key):
         with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as tmp:
             success = generate_audio(text, tmp.name, voice)
             if success:
@@ -341,25 +519,27 @@ if "module_index" not in st.session_state:
 if not st.session_state.authenticated:
     set_style()
     lang = st.session_state.lang
-    st.title(LANGUAGES[lang]["login_title"])
+    ui = LANGUAGES[lang]
+    st.title(ui["login_title"])
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
         show_logo()
         st.markdown("<h2 style='text-align: center;'>Foresight</h2>", unsafe_allow_html=True)
-        st.markdown(f"<p style='text-align: center; color: #00d4ff;'>{LANGUAGES[lang]['login_sub']}</p>", unsafe_allow_html=True)
-        password_input = st.text_input(LANGUAGES[lang]["login_password"], type="password")
-        if st.button(LANGUAGES[lang]["login_btn"]):
+        st.markdown(f"<p style='text-align: center; color: #00d4ff;'>{ui['login_sub']}</p>", unsafe_allow_html=True)
+        password_input = st.text_input(ui["login_password"], type="password")
+        if st.button(ui["login_btn"]):
             if password_input == "20082010":
                 st.session_state.authenticated = True
                 st.rerun()
             else:
-                st.error(LANGUAGES[lang]["login_error"])
+                st.error(ui["login_error"])
     st.stop()
 
 # ---------- Main app ----------
 set_style()
 lang = st.session_state.lang
 ui = LANGUAGES[lang]
+voice = ui["voice"]
 
 # Language selector in sidebar
 with st.sidebar:
@@ -368,11 +548,11 @@ with st.sidebar:
     st.markdown("---")
     show_logo()
     st.markdown(f"## 🎯 {ui['module_prefix']}")
-    module_number = st.selectbox("", [1, 2], index=st.session_state.module_index, format_func=lambda x: f"{ui['module_prefix']} {x}: {ui['modules'][x]['title'][:30]}...", label_visibility="collapsed")
+    module_number = st.selectbox("", list(range(1, 21)), index=st.session_state.module_index, format_func=lambda x: f"{ui['module_prefix']} {x}: {modules_data[x]['title'][:40]}...", label_visibility="collapsed")
     st.session_state.module_index = module_number - 1
     st.markdown("---")
     st.markdown(f"### 📚 {ui['sidebar_progress']}")
-    st.progress(module_number / 2)
+    st.progress(module_number / 20)
     st.markdown(f"✅ {ui['module_prefix']} {module_number} {ui['sidebar_completed']}")
     st.markdown("---")
     st.markdown(f"**{ui['sidebar_founder']}**")
@@ -392,31 +572,44 @@ with st.sidebar:
         st.rerun()
 
 # ---------- Display current module ----------
-module = ui['modules'][module_number]
+module = modules_data[module_number]
 st.markdown(f"## {ui['module_prefix']} {module_number}: {module['title']}")
-st.markdown(f"⏱️ **{ui['duration_label']}:** {module['duration']}")
 st.markdown("---")
+
+# Display image
+try:
+    st.image(module['image'], use_container_width=True, caption=module['title'])
+except:
+    st.info("🖼️ Image not available – you can replace the URL in the code.")
+
 st.markdown(module['content'])
 
-# Audio
-play_audio(module['audio_text'], f"audio_{module_number}_{lang}", ui['voice'])
+# Audio and download buttons
+col1, col2 = st.columns(2)
+with col1:
+    play_audio(module['audio_text'], f"audio_{module_number}", voice)
+with col2:
+    if st.button(ui['download_btn'], use_container_width=True):
+        # Create notes file
+        notes = f"Module {module_number}: {module['title']}\n\n{module['content']}\n\n---\nGenerated by Foresight – GlobalInternet.py"
+        st.download_button("⬇️ Download", notes, file_name=f"foresight_module_{module_number}.txt", mime="text/plain")
 
 # Navigation buttons
-col1, col2, col3 = st.columns([1, 2, 1])
-with col1:
+col_prev, col_next = st.columns(2)
+with col_prev:
     if module_number > 1:
         if st.button(f"⬅️ {ui['prev_module']}", use_container_width=True):
             st.session_state.module_index = module_number - 2
             st.rerun()
-with col3:
-    if module_number < 2:
+with col_next:
+    if module_number < 20:
         if st.button(f"{ui['next_module']} ➡️", use_container_width=True):
             st.session_state.module_index = module_number
             st.rerun()
 
-if module_number == 2:
+if module_number == 20:
     st.markdown("---")
-    st.markdown("## 🎓 You have completed both insights.")
+    st.markdown("## 🎓 You have completed all 20 insights.")
     st.markdown("""
     ### 📞 To get more advanced content or support:
     - **Gesner Deslandes** – Founder
