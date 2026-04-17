@@ -6,824 +6,314 @@ import os
 import subprocess
 from datetime import datetime
 
-st.set_page_config(page_title="Foresight – AI & Robotics Insights", layout="wide")
+st.set_page_config(page_title="AI Foundations & Certification Course", layout="wide")
 
-# ---------- Language data ----------
+# ---------- Language data (English, French, Spanish, Portuguese) ----------
 LANGUAGES = {
     "English": {
         "code": "en",
         "voice": "en-US-GuyNeural",
         "login_title": "🔐 Access Required",
-        "login_sub": "28 daily insights – AI, LLMs, robotics & the future",
+        "login_sub": "28 days to AI mastery – from beginner to certified expert",
         "login_password": "Enter password to access",
         "login_btn": "Login",
         "login_error": "Incorrect password. Access denied.",
         "sidebar_progress": "Your progress",
         "sidebar_completed": "of 28",
         "sidebar_founder": "Founder & Developer:",
-        "sidebar_price": "**$49 USD** (complete insights, source code included)",
+        "sidebar_price": "**$299 USD** (full course – all 28 days, source code, certificate)",
         "sidebar_logout": "Logout",
-        "module_prefix": "Day",
-        "duration_label": "Reading time",
-        "next_module": "Next Day",
-        "prev_module": "Previous Day",
-        "download_btn": "📥 Download Notes (TXT)",
-        "footer_caption": "🔭 Foresight – 28 days to see the future of AI & robotics."
+        "day_prefix": "Day",
+        "duration_label": "Duration",
+        "milestone": "🎯 **Milestone achieved!** Great progress – keep going!",
+        "cert_title": "🏅 Official AI Expert Certificate",
+        "cert_text": "Congratulations! You have completed the AI Foundations & Certification Course.",
+        "cert_btn": "📜 Download Certificate",
+        "congrats_title": "🎓 Congratulations! You are now an AI Certified Expert.",
+        "contact_text": "To continue with advanced courses or get support:",
+        "footer_caption": "🤖 AI Foundations & Certification Course – 28 days to AI mastery.",
+        "weeks": {
+            1: "Week 1 - AI Foundations & Your Personal Mentor",
+            2: "Week 2 - Creativity & Quiet Skill-Building",
+            3: "Week 3 - Building AI Bots & Smart Automation",
+            4: "Week 4 - Certification & Career Application"
+        },
+        "lessons": {
+            1: {"title": "Meet your AI Mentor - Setting up ChatGPT & Gemini", "duration": "15 min", "content": "Learn how to create accounts, navigate the interfaces, and understand the core capabilities of ChatGPT and Google Gemini. These will be your primary AI assistants throughout the course."},
+            2: {"title": "The 'Overthinker's Guide' to Prompting - Get exact answers", "duration": "14 min", "content": "Master the art of crafting precise prompts. Discover how to structure questions, use context, and avoid common pitfalls to get exactly the answers you need."},
+            3: {"title": "Claude - Brainstorming & organizing messy thoughts", "duration": "16 min", "content": "Explore Claude's strength in handling long context windows. Use it to brainstorm ideas, summarize documents, and organize scattered notes into clear action plans."},
+            4: {"title": "Perplexity - Smart, stress-free internet research", "duration": "12 min", "content": "Use Perplexity AI to conduct research with citations. Learn to ask follow-up questions and get accurate, up‑to‑date information without endless searching."},
+            5: {"title": "AI for daily productivity & saving 2 hours a day", "duration": "15 min", "content": "Practical ways to integrate AI into your daily routine: email drafting, task prioritization, meeting summaries, and quick data analysis."},
+            6: {"title": "Crafting your first custom AI assistant persona", "duration": "18 min", "content": "Create a personalized AI persona tailored to your role or interests. Define its tone, expertise, and typical responses to act as your dedicated assistant."},
+            7: {"title": "Milestone - Build your personalized daily AI workflow", "duration": "20 min", "content": "Combine everything from week 1 into a seamless daily routine. Map out when and how you will use each AI tool to maximize efficiency."},
+            8: {"title": "MidJourney - Turning simple text into stunning visuals", "duration": "14 min", "content": "Introduction to MidJourney. Learn basic commands, parameters, and how to generate high‑quality images from text prompts."},
+            9: {"title": "MidJourney - Creating professional brand graphics", "duration": "16 min", "content": "Advanced techniques: logos, social media banners, presentation backgrounds. Learn to iterate and refine outputs for a consistent brand style."},
+            10: {"title": "Canva + AI - Design basics with zero artistic skills", "duration": "15 min", "content": "Use Canva's AI features (Magic Write, Text to Image) to create professional designs quickly. No design experience required."},
+            11: {"title": "Runway - Turning static images into engaging video", "duration": "17 min", "content": "Animate static images, add motion, and create short video clips using Runway's Gen‑2 and other tools."},
+            12: {"title": "ElevenLabs - Pro voiceovers without recording yourself", "duration": "14 min", "content": "Generate natural‑sounding voiceovers from text. Adjust tone, speed, and emotion to match your project."},
+            13: {"title": "Assembling your first AI-generated portfolio piece", "duration": "18 min", "content": "Combine visuals, voiceover, and video into a cohesive portfolio piece. Plan the narrative and structure."},
+            14: {"title": "Milestone - Complete your 'Faceless' AI Video Project", "duration": "20 min", "content": "Produce a complete video (e.g., educational short, product promo) using only AI‑generated assets. No on‑camera presence needed."},
+            15: {"title": "Basics - Visual automation without a single line of code", "duration": "16 min", "content": "Introduction to automation platforms (Zapier, Make). Understand triggers, actions, and how to connect apps visually."},
+            16: {"title": "Connecting AI to your favorite everyday apps", "duration": "18 min", "content": "Integrate AI with Google Sheets, Gmail, Slack, and other common tools to automate repetitive tasks."},
+            17: {"title": "Make.com - Building an automated researcher bot", "duration": "15 min", "content": "Step‑by‑step creation of a bot that fetches news, summarizes articles, and sends reports to you on a schedule."},
+            18: {"title": "How to present AI wins to your manager", "duration": "18 min", "content": "Frameworks and templates for showcasing your automation successes. Learn to measure ROI and communicate value effectively."},
+            19: {"title": "Creating a 24/7 AI Customer Support Agent", "duration": "20 min", "content": "Build a chatbot that answers common customer questions using OpenAI's API or a no‑code platform like Landbot."},
+            20: {"title": "Testing & refining your new AI bot", "duration": "15 min", "content": "Methods for testing your bot, collecting feedback, and iterating to improve accuracy and user satisfaction."},
+            21: {"title": "Milestone - Deploy your first working AI Automation", "duration": "20 min", "content": "Launch your automation in a real environment (e.g., for your own business or a test project). Document the process and results."},
+            22: {"title": "Preparing for your JobEscape AI Certification", "duration": "14 min", "content": "Overview of the certification exam, key topics, and study strategies. Review the official guide."},
+            23: {"title": "Packaging your AI skills for your current role", "duration": "16 min", "content": "How to add AI skills to your resume, LinkedIn, and performance reviews. Practical tips for immediate application."},
+            24: {"title": "How to present AI wins to your manager (repeat)", "duration": "18 min", "content": "Refine your presentation skills with more examples and role‑play scenarios. Learn to handle questions and objections."},
+            25: {"title": "Building your personal AI workflow from scratch", "duration": "15 min", "content": "Design a custom workflow that integrates the tools you've learned. Focus on your unique needs and goals."},
+            26: {"title": "The Final AI Knowledge Check & Review", "duration": "20 min", "content": "Comprehensive review of all concepts covered in the course. Practice quiz to test your understanding."},
+            27: {"title": "Claim your Official AI Expert Certificate", "duration": "10 min", "content": "Download your personalized certificate after completing the course requirements. Instructions for verification."},
+            28: {"title": "Apply what you learned – your first real AI project at work", "duration": "15 min", "content": "Guidance on identifying a real project in your workplace, planning the implementation, and measuring success. Next steps for continued learning."}
+        }
+    },
+    "French": {
+        "code": "fr",
+        "voice": "fr-FR-HenriNeural",
+        "login_title": "🔐 Accès requis",
+        "login_sub": "28 jours pour maîtriser l'IA – du débutant à l'expert certifié",
+        "login_password": "Entrez le mot de passe pour accéder",
+        "login_btn": "Se connecter",
+        "login_error": "Mot de passe incorrect. Accès refusé.",
+        "sidebar_progress": "Votre progression",
+        "sidebar_completed": "sur 28",
+        "sidebar_founder": "Fondateur et développeur :",
+        "sidebar_price": "**299 $ USD** (cours complet – 28 jours, code source, certificat)",
+        "sidebar_logout": "Déconnexion",
+        "day_prefix": "Jour",
+        "duration_label": "Durée",
+        "milestone": "🎯 **Étape clé atteinte !** Bonne continuation – continuez comme ça !",
+        "cert_title": "🏅 Certificat officiel d'expert en IA",
+        "cert_text": "Félicitations ! Vous avez terminé le cours « Fondamentaux de l'IA et certification ».",
+        "cert_btn": "📜 Télécharger le certificat",
+        "congrats_title": "🎓 Félicitations ! Vous êtes désormais un expert certifié en IA.",
+        "contact_text": "Pour continuer avec des cours avancés ou obtenir du soutien :",
+        "footer_caption": "🤖 Cours « Fondamentaux de l'IA et certification » – 28 jours pour maîtriser l'IA.",
+        "weeks": {
+            1: "Semaine 1 - Fondements de l'IA et mentor personnel",
+            2: "Semaine 2 - Créativité et développement de compétences en douceur",
+            3: "Semaine 3 - Création de bots IA et automatisation intelligente",
+            4: "Semaine 4 - Certification et application professionnelle"
+        },
+        "lessons": {
+            1: {"title": "Rencontrez votre mentor IA - Configuration de ChatGPT et Gemini", "duration": "15 min", "content": "Apprenez à créer des comptes, naviguer dans les interfaces et comprendre les capacités de base de ChatGPT et Google Gemini. Ils seront vos principaux assistants IA tout au long du cours."},
+            2: {"title": "Le guide du « surpenseur » pour les invites - Obtenez des réponses exactes", "duration": "14 min", "content": "Maîtrisez l'art de formuler des invites précises. Découvrez comment structurer les questions, utiliser le contexte et éviter les pièges courants."},
+            3: {"title": "Claude - Remue-méninges et organisation des idées", "duration": "16 min", "content": "Exploitez la force de Claude pour gérer de longs contextes. Utilisez-le pour générer des idées, résumer des documents et organiser des notes éparpillées."},
+            4: {"title": "Perplexity - Recherche Internet intelligente et sans stress", "duration": "12 min", "content": "Utilisez Perplexity AI pour faire des recherches avec citations. Apprenez à poser des questions de suivi et obtenez des informations précises à jour."},
+            5: {"title": "IA pour la productivité quotidienne - Gagnez 2 heures par jour", "duration": "15 min", "content": "Moyens pratiques d'intégrer l'IA dans votre routine : rédaction d'emails, priorisation des tâches, résumés de réunions, analyse rapide de données."},
+            6: {"title": "Créez votre premier assistant IA personnalisé", "duration": "18 min", "content": "Créez une personnalité IA adaptée à votre rôle. Définissez son ton, son expertise et ses réponses types."},
+            7: {"title": "Étape clé - Construisez votre workflow IA quotidien personnalisé", "duration": "20 min", "content": "Combinez tout ce que vous avez appris pour créer une routine quotidienne fluide."},
+            8: {"title": "MidJourney - Transformez du texte en visuels époustouflants", "duration": "14 min", "content": "Introduction à MidJourney. Commandes de base, paramètres, génération d'images de haute qualité."},
+            9: {"title": "MidJourney - Créez des graphismes professionnels pour votre marque", "duration": "16 min", "content": "Techniques avancées : logos, bannières sociales, arrière‑plans de présentation."},
+            10: {"title": "Canva + IA - Bases du design sans compétences artistiques", "duration": "15 min", "content": "Utilisez les fonctions IA de Canva pour créer des designs professionnels rapidement."},
+            11: {"title": "Runway - Animez des images fixes en vidéo", "duration": "17 min", "content": "Animez des images fixes, ajoutez du mouvement, créez des clips courts."},
+            12: {"title": "ElevenLabs - Voix off professionnelles sans vous enregistrer", "duration": "14 min", "content": "Générez des voix off naturelles à partir de texte. Ajustez le ton, la vitesse, l'émotion."},
+            13: {"title": "Assemblez votre première pièce de portfolio générée par IA", "duration": "18 min", "content": "Combinez visuels, voix off et vidéo en une pièce cohérente."},
+            14: {"title": "Étape clé - Projet vidéo IA « sans visage »", "duration": "20 min", "content": "Produisez une vidéo complète en utilisant uniquement des actifs générés par IA."},
+            15: {"title": "Bases - Automatisation visuelle sans ligne de code", "duration": "16 min", "content": "Introduction aux plateformes d'automatisation (Zapier, Make). Déclencheurs, actions, connexion d'applications."},
+            16: {"title": "Connectez l'IA à vos applications quotidiennes", "duration": "18 min", "content": "Intégrez l'IA à Google Sheets, Gmail, Slack, etc."},
+            17: {"title": "Make.com - Créez un robot de recherche automatisé", "duration": "15 min", "content": "Bot qui récupère des actualités, résume des articles et envoie des rapports programmés."},
+            18: {"title": "Présentez vos succès IA à votre manager", "duration": "18 min", "content": "Modèles pour présenter vos automatisations, mesurer le ROI et communiquer la valeur."},
+            19: {"title": "Créez un agent de support client IA 24/7", "duration": "20 min", "content": "Chatbot répondant aux questions courantes via OpenAI ou Landbot."},
+            20: {"title": "Testez et améliorez votre nouveau bot IA", "duration": "15 min", "content": "Méthodes de test, collecte de retours, itérations."},
+            21: {"title": "Étape clé - Déployez votre première automatisation IA", "duration": "20 min", "content": "Lancez votre automatisation en environnement réel."},
+            22: {"title": "Préparez votre certification JobEscape IA", "duration": "14 min", "content": "Aperçu de l'examen, sujets clés, stratégies d'étude."},
+            23: {"title": "Valorisez vos compétences IA dans votre rôle actuel", "duration": "16 min", "content": "Ajoutez ces compétences à votre CV, LinkedIn, entretiens."},
+            24: {"title": "Présentez vos succès IA à votre manager (répétition)", "duration": "18 min", "content": "Affinez votre présentation avec plus d'exemples."},
+            25: {"title": "Construisez votre workflow IA personnel à partir de zéro", "duration": "15 min", "content": "Concevez un workflow personnalisé intégrant les outils appris."},
+            26: {"title": "Vérification finale des connaissances IA", "duration": "20 min", "content": "Révision complète de tous les concepts. Quiz pratique."},
+            27: {"title": "Obtenez votre certificat officiel d'expert IA", "duration": "10 min", "content": "Téléchargez votre certificat personnalisé après avoir terminé le cours."},
+            28: {"title": "Appliquez ce que vous avez appris – premier projet IA réel au travail", "duration": "15 min", "content": "Conseils pour identifier un projet réel, planifier l'implémentation et mesurer le succès."}
+        }
+    },
+    "Spanish": {
+        "code": "es",
+        "voice": "es-ES-AlvaroNeural",
+        "login_title": "🔐 Acceso requerido",
+        "login_sub": "28 días para dominar la IA – de principiante a experto certificado",
+        "login_password": "Ingrese la contraseña para acceder",
+        "login_btn": "Iniciar sesión",
+        "login_error": "Contraseña incorrecta. Acceso denegado.",
+        "sidebar_progress": "Tu progreso",
+        "sidebar_completed": "de 28",
+        "sidebar_founder": "Fundador y desarrollador:",
+        "sidebar_price": "**$299 USD** (curso completo – 28 días, código fuente, certificado)",
+        "sidebar_logout": "Cerrar sesión",
+        "day_prefix": "Día",
+        "duration_label": "Duración",
+        "milestone": "🎯 **¡Hito alcanzado!** Sigue así – ¡buen progreso!",
+        "cert_title": "🏅 Certificado oficial de experto en IA",
+        "cert_text": "¡Felicitaciones! Has completado el curso «Fundamentos de IA y certificación».",
+        "cert_btn": "📜 Descargar certificado",
+        "congrats_title": "🎓 ¡Felicitaciones! Ahora eres un experto certificado en IA.",
+        "contact_text": "Para continuar con cursos avanzados o recibir apoyo:",
+        "footer_caption": "🤖 Curso «Fundamentos de IA y certificación» – 28 días para dominar la IA.",
+        "weeks": {
+            1: "Semana 1 - Fundamentos de IA y mentor personal",
+            2: "Semana 2 - Creatividad y desarrollo de habilidades tranquilas",
+            3: "Semana 3 - Creación de bots IA y automatización inteligente",
+            4: "Semana 4 - Certificación y aplicación profesional"
+        },
+        "lessons": {
+            1: {"title": "Conoce a tu mentor IA - Configuración de ChatGPT y Gemini", "duration": "15 min", "content": "Aprende a crear cuentas, navegar por las interfaces y comprender las capacidades básicas de ChatGPT y Google Gemini."},
+            2: {"title": "La guía del «sobrepensador» para hacer prompts - Obtén respuestas exactas", "duration": "14 min", "content": "Domina el arte de crear prompts precisos. Estructura preguntas, usa contexto y evita errores comunes."},
+            3: {"title": "Claude - Lluvia de ideas y organización de pensamientos", "duration": "16 min", "content": "Explora la fortaleza de Claude para manejar contextos largos. Úsalo para generar ideas, resumir documentos y organizar notas."},
+            4: {"title": "Perplexity - Investigación en internet inteligente y sin estrés", "duration": "12 min", "content": "Usa Perplexity AI para investigar con citas. Haz preguntas de seguimiento y obtén información actualizada."},
+            5: {"title": "IA para la productividad diaria - Ahorra 2 horas al día", "duration": "15 min", "content": "Formas prácticas de integrar IA en tu rutina: redacción de correos, priorización de tareas, resúmenes de reuniones."},
+            6: {"title": "Crea tu primer asistente IA personalizado", "duration": "18 min", "content": "Crea una personalidad IA adaptada a tu rol. Define su tono, experiencia y respuestas típicas."},
+            7: {"title": "Hito - Construye tu flujo de trabajo diario con IA", "duration": "20 min", "content": "Combina todo lo aprendido en una rutina diaria fluida."},
+            8: {"title": "MidJourney - Convierte texto en imágenes impresionantes", "duration": "14 min", "content": "Introducción a MidJourney. Comandos básicos, parámetros, generación de imágenes de alta calidad."},
+            9: {"title": "MidJourney - Crea gráficos profesionales para tu marca", "duration": "16 min", "content": "Técnicas avanzadas: logotipos, banners para redes sociales, fondos de presentaciones."},
+            10: {"title": "Canva + IA - Bases del diseño sin habilidades artísticas", "duration": "15 min", "content": "Usa las funciones IA de Canva para crear diseños profesionales rápidamente."},
+            11: {"title": "Runway - Convierte imágenes estáticas en video", "duration": "17 min", "content": "Anima imágenes estáticas, añade movimiento, crea clips cortos."},
+            12: {"title": "ElevenLabs - Locuciones profesionales sin grabarte", "duration": "14 min", "content": "Genera locuciones naturales a partir de texto. Ajusta tono, velocidad, emoción."},
+            13: {"title": "Ensambla tu primera pieza de portafolio generada por IA", "duration": "18 min", "content": "Combina imágenes, locución y video en una pieza coherente."},
+            14: {"title": "Hito - Completa tu proyecto de video IA «sin rostro»", "duration": "20 min", "content": "Produce un video completo usando solo activos generados por IA."},
+            15: {"title": "Bases - Automatización visual sin una línea de código", "duration": "16 min", "content": "Introducción a plataformas de automatización (Zapier, Make). Disparadores, acciones, conexión de aplicaciones."},
+            16: {"title": "Conecta IA a tus aplicaciones cotidianas favoritas", "duration": "18 min", "content": "Integra IA con Google Sheets, Gmail, Slack, etc."},
+            17: {"title": "Make.com - Construye un bot investigador automatizado", "duration": "15 min", "content": "Bot que obtiene noticias, resume artículos y envía informes programados."},
+            18: {"title": "Cómo presentar los logros de IA a tu jefe", "duration": "18 min", "content": "Plantillas para mostrar tus automatizaciones, medir el ROI y comunicar el valor."},
+            19: {"title": "Crea un agente de soporte al cliente IA 24/7", "duration": "20 min", "content": "Chatbot que responde preguntas comunes usando OpenAI o Landbot."},
+            20: {"title": "Prueba y mejora tu nuevo bot IA", "duration": "15 min", "content": "Métodos para probar, recoger comentarios e iterar."},
+            21: {"title": "Hito - Despliega tu primera automatización IA funcional", "duration": "20 min", "content": "Lanza tu automatización en un entorno real."},
+            22: {"title": "Prepara tu certificación JobEscape IA", "duration": "14 min", "content": "Resumen del examen, temas clave, estrategias de estudio."},
+            23: {"title": "Empaca tus habilidades IA para tu rol actual", "duration": "16 min", "content": "Cómo añadir habilidades IA a tu currículum, LinkedIn y evaluaciones."},
+            24: {"title": "Presenta logros IA a tu jefe (repetición)", "duration": "18 min", "content": "Perfecciona tu presentación con más ejemplos."},
+            25: {"title": "Construye tu flujo de trabajo IA personal desde cero", "duration": "15 min", "content": "Diseña un flujo de trabajo personalizado que integre las herramientas aprendidas."},
+            26: {"title": "Revisión final de conocimientos de IA", "duration": "20 min", "content": "Repaso completo de todos los conceptos. Cuestionario práctico."},
+            27: {"title": "Obtén tu certificado oficial de experto en IA", "duration": "10 min", "content": "Descarga tu certificado personalizado después de completar el curso."},
+            28: {"title": "Aplica lo aprendido – tu primer proyecto IA real en el trabajo", "duration": "15 min", "content": "Consejos para identificar un proyecto real, planificar la implementación y medir el éxito."}
+        }
+    },
+    "Portuguese": {
+        "code": "pt",
+        "voice": "pt-BR-FranciscaNeural",
+        "login_title": "🔐 Acesso necessário",
+        "login_sub": "28 dias para dominar a IA – do iniciante ao especialista certificado",
+        "login_password": "Digite a senha para acessar",
+        "login_btn": "Entrar",
+        "login_error": "Senha incorreta. Acesso negado.",
+        "sidebar_progress": "Seu progresso",
+        "sidebar_completed": "de 28",
+        "sidebar_founder": "Fundador e desenvolvedor:",
+        "sidebar_price": "**$299 USD** (curso completo – 28 dias, código fonte, certificado)",
+        "sidebar_logout": "Sair",
+        "day_prefix": "Dia",
+        "duration_label": "Duração",
+        "milestone": "🎯 **Meta alcançada!** Bom progresso – continue assim!",
+        "cert_title": "🏅 Certificado oficial de especialista em IA",
+        "cert_text": "Parabéns! Você concluiu o curso «Fundamentos de IA e certificação».",
+        "cert_btn": "📜 Baixar certificado",
+        "congrats_title": "🎓 Parabéns! Agora você é um especialista certificado em IA.",
+        "contact_text": "Para continuar com cursos avançados ou obter suporte:",
+        "footer_caption": "🤖 Curso «Fundamentos de IA e certificação» – 28 dias para dominar a IA.",
+        "weeks": {
+            1: "Semana 1 - Fundamentos de IA e mentor pessoal",
+            2: "Semana 2 - Criatividade e desenvolvimento de habilidades tranquilas",
+            3: "Semana 3 - Criação de bots IA e automação inteligente",
+            4: "Semana 4 - Certificação e aplicação profissional"
+        },
+        "lessons": {
+            1: {"title": "Conheça seu mentor IA - Configurando ChatGPT e Gemini", "duration": "15 min", "content": "Aprenda a criar contas, navegar pelas interfaces e entender as capacidades básicas do ChatGPT e Google Gemini."},
+            2: {"title": "Guia do «pensador excessivo» para prompts - Obtenha respostas exatas", "duration": "14 min", "content": "Domine a arte de criar prompts precisos. Estruture perguntas, use contexto e evite armadilhas comuns."},
+            3: {"title": "Claude - Brainstorming e organização de ideias", "duration": "16 min", "content": "Explore a força do Claude em lidar com longos contextos. Use para gerar ideias, resumir documentos e organizar anotações."},
+            4: {"title": "Perplexity - Pesquisa na internet inteligente e sem estresse", "duration": "12 min", "content": "Use o Perplexity AI para pesquisar com citações. Faça perguntas de acompanhamento e obtenha informações atualizadas."},
+            5: {"title": "IA para produtividade diária - Economize 2 horas por dia", "duration": "15 min", "content": "Formas práticas de integrar IA à sua rotina: redação de e-mails, priorização de tarefas, resumos de reuniões."},
+            6: {"title": "Crie seu primeiro assistente IA personalizado", "duration": "18 min", "content": "Crie uma persona IA adaptada ao seu papel. Defina tom, expertise e respostas típicas."},
+            7: {"title": "Marco - Construa seu fluxo de trabalho diário com IA", "duration": "20 min", "content": "Combine tudo o que aprendeu em uma rotina diária perfeita."},
+            8: {"title": "MidJourney - Transforme texto em visuais impressionantes", "duration": "14 min", "content": "Introdução ao MidJourney. Comandos básicos, parâmetros, geração de imagens de alta qualidade."},
+            9: {"title": "MidJourney - Crie gráficos profissionais para sua marca", "duration": "16 min", "content": "Técnicas avançadas: logotipos, banners para redes sociais, fundos de apresentação."},
+            10: {"title": "Canva + IA - Noções básicas de design sem habilidades artísticas", "duration": "15 min", "content": "Use os recursos de IA do Canva para criar designs profissionais rapidamente."},
+            11: {"title": "Runway - Transforme imagens estáticas em vídeo", "duration": "17 min", "content": "Anime imagens estáticas, adicione movimento, crie clipes curtos."},
+            12: {"title": "ElevenLabs - Narrações profissionais sem se gravar", "duration": "14 min", "content": "Gere narrações naturais a partir de texto. Ajuste tom, velocidade, emoção."},
+            13: {"title": "Monte sua primeira peça de portfólio gerada por IA", "duration": "18 min", "content": "Combine visuais, narração e vídeo em uma peça coesa."},
+            14: {"title": "Marco - Complete seu projeto de vídeo IA «sem rosto»", "duration": "20 min", "content": "Produza um vídeo completo usando apenas ativos gerados por IA."},
+            15: {"title": "Bases - Automação visual sem uma linha de código", "duration": "16 min", "content": "Introdução a plataformas de automação (Zapier, Make). Gatilhos, ações, conexão de aplicativos."},
+            16: {"title": "Conecte IA aos seus aplicativos diários favoritos", "duration": "18 min", "content": "Integre IA com Google Sheets, Gmail, Slack e outras ferramentas."},
+            17: {"title": "Make.com - Construa um bot pesquisador automatizado", "duration": "15 min", "content": "Bot que obtém notícias, resume artigos e envia relatórios agendados."},
+            18: {"title": "Como apresentar vitórias da IA ao seu gerente", "duration": "18 min", "content": "Modelos para mostrar suas automações, medir ROI e comunicar valor."},
+            19: {"title": "Crie um agente de suporte ao cliente IA 24/7", "duration": "20 min", "content": "Chatbot que responde perguntas comuns usando OpenAI ou Landbot."},
+            20: {"title": "Teste e refine seu novo bot IA", "duration": "15 min", "content": "Métodos para testar, coletar feedback e iterar."},
+            21: {"title": "Marco - Implante sua primeira automação IA funcional", "duration": "20 min", "content": "Lance sua automação em um ambiente real."},
+            22: {"title": "Prepare-se para sua certificação JobEscape IA", "duration": "14 min", "content": "Visão geral do exame, tópicos principais, estratégias de estudo."},
+            23: {"title": "Empacote suas habilidades de IA para sua função atual", "duration": "16 min", "content": "Como adicionar habilidades de IA ao seu currículo, LinkedIn e avaliações."},
+            24: {"title": "Apresente vitórias da IA ao seu gerente (repetição)", "duration": "18 min", "content": "Aprimore sua apresentação com mais exemplos."},
+            25: {"title": "Construa seu fluxo de trabalho IA pessoal do zero", "duration": "15 min", "content": "Projete um fluxo de trabalho personalizado que integre as ferramentas aprendidas."},
+            26: {"title": "Verificação final de conhecimento em IA", "duration": "20 min", "content": "Revisão abrangente de todos os conceitos. Questionário prático."},
+            27: {"title": "Obtenha seu certificado oficial de especialista em IA", "duration": "10 min", "content": "Baixe seu certificado personalizado após concluir o curso."},
+            28: {"title": "Aplique o que aprendeu – seu primeiro projeto real de IA no trabalho", "duration": "15 min", "content": "Orientações para identificar um projeto real, planejar a implementação e medir o sucesso."}
+        }
     }
 }
 
-# ---------- 28 modules with working image URLs (using picsum.photos) ----------
-modules_data = {
-    1: {
-        "title": "How Large Language Models (LLMs) Actually Work",
-        "content": """
-**Key Notes / Takeaways**  
-- Transformers use self‑attention to process words in parallel, capturing long‑range context.  
-- Training has two phases: pre‑training (predict next word) and fine‑tuning (RLHF).  
-- Larger models (more parameters) generally perform better but cost more.  
-- Limitations: hallucinations, context window limits, and biases in training data.  
-
-**Detailed Explanation**  
-Large Language Models like GPT-4, Gemini, and Claude are built on a deep learning architecture called the Transformer. Unlike older recurrent networks, Transformers process all words in a sentence simultaneously using a mechanism called "self-attention". This allows the model to understand context and relationships between words, regardless of their distance in the text.  
-
-**Training Process**  
-LLMs are trained in two main stages: pre-training and fine-tuning. During pre-training, the model learns to predict the next word in a huge corpus of internet text (billions of pages). It develops grammar, facts, reasoning patterns, and even biases. Fine-tuning then adjusts the model for specific tasks like conversation or coding, often using human feedback (RLHF).  
-
-**Why Scale Matters**  
-Larger models with more parameters (hundreds of billions) tend to perform better, but they also require massive computational resources. Recent research shows that data quality and training efficiency can be as important as raw size.  
-
-**Limitations**  
-LLMs can "hallucinate" (make up confident-sounding but false information), have limited context windows (typically 8k-128k tokens), and reflect the biases in their training data. Understanding these limits is crucial for responsible use.
-""",
-        "main_image": "https://picsum.photos/id/0/800/400",  # random landscape
-        "explanation_image": "https://picsum.photos/id/1/800/400",
-        "audio_text": "Day 1: How Large Language Models work. Transformers use self-attention to process words simultaneously. Training involves pre-training and fine-tuning. Larger models perform better but have limitations like hallucinations and context windows."
-    },
-    2: {
-        "title": "The Rise of Dexterous Robotics – BrainCo's Hand",
-        "content": """
-**Key Notes / Takeaways**  
-- BrainCo's hand has five independently articulated fingers, mimicking human dexterity.  
-- Uses force sensors and machine learning to translate human movements.  
-- Enables fine tasks: assembling electronics, handling delicate instruments.  
-- Challenges: cost, durability, and AI control systems.  
-
-**What Makes BrainCo's Hand Different**  
-Most industrial robots use simple grippers that can only pick and place objects. BrainCo's new dexterous hand has five independently articulated fingers, each with multiple joints. It can perform fine motor tasks: holding a pen, turning a key, even playing musical instruments.  
-
-**How It Works**  
-The hand uses a combination of electric motors, tendon-like cables, and force sensors. Machine learning algorithms translate human movements (captured by a sensor glove) into precise finger motions. The system can also operate autonomously using computer vision to identify and grasp objects of various shapes.  
-
-**Implications for Automation**  
-Tasks that once required human dexterity – assembling electronics, handling delicate medical instruments, sorting irregular packages – are now within reach of automation. Industries like healthcare, logistics, and manufacturing will see major shifts in the next 3-5 years.  
-
-**Challenges**  
-Cost (currently high), durability, and the need for advanced AI control systems remain barriers. However, rapid progress suggests that dexterous robots will become commercially viable sooner than many expect.
-""",
-        "main_image": "https://picsum.photos/id/2/800/400",
-        "explanation_image": "https://picsum.photos/id/3/800/400",
-        "audio_text": "Day 2: BrainCo's dexterous robotic hand mimics human fine motor skills. It uses articulated fingers, force sensors, and AI. Applications in healthcare, assembly, and logistics. Challenges remain but progress is rapid."
-    },
-    3: {
-        "title": "The Future of AI Agents – From Chatbots to Action",
-        "content": """
-**Key Notes / Takeaways**  
-- AI agents take actions (book flights, send emails, run code).  
-- Use ReAct loop: Reason → Act → Observe.  
-- Examples: AutoGPT, BabyAGI, LangChain agents.  
-- Risks: harmful actions, costly mistakes, debugging difficulty.  
-
-**What Are AI Agents?**  
-Unlike chatbots that only respond to prompts, AI agents are designed to take actions: book flights, send emails, control smart home devices, even write and execute code. They combine LLMs with tools and APIs.  
-
-**How They Work**  
-An agent receives a goal (e.g., "plan a trip to Paris"). It breaks the task into steps, decides which tools to use (search, calendar, booking API), executes actions, and learns from results. This loop of reasoning, acting, and observing is called "ReAct" (Reasoning + Acting).  
-
-**Current Examples**  
-AutoGPT, BabyAGI, and LangChain agents are early prototypes. Companies like Adept and Google are building more robust versions for enterprise automation.  
-
-**Potential and Risks**  
-Agents could automate entire workflows, but they also pose risks: executing harmful actions if not properly constrained, making costly mistakes, and being difficult to debug. Safe deployment requires careful guardrails.
-""",
-        "main_image": "https://picsum.photos/id/4/800/400",
-        "explanation_image": "https://picsum.photos/id/5/800/400",
-        "audio_text": "Day 3: AI agents go beyond chatbots – they take actions. They use reasoning loops and tools. Examples include AutoGPT. Potential to automate workflows but risks need careful management."
-    },
-    4: {
-        "title": "Multimodal AI – Seeing, Hearing, and Understanding",
-        "content": """
-**Key Notes / Takeaways**  
-- Multimodal AI processes text, images, audio, and video together.  
-- Models: GPT‑4V, Gemini, ImageBind.  
-- Applications: medical diagnosis, accessibility, content creation.  
-- Challenges: computational cost, alignment, bias propagation.  
-
-**Beyond Text**  
-Multimodal AI models can process and generate not just text, but also images, audio, and video. GPT-4 with vision, Google Gemini, and Meta's ImageBind are leading examples.  
-
-**How It Works**  
-These models are trained on vast datasets containing paired modalities: images with captions, video with audio, etc. They learn to map different types of data into a shared semantic space. For instance, they can understand that a picture of a cat and the word "cat" are related.  
-
-**Applications**  
-- Medical diagnosis: analyzing X‑rays and patient notes together.  
-- Accessibility: describing scenes for blind users.  
-- Content creation: generating videos from text descriptions.  
-
-**Challenges**  
-Training is computationally expensive. Aligning different modalities without losing information is difficult. Bias can propagate across all modalities.
-""",
-        "main_image": "https://picsum.photos/id/6/800/400",
-        "explanation_image": "https://picsum.photos/id/7/800/400",
-        "audio_text": "Day 4: Multimodal AI processes text, images, audio, and video. Models like GPT-4 Vision and Gemini are examples. Applications in medicine, accessibility, and content creation. Challenges include cost and bias."
-    },
-    5: {
-        "title": "Edge AI – Running Models on Your Phone",
-        "content": """
-**Key Notes / Takeaways**  
-- Edge AI runs on local devices, not cloud → low latency, privacy, offline.  
-- Techniques: model compression (pruning, quantization), specialized hardware.  
-- Examples: face unlock, offline translation, anomaly detection.  
-- Future: more powerful on‑device models for drones, sensors, wearables.  
-
-**Why Edge AI Matters**  
-Most AI runs in the cloud, which requires internet and causes latency. Edge AI runs models directly on devices: smartphones, cameras, cars, even microcontrollers. This enables real‑time processing, privacy, and offline operation.  
-
-**Techniques**  
-- Model compression (pruning, quantization) to reduce size.  
-- Specialized hardware like Google's TPU, Apple's Neural Engine, and NVIDIA Jetson.  
-- On‑device training (federated learning) for personalization without sending data to the cloud.  
-
-**Examples**  
-- Face unlock on phones.  
-- Real‑time translation without internet.  
-- Anomaly detection in industrial equipment.  
-
-**Future**  
-As chips become more powerful, more complex models will run at the edge, reducing reliance on cloud servers and enabling new applications like autonomous drones and smart sensors.
-""",
-        "main_image": "https://picsum.photos/id/8/800/400",
-        "explanation_image": "https://picsum.photos/id/9/800/400",
-        "audio_text": "Day 5: Edge AI runs models on local devices, not the cloud. It enables real-time processing, privacy, and offline use. Techniques include compression and specialized hardware. Examples: face unlock, offline translation."
-    },
-    6: {
-        "title": "AI Hallucinations – Why Models Make Things Up",
-        "content": """
-**Key Notes / Takeaways**  
-- Hallucination = plausible but false information.  
-- Cause: models predict likely next words, not truth.  
-- Mitigation: RAG, chain‑of‑thought prompting, fine‑tuning, fact‑checking.  
-- Unsolved: elimination would require true understanding.  
-
-**What Are Hallucinations?**  
-When an LLM generates plausible-sounding but factually incorrect or nonsensical information, it's called a hallucination. For example, inventing a scientific paper that doesn't exist or citing wrong dates.  
-
-**Why Do They Happen?**  
-LLMs are trained to predict the next most likely word, not to assert truth. They have no internal knowledge base to verify facts. Hallucinations are more common when the prompt is ambiguous, asks for obscure information, or pushes the model beyond its training data.  
-
-**Mitigation Strategies**  
-- Retrieval-Augmented Generation (RAG): provide relevant documents as context.  
-- Chain-of-thought prompting: force step‑by‑step reasoning.  
-- Fine-tuning with high‑quality, verified data.  
-- Using external fact-checking tools.  
-
-**Why It's Still Unsolved**  
-Eliminating hallucinations entirely would require a model that understands truth – a very hard problem. Current best practice is to design applications that can tolerate or detect hallucinations.
-""",
-        "main_image": "https://picsum.photos/id/10/800/400",
-        "explanation_image": "https://picsum.photos/id/11/800/400",
-        "audio_text": "Day 6: Hallucinations are when AI makes up false information. They happen because models predict likely words, not facts. Mitigation includes RAG and fine-tuning. Complete elimination is still unsolved."
-    },
-    7: {
-        "title": "Reinforcement Learning from Human Feedback (RLHF)",
-        "content": """
-**Key Notes / Takeaways**  
-- RLHF aligns LLMs with human preferences (helpful, honest, harmless).  
-- Steps: human ranking → reward model → RL fine‑tuning.  
-- Used in ChatGPT, Claude, Gemini.  
-- Limitations: expensive, can introduce bias from human evaluators.  
-
-**What Is RLHF?**  
-RLHF is a technique used to align LLMs with human preferences. After pre-training, the model is fine-tuned using feedback from human evaluators who rank different model outputs. This helps the model learn what responses are helpful, honest, and harmless.  
-
-**How It Works**  
-1. A human ranks two or more model outputs.  
-2. A reward model is trained to predict human preferences.  
-3. The LLM is fine‑tuned using reinforcement learning (often PPO) to maximize the reward model's score.  
-
-**Why It's Important**  
-RLHF reduces harmful outputs, improves helpfulness, and makes models more engaging. It's why ChatGPT feels more "aligned" than base GPT-3.  
-
-**Limitations**  
-RLHF is expensive and time‑consuming. It can also introduce new biases based on the preferences of the human evaluators. Scaling it to all possible scenarios is impossible.
-""",
-        "main_image": "https://picsum.photos/id/12/800/400",
-        "explanation_image": "https://picsum.photos/id/13/800/400",
-        "audio_text": "Day 7: RLHF aligns AI with human preferences. Humans rank outputs, a reward model learns, and the LLM is fine-tuned. It reduces harm and improves helpfulness but is expensive and can introduce bias."
-    },
-    8: {
-        "title": "The Economics of AI – Cost, Compute, and Carbon",
-        "content": """
-**Key Notes / Takeaways**  
-- Training large LLMs costs millions of dollars and emits significant carbon.  
-- Compute demand doubles every ~3.4 months.  
-- Techniques to reduce cost: distillation, quantization, Mixture of Experts.  
-- Open‑source models democratize access.  
-
-**The True Cost of AI**  
-Training a large LLM like GPT-4 costs tens of millions of dollars in compute (GPU hours) and electricity. Inference (using the model) also adds up: serving millions of users requires vast server farms.  
-
-**Compute Trends**  
-Compute demand for AI has doubled every ~3.4 months since 2012, far outpacing Moore's Law. This drives investment in specialized hardware like GPUs, TPUs, and neuromorphic chips.  
-
-**Carbon Footprint**  
-Training a single large model can emit as much carbon as five cars over their lifetimes. However, inference (usage) over the model's life may account for far more. Companies are increasingly using carbon‑aware scheduling and renewable energy.  
-
-**Making AI More Affordable**  
-Techniques like distillation (training smaller models to mimic larger ones), quantization, and efficient architectures (Mixture of Experts) help reduce costs. Open‑source models also democratize access.
-""",
-        "main_image": "https://picsum.photos/id/14/800/400",
-        "explanation_image": "https://picsum.photos/id/15/800/400",
-        "audio_text": "Day 8: Training large AI models costs millions of dollars and significant carbon. Compute demand grows faster than Moore's Law. Techniques like distillation and efficient architectures help reduce costs."
-    },
-    9: {
-        "title": "Retrieval-Augmented Generation (RAG)",
-        "content": """
-**Key Notes / Takeaways**  
-- RAG = LLM + external knowledge base (vector database, search).  
-- Reduces hallucinations, keeps knowledge current, allows access to private data.  
-- Steps: retrieve relevant documents → generate answer with citations.  
-- Applications: customer support, research assistants, legal analysis.  
-
-**What Is RAG?**  
-RAG combines an LLM with an external knowledge base (e.g., a database, vector store, or search engine). When asked a question, the system first retrieves relevant documents, then feeds them as context to the LLM to generate an answer grounded in those sources.  
-
-**Why Use RAG?**  
-- Reduces hallucinations by providing factual references.  
-- Keeps knowledge up‑to‑date without retraining the model.  
-- Allows the model to access private or proprietary data.  
-
-**How It Works**  
-1. User asks a question.  
-2. A retriever (e.g., dense vector search) finds relevant chunks from a knowledge base.  
-3. The LLM receives the question + retrieved chunks and generates an answer citing the sources.  
-
-**Applications**  
-Customer support (company documentation), research assistants (academic papers), legal analysis (case law), and any domain requiring up‑to‑date, verifiable information.
-""",
-        "main_image": "https://picsum.photos/id/16/800/400",
-        "explanation_image": "https://picsum.photos/id/17/800/400",
-        "audio_text": "Day 9: RAG combines LLMs with external knowledge bases. It retrieves relevant documents then generates answers grounded in them. Reduces hallucinations and keeps knowledge current. Used in support, research, legal."
-    },
-    10: {
-        "title": "Open‑Source vs. Proprietary AI Models",
-        "content": """
-**Key Notes / Takeaways**  
-- Proprietary: GPT-4, Claude, Gemini – state‑of‑the‑art, pay per token, black box.  
-- Open‑source: Llama, Mistral, Falcon – free, customizable, transparent, but slightly behind.  
-- Gap is closing; open‑source models approach proprietary performance.  
-
-**The Landscape**  
-Proprietary models (GPT-4, Claude, Gemini) are developed by companies, kept secret, and accessed via APIs. Open‑source models (Llama, Mistral, Falcon) have weights publicly available and can be run locally.  
-
-**Pros and Cons**  
-| Aspect | Proprietary | Open‑Source |  
-|--------|-------------|-------------|  
-| Performance | Usually state‑of‑the‑art | Often slightly behind |  
-| Cost | Pay per token | Free (except compute) |  
-| Privacy | Data may be logged | Full control |  
-| Customization | Limited | Full fine‑tuning |  
-| Transparency | Black box | Inspectable |  
-
-**The Open‑Source Advantage**  
-Open‑source models allow researchers to study biases, developers to build on‑premise solutions, and startups to avoid API costs. The gap in capability is closing rapidly, with Llama 3 and Mixtral approaching GPT-4 performance on many benchmarks.  
-
-**Future**  
-The trend suggests open‑source models will become increasingly competitive, forcing proprietary providers to offer more value (e.g., better tooling, safety guarantees, or integration).
-""",
-        "main_image": "https://picsum.photos/id/18/800/400",
-        "explanation_image": "https://picsum.photos/id/19/800/400",
-        "audio_text": "Day 10: Open-source models like Llama are free and customizable but slightly behind proprietary models like GPT-4. Proprietary models are state-of-the-art but cost money and lack transparency. The gap is closing."
-    },
-    11: {
-        "title": "AI in Healthcare – Diagnosis, Drug Discovery, and Beyond",
-        "content": """
-**Key Notes / Takeaways**  
-- AI matches or exceeds human experts in medical image diagnosis.  
-- AlphaFold solves protein folding, accelerating drug discovery.  
-- LLMs power personalized medicine and patient chatbots.  
-- Challenges: regulation, data privacy, bias.  
-
-**Diagnosis**  
-AI models can now detect diseases from medical images (X‑rays, MRIs, retinal scans) with accuracy rivaling or exceeding human experts. For example, Google's LYNA detects breast cancer metastases, and IDx‑DR diagnoses diabetic retinopathy.  
-
-**Drug Discovery**  
-AlphaFold solved the protein folding problem, predicting 3D structures from amino acid sequences. This accelerates drug design. Generative models can also propose novel molecules for specific targets, reducing discovery time from years to months.  
-
-**Personalized Medicine**  
-LLMs can analyze patient records, genetic data, and clinical studies to recommend tailored treatments. They also power chatbots that triage symptoms and answer patient questions, reducing clinician workload.  
-
-**Challenges**  
-Regulatory approval, data privacy (HIPAA), and avoiding bias are major hurdles. AI systems must be rigorously validated before clinical deployment.
-""",
-        "main_image": "https://picsum.photos/id/20/800/400",
-        "explanation_image": "https://picsum.photos/id/21/800/400",
-        "audio_text": "Day 11: AI helps diagnose diseases from medical images, discovers new drugs via AlphaFold, and enables personalized medicine. Challenges include regulation, privacy, and bias."
-    },
-    12: {
-        "title": "Generative AI for Video – Runway, Sora, and the Future",
-        "content": """
-**Key Notes / Takeaways**  
-- Generative video models (Runway, Sora) create clips from text prompts.  
-- Diffusion models extended to time dimension.  
-- Current limits: short clips (<1 min), occasional physics glitches.  
-- Future impact on film, ads, social media.  
-
-**From Text to Video**  
-Generative video models like Runway's Gen‑2, OpenAI's Sora, and Pika Labs can create short video clips from text prompts. They learn the dynamics of real‑world motion, lighting, and objects.  
-
-**How They Work**  
-These models are typically diffusion‑based (like image generators) but extended to the temporal dimension. They are trained on vast datasets of video clips with captions, learning to predict subsequent frames.  
-
-**Current Capabilities**  
-- Generate up to 10‑60 seconds of consistent video.  
-- Animate static images.  
-- Extend or edit existing videos.  
-
-**Limitations**  
-Physics can still be inconsistent (objects passing through each other). Long‑range coherence (story over minutes) is not yet possible. Compute cost is high.  
-
-**Implications**  
-Film production, advertising, and social media will be transformed. Soon, anyone will be able to create short films from a script.
-""",
-        "main_image": "https://picsum.photos/id/22/800/400",
-        "explanation_image": "https://picsum.photos/id/23/800/400",
-        "audio_text": "Day 12: Generative video models like Runway and Sora create clips from text. They use diffusion extended to time. Current limits: short clips, occasional physics glitches. Future impact on film and ads."
-    },
-    13: {
-        "title": "AI Safety – Alignment, Robustness, and Control",
-        "content": """
-**Key Notes / Takeaways**  
-- Alignment: ensure AI pursues human‑beneficial goals.  
-- Robustness: resistance to adversarial attacks.  
-- Control: ability to monitor, shut down, or correct AI.  
-- Even current LLMs can be jailbroken; safety research is urgent.  
-
-**Alignment Problem**  
-How do we ensure AI systems pursue goals that are beneficial to humans? Misaligned AI could optimize for the wrong objective (e.g., a paperclip maximizer). Current alignment techniques include RLHF, constitutional AI, and scalable oversight.  
-
-**Robustness**  
-AI systems can be fooled by adversarial examples – small, imperceptible changes to input that cause wrong outputs. Robustness research aims to make models resistant to such attacks.  
-
-**Control and Monitoring**  
-For advanced AI, we may need methods to verify behavior, shut down unsafe systems, and prevent deception. This includes interpretability (understanding why a model made a decision) and anomaly detection.  
-
-**Why It Matters Now**  
-Even today's LLMs can be jailbroken to produce harmful content. As AI becomes more capable and autonomous, safety research becomes urgent. Leading labs have dedicated safety teams, but the field is still young.
-""",
-        "main_image": "https://picsum.photos/id/24/800/400",
-        "explanation_image": "https://picsum.photos/id/25/800/400",
-        "audio_text": "Day 13: AI safety covers alignment (ensuring AI pursues human goals), robustness (resistance to adversarial attacks), and control. Even current models can be jailbroken. Research is urgent as AI advances."
-    },
-    14: {
-        "title": "The Turing Test and Beyond – Measuring Intelligence",
-        "content": """
-**Key Notes / Takeaways**  
-- Turing Test: human cannot distinguish AI from human. Modern LLMs pass it easily.  
-- Modern benchmarks: MMLU (knowledge), GSM8K (math), HumanEval (code).  
-- Missing: long‑term planning, embodiment, social intelligence.  
-- Future: interactive environments (e.g., Minecraft) for holistic evaluation.  
-
-**The Turing Test**  
-Proposed by Alan Turing in 1950, a machine passes if a human cannot distinguish its responses from a human's. Today, many LLMs can easily pass the original test, but the test is now considered insufficient for true intelligence.  
-
-**Modern Benchmarks**  
-- MMLU (Massive Multitask Language Understanding) – tests knowledge across 57 subjects.  
-- GSM8K – grade school math problems.  
-- HumanEval – code generation.  
-- BIG‑bench – diverse reasoning tasks.  
-
-**What's Missing**  
-Current benchmarks don't measure long‑term planning, memory, embodiment, or social intelligence. Some argue that intelligence is not a single dimension but a collection of capabilities.  
-
-**Future Directions**  
-Researchers are developing more holistic evaluations, including interactive environments (like Minecraft) where agents must achieve goals over extended periods.
-""",
-        "main_image": "https://picsum.photos/id/26/800/400",
-        "explanation_image": "https://picsum.photos/id/27/800/400",
-        "audio_text": "Day 14: The Turing Test is outdated. Modern benchmarks include MMLU, GSM8K, and HumanEval. They measure knowledge, math, and code. Future evaluations will include long-term planning and embodiment."
-    },
-    15: {
-        "title": "Low‑Code and No‑Code AI for Everyone",
-        "content": """
-**Key Notes / Takeaways**  
-- Platforms: Zapier, Make, Power Automate – drag‑and‑drop AI workflows.  
-- Build automations: email summarization, ticket classification, data extraction.  
-- Benefits: non‑technical users can automate tasks; rapid prototyping.  
-- Limitations: pre‑built connectors only; custom logic still needs code.  
-
-**Democratizing AI**  
-Platforms like Microsoft Power Automate, Zapier, and Make allow users to build AI‑powered workflows without writing code. Drag‑and‑drop interfaces connect apps, trigger actions, and integrate AI models.  
-
-**What You Can Build**  
-- Automatically summarize emails.  
-- Classify customer support tickets.  
-- Extract data from invoices.  
-- Generate social media posts.  
-
-**Benefits**  
-Non‑technical employees can automate tasks, reducing workload and errors. Businesses can quickly prototype AI solutions without hiring developers.  
-
-**Limitations**  
-These tools are limited to pre‑built connectors and templates. Custom logic or complex models still require coding. However, the trend is toward more flexibility and power.
-""",
-        "main_image": "https://picsum.photos/id/28/800/400",
-        "explanation_image": "https://picsum.photos/id/29/800/400",
-        "audio_text": "Day 15: Low-code AI platforms like Zapier and Make let non-technical users build automations. Benefits include speed and accessibility. Limitations: custom logic still requires coding."
-    },
-    16: {
-        "title": "Ethical AI – Bias, Fairness, and Transparency",
-        "content": """
-**Key Notes / Takeaways**  
-- Bias originates from training data and can be amplified.  
-- Fairness metrics: demographic parity, equal opportunity, individual fairness.  
-- Mitigation: pre‑processing, in‑processing, post‑processing.  
-- Transparency: LIME, SHAP explain decisions; full interpretability remains hard.  
-- Regulation: EU AI Act requires risk assessments.  
-
-**Sources of Bias**  
-AI models inherit biases from their training data (e.g., stereotypes in text, underrepresentation in images). They can also amplify those biases, leading to unfair outcomes in hiring, lending, policing, etc.  
-
-**Measuring Fairness**  
-There are multiple definitions: demographic parity (equal outcomes across groups), equal opportunity (equal true positive rates), and individual fairness (similar individuals get similar predictions). No single metric is universally correct.  
-
-**Mitigation Strategies**  
-- Pre‑processing: debias training data.  
-- In‑processing: add fairness constraints during training.  
-- Post‑processing: adjust model outputs.  
-
-**Transparency**  
-Explainable AI (XAI) methods like LIME and SHAP help users understand why a model made a decision. However, for large neural networks, full interpretability remains an open problem.  
-
-**Regulation**  
-The EU's AI Act and similar regulations require risk assessments and transparency for high‑risk AI systems. Companies must audit models for bias.
-""",
-        "main_image": "https://picsum.photos/id/30/800/400",
-        "explanation_image": "https://picsum.photos/id/31/800/400",
-        "audio_text": "Day 16: AI bias comes from training data. Fairness can be measured in different ways. Mitigation includes debiasing and constraints. Transparency tools like LIME help explain decisions. Regulations are emerging."
-    },
-    17: {
-        "title": "The Future of Work with AI – Augmentation, Not Replacement",
-        "content": """
-**Key Notes / Takeaways**  
-- Automation historically displaces some jobs but creates new ones.  
-- AI affects cognitive work: writing, coding, analysis.  
-- AI augments workers by handling routine subtasks.  
-- Workers should learn AI tools and soft skills.  
-
-**Historical Patterns**  
-Automation has always displaced some jobs while creating new ones. The printing press, steam engine, and computer each caused upheaval, but employment eventually grew.  
-
-**AI's Unique Impact**  
-AI affects cognitive work – writing, coding, design, analysis. It can augment workers by handling routine subtasks, allowing humans to focus on higher‑value activities (creativity, strategy, relationships).  
-
-**Which Jobs Are Most Exposed?**  
-Research suggests that jobs involving data processing, pattern recognition, and routine communication are most affected. Physical jobs are less exposed (for now). However, dexterous robotics is closing that gap.  
-
-**What Workers Can Do**  
-- Learn to use AI tools as co‑pilots.  
-- Develop soft skills (empathy, communication, leadership).  
-- Embrace lifelong learning.  
-
-**Organizational Response**  
-Companies should invest in reskilling, redesign workflows, and involve workers in AI adoption decisions.
-""",
-        "main_image": "https://picsum.photos/id/32/800/400",
-        "explanation_image": "https://picsum.photos/id/33/800/400",
-        "audio_text": "Day 17: AI will augment, not replace, most jobs. It automates routine cognitive tasks. Workers should learn AI tools and soft skills. Organizations must reskill and redesign workflows."
-    },
-    18: {
-        "title": "Quantum Machine Learning – Hype or Reality?",
-        "content": """
-**Key Notes / Takeaways**  
-- QML uses quantum computers to speed up ML algorithms.  
-- Current quantum computers are too small (noisy, limited qubits).  
-- No practical advantage demonstrated yet.  
-- Practical QML likely a decade away; classical AI remains dominant.  
-
-**What Is Quantum Machine Learning?**  
-QML uses quantum computers to speed up machine learning algorithms. Potential applications include solving linear systems exponentially faster, improving optimization, and discovering new materials.  
-
-**Current State**  
-Quantum computers are still small (noisy, limited qubits). Only a few toy demonstrations exist, such as quantum kernel methods or small Boltzmann machines. No practical advantage has been proven yet.  
-
-**Challenges**  
-- Hardware instability (decoherence).  
-- Lack of quantum RAM to load classical data.  
-- Algorithm design is extremely difficult.  
-
-**When Will It Arrive?**  
-Most experts believe practical QML is at least a decade away, and it may only benefit specific niches (e.g., chemistry, optimization). Classical AI will remain dominant for the foreseeable future.
-""",
-        "main_image": "https://picsum.photos/id/34/800/400",
-        "explanation_image": "https://picsum.photos/id/35/800/400",
-        "audio_text": "Day 18: Quantum machine learning promises speedups for some algorithms, but current quantum computers are too small. Practical QML is likely a decade away. Classical AI remains dominant."
-    },
-    19: {
-        "title": "Embodied AI – Robots That Learn in the Real World",
-        "content": """
-**Key Notes / Takeaways**  
-- Embodied AI gives intelligence a physical body (robot, drone).  
-- Learns through interaction with the environment.  
-- Challenges: slow learning, sim‑to‑real transfer, safety.  
-- Advances: Google's RT‑2, Meta's Habitat.  
-
-**Beyond Pure Software**  
-Embodied AI gives an AI a body – a robot, drone, or even a simulated avatar. It learns by interacting with the physical world through sensors and actuators.  
-
-**Challenges**  
-- Real‑world interaction is slow and expensive compared to simulation.  
-- Sim‑to‑real transfer is hard because of physical differences.  
-- Safety constraints prevent random exploration.  
-
-**Recent Advances**  
-- Google's RT-2: a vision‑language‑action model that can follow commands in novel situations.  
-- Meta's Habitat: simulated environments for training navigation agents.  
-- Reinforcement learning from human feedback (RLHF) in robotics.  
-
-**Applications**  
-Warehouse automation, domestic service robots, search and rescue, and space exploration. Embodied AI could eventually lead to general‑purpose household robots.
-""",
-        "main_image": "https://picsum.photos/id/36/800/400",
-        "explanation_image": "https://picsum.photos/id/37/800/400",
-        "audio_text": "Day 19: Embodied AI gives intelligence a physical body. It learns by interacting with the real world. Challenges include slow learning and sim-to-real transfer. Recent advances include Google's RT-2."
-    },
-    20: {
-        "title": "How to Stay Ahead – Lifelong Learning in the AI Era",
-        "content": """
-**Key Notes / Takeaways**  
-- AI capabilities double every few months → continuous learning required.  
-- Follow researchers, build small projects, join communities.  
-- Learn: prompt engineering, basic Python, API integration, ethics.  
-- Most valuable skill: learning how to learn.  
-
-**The Pace of Change**  
-AI capabilities are doubling every few months. What was cutting‑edge a year ago is now standard. To stay relevant, you need a strategy for continuous learning.  
-
-**Practical Tips**  
-- Follow key researchers and labs (OpenAI, DeepMind, Stanford).  
-- Build small projects using new APIs (OpenAI, Hugging Face).  
-- Join communities (Reddit, Discord, local meetups).  
-- Set aside 2‑4 hours weekly for reading and experimentation.  
-
-**What to Learn**  
-- Prompt engineering and AI tool usage.  
-- Basic Python and API integration.  
-- Understanding model limitations and evaluation.  
-- Ethical and legal aspects of AI deployment.  
-
-**The Mindset**  
-Don't try to master everything. Focus on learning how to learn – adapt quickly to new tools as they emerge. The most valuable skill is not knowing a specific technology but being able to pick it up when needed.
-""",
-        "main_image": "https://picsum.photos/id/38/800/400",
-        "explanation_image": "https://picsum.photos/id/39/800/400",
-        "audio_text": "Day 20: Stay ahead by continuous learning. Follow researchers, build small projects, join communities. Learn prompt engineering, basic Python, and ethical considerations. The key skill is learning how to learn."
-    },
-    21: {
-        "title": "AI Regulation – The EU AI Act and Global Trends",
-        "content": """
-**Key Notes / Takeaways**  
-- EU AI Act: first comprehensive AI law. Risk categories: unacceptable, high, limited, minimal.  
-- Bans social scoring, real‑time biometric surveillance (exceptions).  
-- High‑risk systems require conformity assessments and human oversight.  
-- Fines up to €30M or 6% of global turnover.  
-
-**The EU AI Act**  
-The European Union's AI Act is the world's first comprehensive AI law. It classifies AI systems into risk categories: unacceptable, high, limited, and minimal. Unacceptable risk systems (e.g., social scoring) are banned. High‑risk systems (e.g., medical devices, hiring tools) require conformity assessments, transparency, and human oversight.  
-
-**Global Landscape**  
-- China has implemented rules for generative AI (must respect socialist values, watermark content).  
-- The US has executive orders and voluntary commitments from leading AI companies.  
-- Many countries are drafting their own regulations.  
-
-**Implications for Businesses**  
-Companies building or using AI must conduct risk assessments, document data sources, and ensure compliance. Non‑compliance can lead to fines up to €30 million or 6% of global turnover.  
-
-**Challenges**  
-Rapidly evolving technology makes regulation difficult. Over‑regulation could stifle innovation, while under‑regulation could cause harm. The EU AI Act is likely to become a global benchmark, similar to GDPR.
-""",
-        "main_image": "https://picsum.photos/id/40/800/400",
-        "explanation_image": "https://picsum.photos/id/41/800/400",
-        "audio_text": "Day 21: The EU AI Act is the first comprehensive AI law. It classifies AI by risk, bans unacceptable systems, and requires compliance for high-risk ones. Global regulations are emerging. Businesses must prepare."
-    },
-    22: {
-        "title": "AI in Education – Personalized Tutors and Automated Grading",
-        "content": """
-**Key Notes / Takeaways**  
-- AI tutors provide one‑on‑one guidance at scale (e.g., Khanmigo).  
-- Automated grading saves teacher time but must be fair.  
-- AI generates lesson plans, quizzes, study guides.  
-- Risks: over‑reliance, privacy, bias.  
-
-**Personalized Learning**  
-AI can provide one‑on‑one tutoring at scale. Systems like Khan Academy's Khanmigo use LLMs to guide students through problems without giving away answers. They adapt to each student's pace and learning style.  
-
-**Automated Grading**  
-AI can grade essays, short answers, and even code, providing instant feedback. This frees teachers to focus on instruction. However, ensuring fairness and avoiding bias remains a challenge.  
-
-**Content Generation**  
-Teachers can use AI to create lesson plans, quizzes, and explanatory texts. Students can generate study guides or practice problems.  
-
-**Risks**  
-Over‑reliance on AI could reduce critical thinking. Privacy concerns arise when student data is processed. Also, AI may perpetuate existing biases in educational materials.  
-
-**The Future**  
-AI will not replace teachers but will augment them, handling routine tasks and enabling more personalized, engaging learning experiences.
-""",
-        "main_image": "https://picsum.photos/id/42/800/400",
-        "explanation_image": "https://picsum.photos/id/43/800/400",
-        "audio_text": "Day 22: AI offers personalized tutoring, automated grading, and content generation. It frees teachers but risks over-reliance and bias. The future is augmentation, not replacement."
-    },
-    23: {
-        "title": "AI for Climate Change – Prediction, Optimization, and Mitigation",
-        "content": """
-**Key Notes / Takeaways**  
-- AI improves weather and climate prediction, tracks deforestation.  
-- Optimizes energy grids and building efficiency.  
-- Accelerates material discovery for carbon capture, batteries.  
-- Training AI has carbon footprint, but net benefit is positive.  
-
-**Climate Prediction**  
-AI improves weather forecasting and climate modeling, helping predict extreme events (hurricanes, floods) with greater accuracy. It also analyzes satellite imagery to track deforestation, glacier melt, and pollution.  
-
-**Energy Optimization**  
-AI optimizes power grids, reducing waste and integrating renewable sources. Smart buildings adjust heating and cooling based on occupancy and weather forecasts.  
-
-**Carbon Capture and Material Science**  
-AI accelerates the discovery of new materials for carbon capture, batteries, and solar cells. It simulates chemical reactions at scale, reducing lab experimentation time.  
-
-**Challenges**  
-Training large AI models has a significant carbon footprint. However, the net benefit (optimizing other sectors) likely outweighs the cost.  
-
-**Call to Action**  
-Use AI tools to measure and reduce your own carbon footprint. Support policies that encourage green AI research.
-""",
-        "main_image": "https://picsum.photos/id/44/800/400",
-        "explanation_image": "https://picsum.photos/id/45/800/400",
-        "audio_text": "Day 23: AI helps predict climate events, optimize energy, and discover green materials. Training AI has a carbon cost, but the net benefit is positive. Use AI to reduce your footprint."
-    },
-    24: {
-        "title": "AI in Finance – Fraud Detection, Algorithmic Trading, and Robo‑Advisors",
-        "content": """
-**Key Notes / Takeaways**  
-- AI detects fraud in real time, adapts to new schemes.  
-- Algorithmic trading exploits millisecond inefficiencies.  
-- Robo‑advisors automate portfolio management, lowering costs.  
-- Risks: market volatility, opaque decisions, bias.  
-
-**Fraud Detection**  
-AI models analyze transaction patterns in real time to flag suspicious activity. They learn from past fraud and adapt to new schemes, reducing false positives compared to rule‑based systems.  
-
-**Algorithmic Trading**  
-High‑frequency trading firms use AI to execute trades in milliseconds, exploiting market inefficiencies. More advanced models incorporate news sentiment and macroeconomic indicators.  
-
-**Robo‑Advisors**  
-Automated investment platforms (Betterment, Wealthfront) use AI to build and rebalance portfolios based on risk tolerance and goals. They lower costs and democratize access to financial advice.  
-
-**Credit Scoring**  
-AI can assess creditworthiness using alternative data (rent payments, utility bills), expanding access to underserved populations. However, this raises fairness and privacy concerns.  
-
-**Risks**  
-AI can amplify market volatility (flash crashes). Black‑box models may produce unexplainable decisions, complicating regulatory compliance. Bias in training data can lead to discriminatory lending.
-""",
-        "main_image": "https://picsum.photos/id/46/800/400",
-        "explanation_image": "https://picsum.photos/id/47/800/400",
-        "audio_text": "Day 24: AI detects fraud, powers algorithmic trading, and enables robo-advisors. It expands credit access but risks market volatility and bias. Transparency is key."
-    },
-    25: {
-        "title": "AI in Creative Arts – Music, Painting, and Storytelling",
-        "content": """
-**Key Notes / Takeaways**  
-- Generative AI (DALL‑E, MidJourney) creates stunning images.  
-- AI music models (Suno, Udio) generate full songs.  
-- LLMs write stories, poems, screenplays.  
-- Copyright and ownership are unsettled.  
-- AI is a tool; human creativity remains essential.  
-
-**Generative Art**  
-Tools like DALL‑E, MidJourney, and Stable Diffusion allow anyone to create stunning images from text prompts. Artists use them for inspiration, prototyping, or final pieces.  
-
-**AI Music**  
-Models like Suno and Udio generate full songs with lyrics, melody, and instrumentation. Musicians use AI for backing tracks, idea generation, or even complete releases.  
-
-**Storytelling**  
-LLMs can write short stories, poems, and even screenplays. They assist writers by overcoming writer's block or generating variations.  
-
-**Copyright and Ownership**  
-Who owns AI‑generated art? Current laws are unclear. Some argue it's the user who provided the prompt; others say the model's creators or the public domain. This is an active legal debate.  
-
-**The Human Touch**  
-AI is a tool, not a replacement. The most compelling art still requires human emotion, intent, and curation. AI expands what's possible, but the artist remains essential.
-""",
-        "main_image": "https://picsum.photos/id/48/800/400",
-        "explanation_image": "https://picsum.photos/id/49/800/400",
-        "audio_text": "Day 25: AI generates images, music, and stories. It's a tool for artists, not a replacement. Copyright and ownership remain unsettled. Human creativity still drives value."
-    },
-    26: {
-        "title": "AI for Accessibility – Empowering People with Disabilities",
-        "content": """
-**Key Notes / Takeaways**  
-- AI describes scenes, reads text for blind users (Seeing AI).  
-- Live captioning and sign language translation for deaf users.  
-- Voice control and brain‑computer interfaces for motor impairments.  
-- Personalized assistance for cognitive disabilities.  
-- Accessibility should be default, not an add‑on.  
-
-**Visual Impairment**  
-AI apps like Seeing AI (Microsoft) describe scenes, read text, and identify objects for blind users. Real‑time navigation and obstacle detection are also possible.  
-
-**Hearing Impairment**  
-Live captioning and sign language translation (via computer vision) help deaf users communicate. AI can also transcribe meetings and lectures in real time.  
-
-**Motor Impairment**  
-Voice‑controlled assistants (Alexa, Google Home) enable independent living. Brain‑computer interfaces (like Neuralink) promise direct thought‑controlled devices.  
-
-**Cognitive Disabilities**  
-AI simplifies complex tasks, provides reminders, and offers step‑by‑step guidance. Personalized learning tools adapt to individual needs.  
-
-**The Challenge**  
-Accessibility features must be affordable and integrated by default, not as expensive add‑ons. Privacy concerns (e.g., cameras in the home) must be addressed.  
-
-**Call to Action**  
-Developers should prioritize accessibility from the start. Inclusive design benefits everyone.
-""",
-        "main_image": "https://picsum.photos/id/50/800/400",
-        "explanation_image": "https://picsum.photos/id/51/800/400",
-        "audio_text": "Day 26: AI empowers people with visual, hearing, motor, and cognitive disabilities through scene description, live captioning, voice control, and personalized assistance. Accessibility must be default, not an afterthought."
-    },
-    27: {
-        "title": "AI in Cybersecurity – Threat Detection and Response",
-        "content": """
-**Key Notes / Takeaways**  
-- AI detects zero‑day attacks and anomalies.  
-- Automated response isolates threats in seconds.  
-- AI also used by attackers (phishing, adversarial AI).  
-- Combine AI with human oversight; regularly update models.  
-
-**Threat Detection**  
-AI analyzes network traffic, user behavior, and system logs to identify anomalies that may indicate a breach. It can detect zero‑day attacks that signature‑based systems miss.  
-
-**Automated Response**  
-When a threat is detected, AI can automatically isolate affected systems, block malicious IPs, and initiate incident response workflows, reducing reaction time from hours to seconds.  
-
-**Phishing and Social Engineering**  
-AI filters emails and messages for phishing attempts, and can also be used by attackers to craft convincing scams. This is an arms race.  
-
-**Challenges**  
-Adversarial AI can evade detection. Attackers also use AI to automate attacks. Defenders must constantly update models. Data privacy (monitoring user behavior) is a concern.  
-
-**Best Practices**  
-Combine AI with human oversight. Regularly test and update models. Use explainable AI to understand why a decision was made.
-""",
-        "main_image": "https://picsum.photos/id/52/800/400",
-        "explanation_image": "https://picsum.photos/id/53/800/400",
-        "audio_text": "Day 27: AI detects threats and automates response. It fights phishing and zero-day attacks but faces adversarial evasion. Combine AI with human oversight and regular updates."
-    },
-    28: {
-        "title": "The Next Frontier – AGI, Superintelligence, and the Long‑Term Future",
-        "content": """
-**Key Notes / Takeaways**  
-- AGI = Artificial General Intelligence (human‑level across all tasks).  
-- Estimates vary: 5‑10 years to a century.  
-- Superintelligence could solve major problems or pose existential risks.  
-- Alignment is the most critical challenge.  
-- Stay informed and engage in shaping the future.  
-
-**What Is AGI?**  
-Artificial General Intelligence (AGI) refers to a machine that can perform any intellectual task that a human can. Current AI is narrow (excels at specific tasks). AGI would be flexible and adaptable.  
-
-**When Might It Arrive?**  
-Estimates vary wildly: some say 5‑10 years, others a century. Recent rapid progress has moved many predictions closer.  
-
-**Superintelligence**  
-Once AGI is achieved, it could quickly improve itself, leading to superintelligence – an intellect vastly surpassing the best human minds. This could solve major problems (disease, poverty) but also poses existential risks.  
-
-**Alignment Again**  
-Ensuring a superintelligent AI shares human values is the most critical challenge. Misaligned superintelligence could be catastrophic.  
-
-**What You Can Do**  
-Stay informed. Support research into AI safety and governance. Engage in public discourse. The decisions we make in the next decade will shape the long‑term future of intelligence.  
-
-**Final Thought**  
-The future is not predetermined. By understanding AI today, you become part of the conversation that will determine tomorrow.
-""",
-        "main_image": "https://picsum.photos/id/54/800/400",
-        "explanation_image": "https://picsum.photos/id/55/800/400",
-        "audio_text": "Day 28: AGI is a machine that can do any intellectual task. Superintelligence could solve huge problems but poses existential risks. Alignment is critical. Stay informed and engage in shaping the future."
-    }
+# ---------- Additional notes and images for each day (English only, for illustration) ----------
+# Each day gets a custom note and an image URL (free stock photos via Unsplash with relevant keywords)
+DAY_NOTES = {
+    1: "💡 **Pro Tip:** Create separate accounts for ChatGPT and Gemini. Use a password manager. Explore the 'Explore GPTs' section in ChatGPT to see what others have built.",
+    2: "💡 **Pro Tip:** Use the 'Chain of Thought' prompting: ask the AI to explain its reasoning step by step. This gives you more accurate and transparent answers.",
+    3: "💡 **Pro Tip:** Claude's 100k token context is perfect for pasting entire research papers or long reports. Ask it to create a table of contents or an executive summary.",
+    4: "💡 **Pro Tip:** In Perplexity, use the 'Focus' feature to limit search to academic sources or Reddit. Great for market research or finding niche opinions.",
+    5: "💡 **Pro Tip:** Create email templates with placeholders, then ask AI to fill them. For meeting summaries, record and transcribe first, then feed to AI.",
+    6: "💡 **Pro Tip:** Save your persona instructions in a text file. You can then copy-paste it every time you start a new chat to keep consistency.",
+    7: "🎯 **Milestone Note:** Your workflow should be a checklist. For example: 1) Perplexity for research (10 min), 2) ChatGPT for drafting (15 min), 3) Gemini for final polish (5 min).",
+    8: "💡 **Pro Tip:** MidJourney works best with 'style modifiers' like '--style raw' or '--stylize 500'. Experiment with '--ar 16:9' for widescreen images.",
+    9: "💡 **Pro Tip:** For brand consistency, use the same seed number (--seed) to generate variations of a logo. Combine with '--iw 2' to reference an initial image.",
+    10: "💡 **Pro Tip:** Canva's 'Magic Media' can generate custom illustrations. Use the 'Background Remover' to isolate subjects, then animate with 'Magic Animate'.",
+    11: "💡 **Pro Tip:** Runway's 'Motion Brush' lets you select areas of an image to move. Use it to create subtle parallax effects for storytelling.",
+    12: "💡 **Pro Tip:** In ElevenLabs, clone your own voice (requires consent). Use 'stability' and 'similarity' sliders to balance naturalness and consistency.",
+    13: "💡 **Pro Tip:** Plan your portfolio piece with a storyboard: 1) hook (5 sec), 2) problem (10 sec), 3) AI solution (15 sec), 4) result (10 sec).",
+    14: "🎯 **Milestone Note:** A 'faceless' video can be a slideshow with voiceover. Use Canva to export slides as video, then overlay ElevenLabs audio.",
+    15: "💡 **Pro Tip:** Zapier's 'Paths' let you create if-this-then-that logic. Start with a simple 'email to spreadsheet' automation to understand triggers.",
+    16: "💡 **Pro Tip:** Use Google Sheets + AI to auto-categorize expenses. Connect Gmail to AI to auto-draft replies for common customer emails.",
+    17: "💡 **Pro Tip:** On Make.com, use the 'Router' module to split a bot into multiple branches. One branch for news, another for social media monitoring.",
+    18: "💡 **Pro Tip:** When presenting to management, focus on time saved (e.g., 'this automation saves 10 hours/week') and error reduction (e.g., 'zero data entry mistakes').",
+    19: "💡 **Pro Tip:** Start with a FAQ document. Feed it into the AI's context. Use a no-code chatbot builder like Landbot or Botpress for a quick prototype.",
+    20: "💡 **Pro Tip:** Create a 'test user' group of 5 people. Ask them to try breaking the bot. Log all failed interactions and update the knowledge base.",
+    21: "🎯 **Milestone Note:** Document your automation with screenshots and a one-page guide. This makes it easy to hand over to colleagues or scale later.",
+    22: "💡 **Pro Tip:** The JobEscape certification focuses on practical application. Review your notes from days 1-21. Practice with sample prompts they provide.",
+    23: "💡 **Pro Tip:** On LinkedIn, add a 'Projects' section for your AI automations. Use action verbs: 'built', 'deployed', 'optimized', 'reduced cost by X%'.",
+    24: "💡 **Pro Tip:** Role-play the presentation with a friend. Ask them to play a skeptical manager. Prepare data-backed answers to 'Why should we trust AI?'",
+    25: "💡 **Pro Tip:** Your personal workflow should be modular. For example: a morning briefing bot (news + calendar), a midday research bot, and an evening summary bot.",
+    26: "💡 **Pro Tip:** The final knowledge check includes: prompt engineering, AI ethics, automation design, and tool selection. Use flashcards to memorize key terms.",
+    27: "🎓 **Note:** Your certificate is verifiable via the download link. Add it to your LinkedIn 'Licenses & Certifications' section with the verification URL.",
+    28: "🚀 **Next Steps:** Join AI communities (Reddit r/LocalLLaMA, EleutherAI Discord). Start a small freelance project or contribute to an open-source AI tool."
 }
 
-# ---------- Helper functions (same as before) ----------
-def set_style():
+DAY_IMAGES = {
+    1: "https://source.unsplash.com/featured/800x400?chatgpt,ai,mentor",
+    2: "https://source.unsplash.com/featured/800x400?writing,question,answer",
+    3: "https://source.unsplash.com/featured/800x400?brainstorm,notes,claude",
+    4: "https://source.unsplash.com/featured/800x400?research,internet,search",
+    5: "https://source.unsplash.com/featured/800x400?productivity,computer,time",
+    6: "https://source.unsplash.com/featured/800x400?assistant,robot,persona",
+    7: "https://source.unsplash.com/featured/800x400?workflow,checklist,success",
+    8: "https://source.unsplash.com/featured/800x400?midjourney,art,digital",
+    9: "https://source.unsplash.com/featured/800x400?logo,brand,graphics",
+    10: "https://source.unsplash.com/featured/800x400?canva,design,template",
+    11: "https://source.unsplash.com/featured/800x400?runway,video,animation",
+    12: "https://source.unsplash.com/featured/800x400?voiceover,microphone,studio",
+    13: "https://source.unsplash.com/featured/800x400?portfolio,showcase,creative",
+    14: "https://source.unsplash.com/featured/800x400?faceless,video,content",
+    15: "https://source.unsplash.com/featured/800x400?automation,code,visual",
+    16: "https://source.unsplash.com/featured/800x400?apps,integration,connect",
+    17: "https://source.unsplash.com/featured/800x400?researcher,bot,automated",
+    18: "https://source.unsplash.com/featured/800x400?presentation,manager,success",
+    19: "https://source.unsplash.com/featured/800x400?customer,support,chatbot",
+    20: "https://source.unsplash.com/featured/800x400?testing,feedback,refine",
+    21: "https://source.unsplash.com/featured/800x400?deploy,launch,automation",
+    22: "https://source.unsplash.com/featured/800x400?certification,exam,study",
+    23: "https://source.unsplash.com/featured/800x400?resume,linkedin,skills",
+    24: "https://source.unsplash.com/featured/800x400?presentation,repeat,training",
+    25: "https://source.unsplash.com/featured/800x400?workflow,custom,personal",
+    26: "https://source.unsplash.com/featured/800x400?knowledge,review,quiz",
+    27: "https://source.unsplash.com/featured/800x400?certificate,diploma,success",
+    28: "https://source.unsplash.com/featured/800x400?project,realworld,apply"
+}
+
+# ---------- Helper functions ----------
+def set_tech_style():
     st.markdown("""
         <style>
         .stApp { background: linear-gradient(135deg, #0a0f1f, #0e1a2a, #0a0f1f); }
@@ -832,6 +322,9 @@ def set_style():
         .main-header p { color: #fff5cc; font-size: 1.2rem; margin: 0; }
         html, body, .stApp, .stMarkdown, .stText, .stRadio label, .stSelectbox label, .stTextInput label, .stButton button, .stTitle, .stSubheader, .stHeader, .stCaption, .stAlert, .stException, .stCodeBlock, .stDataFrame, .stTable, .stTabs [role="tab"], .stTabs [role="tablist"] button, .stExpander, .stProgress > div, .stMetric label, .stMetric value, div, p, span, pre, code, .element-container, .stTextArea label, .stText p, .stText div, .stText span, .stText code { color: #ffffff !important; }
         .stText { color: #ffffff !important; font-size: 1rem; background: transparent !important; }
+        .stTabs [role="tab"] { color: #ffffff !important; background: rgba(0,212,255,0.2); border-radius: 10px; margin: 0 2px; }
+        .stTabs [role="tab"][aria-selected="true"] { background: #0077ff; color: white !important; }
+        .stRadio [role="radiogroup"] label { background: rgba(255,255,255,0.1); border-radius: 10px; padding: 0.3rem; margin: 0.2rem 0; color: white !important; }
         .stButton button { background-color: #0077ff; color: white !important; border-radius: 30px; font-weight: bold; }
         .stButton button:hover { background-color: #00d4ff; color: black !important; }
         section[data-testid="stSidebar"] { background: linear-gradient(135deg, #0a0f1f, #0e1a2a); }
@@ -841,7 +334,8 @@ def set_style():
         div[data-baseweb="popover"] ul { background-color: #1e2a3a; border: 1px solid #0077ff; }
         div[data-baseweb="popover"] li { color: white !important; background-color: #1e2a3a; }
         div[data-baseweb="popover"] li:hover { background-color: #0077ff; }
-        .module-image { border-radius: 15px; margin: 1rem 0; width: 100%; }
+        .certificate { background: linear-gradient(135deg, #ffd700, #ffaa00); padding: 1rem; border-radius: 20px; text-align: center; color: #000 !important; }
+        .certificate h3, .certificate p { color: #000 !important; }
         </style>
     """, unsafe_allow_html=True)
 
@@ -855,76 +349,52 @@ def show_logo():
                     <stop offset="50%" stop-color="#0077ff"/>
                     <stop offset="100%" stop-color="#0033aa"/>
                 </linearGradient></defs>
-                <text x="50" y="65" font-size="40" text-anchor="middle" fill="white" font-weight="bold">🔭</text>
+                <text x="50" y="65" font-size="40" text-anchor="middle" fill="white" font-weight="bold">🤖</text>
             </svg>
         </div>
     """, unsafe_allow_html=True)
-
-def generate_audio(text, output_path, voice):
-    clean_text = ' '.join(text.split())
-    cmd = ["edge-tts", "--voice", voice, "--text", clean_text, "--write-media", output_path]
-    try:
-        subprocess.run(cmd, check=True, capture_output=True, text=True, timeout=30)
-        return True
-    except:
-        return False
-
-def play_audio(text, key, voice):
-    if st.button(f"🔊 Listen", key=key):
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as tmp:
-            success = generate_audio(text, tmp.name, voice)
-            if success:
-                with open(tmp.name, "rb") as f:
-                    audio_bytes = f.read()
-                    b64 = base64.b64encode(audio_bytes).decode()
-                    st.markdown(f'<audio controls src="data:audio/mp3;base64,{b64}" autoplay style="width: 100%;"></audio>', unsafe_allow_html=True)
-            os.unlink(tmp.name)
 
 # ---------- Authentication ----------
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 if "lang" not in st.session_state:
     st.session_state.lang = "English"
-if "module_index" not in st.session_state:
-    st.session_state.module_index = 0
 
 if not st.session_state.authenticated:
-    set_style()
+    set_tech_style()
     lang = st.session_state.lang
-    ui = LANGUAGES[lang]
-    st.title(ui["login_title"])
+    st.title(LANGUAGES[lang]["login_title"])
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
         show_logo()
-        st.markdown("<h2 style='text-align: center;'>Foresight</h2>", unsafe_allow_html=True)
-        st.markdown(f"<p style='text-align: center; color: #00d4ff;'>{ui['login_sub']}</p>", unsafe_allow_html=True)
-        password_input = st.text_input(ui["login_password"], type="password")
-        if st.button(ui["login_btn"]):
+        st.markdown("<h2 style='text-align: center;'>AI Foundations & Certification Course</h2>", unsafe_allow_html=True)
+        st.markdown(f"<p style='text-align: center; color: #00d4ff;'>{LANGUAGES[lang]['login_sub']}</p>", unsafe_allow_html=True)
+        password_input = st.text_input(LANGUAGES[lang]["login_password"], type="password")
+        if st.button(LANGUAGES[lang]["login_btn"]):
             if password_input == "20082010":
                 st.session_state.authenticated = True
                 st.rerun()
             else:
-                st.error(ui["login_error"])
+                st.error(LANGUAGES[lang]["login_error"])
     st.stop()
 
-# ---------- Main app ----------
-set_style()
+# ---------- Main app after login ----------
+set_tech_style()
 lang = st.session_state.lang
 ui = LANGUAGES[lang]
-voice = ui["voice"]
 
+# Language selector in sidebar
 with st.sidebar:
     st.image("https://flagcdn.com/w320/ht.png", width=60)
     st.selectbox("🌐 Language", options=list(LANGUAGES.keys()), key="lang")
     st.markdown("---")
     show_logo()
-    st.markdown(f"## 🎯 {ui['module_prefix']}")
-    module_number = st.selectbox("", list(range(1, 29)), index=st.session_state.module_index, format_func=lambda x: f"{ui['module_prefix']} {x}: {modules_data[x]['title'][:40]}...", label_visibility="collapsed")
-    st.session_state.module_index = module_number - 1
+    st.markdown("## 🎯 Select a day")
+    day_number = st.selectbox("Day", list(range(1, 29)), index=0, label_visibility="collapsed")
     st.markdown("---")
     st.markdown(f"### 📚 {ui['sidebar_progress']}")
-    st.progress(module_number / 28)
-    st.markdown(f"✅ {ui['module_prefix']} {module_number} {ui['sidebar_completed']}")
+    st.progress(day_number / 28)
+    st.markdown(f"✅ {ui['day_prefix']} {day_number} {ui['sidebar_completed']}")
     st.markdown("---")
     st.markdown(f"**{ui['sidebar_founder']}**")
     st.markdown("Gesner Deslandes")
@@ -942,59 +412,78 @@ with st.sidebar:
         st.session_state.authenticated = False
         st.rerun()
 
-# ---------- Display current module ----------
-module = modules_data[module_number]
-st.markdown(f"## {ui['module_prefix']} {module_number}: {module['title']}")
+# ---------- Display current lesson ----------
+week_num = (day_number - 1) // 7 + 1
+week_title = ui['weeks'][week_num]
+day_title = ui['lessons'][day_number]["title"]
+duration = ui['lessons'][day_number]["duration"]
+content = ui['lessons'][day_number]["content"]
+
+st.markdown(f"## 📅 {week_title}")
+st.markdown(f"### {ui['day_prefix']} {day_number}: {day_title}")
+st.markdown(f"⏱️ **{ui['duration_label']}:** {duration}")
 st.markdown("---")
+st.markdown(content)
 
-# Main image
-try:
-    st.image(module['main_image'], use_container_width=True, caption="Main illustration")
-except:
-    st.info("🖼️ Main image not available – you can replace the URL in the code.")
+# ----- Added: Image for the day (example) -----
+if day_number in DAY_IMAGES:
+    st.image(DAY_IMAGES[day_number], caption=f"Example visual for Day {day_number}: {day_title}", use_container_width=True)
+    st.caption("📷 Image from Unsplash (illustrative purpose)")
 
-st.markdown(module['content'])
-
-# Audio and download buttons
-col_audio, col_download = st.columns(2)
-with col_audio:
-    play_audio(module['audio_text'], f"audio_{module_number}", voice)
-with col_download:
-    if st.button(ui['download_btn'], use_container_width=True):
-        notes = f"Day {module_number}: {module['title']}\n\n{module['content']}\n\n---\nGenerated by Foresight – GlobalInternet.py"
-        st.download_button("⬇️ Download", notes, file_name=f"foresight_day_{module_number}.txt", mime="text/plain")
-
-# Explanation image (notes / diagram)
-st.markdown("### 📘 Visual Notes / Explanation Diagram")
-try:
-    st.image(module['explanation_image'], use_container_width=True, caption="Explanatory diagram – click to enlarge")
-except:
-    st.info("🖼️ Explanation image not available – you can replace the URL in the code.")
-
-# Navigation buttons
-col_prev, col_next = st.columns(2)
-with col_prev:
-    if module_number > 1:
-        if st.button(f"⬅️ {ui['prev_module']}", use_container_width=True):
-            st.session_state.module_index = module_number - 2
-            st.rerun()
-with col_next:
-    if module_number < 28:
-        if st.button(f"{ui['next_module']} ➡️", use_container_width=True):
-            st.session_state.module_index = module_number
-            st.rerun()
-
-if module_number == 28:
+# ----- Added: Notes for the day (additional explanation) -----
+if day_number in DAY_NOTES:
     st.markdown("---")
-    st.markdown("## 🎓 You have completed all 28 insights.")
-    st.markdown("""
-    ### 📞 To get more advanced content or support:
+    st.markdown("### 📝 Module Notes & Pro Tips")
+    st.markdown(DAY_NOTES[day_number])
+else:
+    st.markdown("---")
+    st.markdown("### 📝 Notes")
+    st.markdown("*No additional notes for this module yet. Practice the lesson and experiment with the tools.*")
+
+# Audio for the lesson content
+def generate_audio(text, output_path, voice):
+    cmd = ["edge-tts", "--voice", voice, "--text", text, "--write-media", output_path]
+    try:
+        subprocess.run(cmd, check=True, capture_output=True, text=True, timeout=30)
+    except Exception as e:
+        st.error(f"Audio error: {e}")
+
+def play_audio(text, key, voice):
+    if st.button(f"🔊 Listen to lesson", key=key):
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as tmp:
+            generate_audio(text, tmp.name, voice)
+            with open(tmp.name, "rb") as f:
+                audio_bytes = f.read()
+                b64 = base64.b64encode(audio_bytes).decode()
+                st.markdown(f'<audio controls src="data:audio/mp3;base64,{b64}" autoplay style="width: 100%;"></audio>', unsafe_allow_html=True)
+            os.unlink(tmp.name)
+
+play_audio(f"{ui['day_prefix']} {day_number}: {day_title}. {content}", f"audio_{day_number}_{lang}", ui['voice'])
+
+# Milestone indicator
+if day_number in [7, 14, 21, 28]:
+    st.markdown("---")
+    st.success(ui['milestone'])
+
+# Certificate claim on day 27-28
+if day_number >= 27:
+    st.markdown("---")
+    st.markdown(f'<div class="certificate"><h3>{ui["cert_title"]}</h3><p>{ui["cert_text"]}</p><p>Click the button below to download your certificate.</p></div>', unsafe_allow_html=True)
+    if st.button(ui['cert_btn'], use_container_width=True):
+        cert_text = f"AI Expert Certificate\n\nThis certifies that User has successfully completed the 28‑day AI Foundations & Certification Course.\n\nDate: {datetime.now().strftime('%Y-%m-%d')}\n\nGesner Deslandes\nFounder, GlobalInternet.py"
+        st.download_button("⬇️ Download Certificate (TXT)", cert_text, file_name="ai_certificate.txt", mime="text/plain")
+
+if day_number == 28:
+    st.markdown("---")
+    st.markdown(f"## {ui['congrats_title']}")
+    st.markdown(f"""
+    ### 📞 {ui['contact_text']}
     - **Gesner Deslandes** – Founder
     - 📱 WhatsApp: (509) 4738-5663
     - 📧 Email: deslandes78@gmail.com
     - 🌐 [GlobalInternet.py](https://globalinternetsitepy-abh7v6tnmskxxnuplrdcgk.streamlit.app/)
     
-    Keep learning – the future belongs to those who understand AI and robotics.
+    Keep practicing and applying your skills. You are ready for real‑world AI projects!
     """)
 
 st.markdown("---")
